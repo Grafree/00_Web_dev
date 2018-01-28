@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>2010: 365 jours en images</title>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+
+<script language="javascript" type="text/javascript" src="js/script.js"></script>
+<script language="javascript" type="text/javascript">
+
+
+	var ImgArrayList = new Array(
+	'001.jpg', '002.jpg', '003.jpg', '004.jpg', '005.jpg', '006.jpg', '007.jpg', '008.jpg', '009.jpg', '010.jpg', '011.jpg', '012.jpg', '013.jpg', '014.jpg', '015.jpg',
+	'016.jpg', '017.jpg', '018.jpg', '019.jpg', '020.jpg', '021.jpg', '022.jpg', '023.jpg', '024.jpg', '025.jpg', '026.jpg', '027.jpg', '028.jpg', '029.jpg', '030.jpg',						    '031.jpg', '032.jpg', '033.jpg', '034.jpg', '035.jpg', '036.jpg', '037.jpg', '038.jpg', '039.jpg', '040.jpg', '041.jpg', '042.jpg', '043.jpg', '044.jpg', '045.jpg',
+	'046.jpg', '047.jpg', '048.jpg', '049.jpg', '050.jpg', '051.jpg', '052.jpg', '053.jpg', '054.jpg', '055.jpg', '056.jpg', '057.jpg', '058.jpg', '059.jpg', '060.jpg'
+	);
+	
+	var ImgCommentList = new Array(
+	'1 janvier - 08:00 - Bonne journée et bonne année!', 
+	'2 janvier - 18:00 - Poivron et haloumi, essayé, adopté!', 
+	'3 janvier - 18:10 - Chernex, lumière étrange', 
+	'4 janvier - 07:50 - Lausanne, jeu de lumière pour une fin de nuit', 
+	'5 janvier - 18:10 - Vevey Gare, parole de suisse', 
+	'6 janvier - 17:10 - Lausanne, NNT: neige, nuit, trafic', 
+	'7 janvier - 07:42 - Lausanne Gare, ghost! une apparition', 
+	'8 janvier - 17:10 - Lausanne Flon, la ville est une abstraction', 
+	'9 janvier - 10:50 - Genève Grand-Pré, neige et glace', 
+	'10 janvier - 11:10 - Saudanne, une nature sauvage à portée de ville',
+	'11 janvier - 07:50 - Lausanne, la nuit peut effacer la laideur architecturale', 
+	'12 janvier - 19:10 - Montreux Gare, reflet et réalité', 
+	'13 janvier - 14:20 - Lausanne Sévelin, la neige, bon pour les carrosiers', 
+	'14 janvier - 18:10 - Chernex Ateliers MOB, chaud, froid', 
+	'15 janvier - 16:50 - Lausanne, ciel plombé et symbole',
+	'16 janvier - 10:55 - En direction de ... chacun y laisse sa trace', 
+	'17 janvier - 12:45 - Lausanne, vol en patrouille', 
+	'18 janvier - 17:35 - Rivaz, mon vis-à-vis récup!', 
+	'19 janvier - 17:55 - Vevey, neige en plaine pour la nuit',
+	'20 janvier - 18:02 - Vevey, jaune Fiat',
+	'21 janvier - 17:55 - Vevey, Colors of Night', 
+	'22 janvier - 17:13 - Lausanne, jeu de lumière de fin de journée', 
+	'23 janvier - 13:20 - En descendant du Col du Bel Oiseau, AbsolutlyFun!', 
+	'24 janvier - 13:24 - Chardonne, cache-cache soleil', 
+	'25 janvier - 17.58 - Vevey, jeu de lumière pour voiture invisible',
+	'26 janvier - 07:43 - Lausanne Chauderon, la machine à remonter le temps?', 
+	'27 janvier - 07:14 - Vevey Gare, bien négocier le virage à gauche', 
+	'28 janvier - 06:55 - Chernex, chacun laisse sa trace', 
+	'29 janvier - 17.03 - SkatePark de Sévelin, chacun laisse sa trace bis', 
+	'30 janvier - 14:45 - Hauts de Blonay, un ciel qui parle aux romantiques',
+	'31 janvier - 14:38 - Hauts de Rossinière, halt=e gardée!', 
+	'1 février - 07:57 - Lausanne Sévelin, au taf le lundi',
+	'2 février - 17:01 - Lausanne Sévelin, ne prenez pas cet ascenseur',
+	'3 février - 18:10 - Vevey, quoi de neuf? Vivement le printemps!',
+	'4 février - 07:50 - Lausanne Sévelin, trace',
+	'5 février - 07:35 - Lausanne Gare, tout le monde est descendu?',
+	'6 février - 15:05 - Lausanne Sévelin, neige:le retour',
+	'7 février - 13:50 - ',
+	'8 février - 16:58 - Lausanne Sévelin, interdit de rire',
+	'9 février - 20:15 - Sommet du Folly. Champagne et poudre à gogo!',
+	'10 février - 07:55 - Lausanne Chauderon, ombre vaudoise ',
+	'11 février - ',
+	'12 février - 18:45 - Lausanne Gare, les maîtres du fer',
+	'13 février - 11:50 - En direction du Grépon blanc, neige vierge déflorée par un binôme',
+	'14 février - 12:40 - Pointe Blanche, quand il y a du couloir, il y a du plaisir?',
+	'15 février - 17:18 - Rivaz, classique et intemporel',
+	'16 février - 07:45 - Lausanne Gare, chaud dedans, froid dehors',
+	'17 février - 07:50 - Lausanne Ruchonnet, qui a paumé la clé?',
+	'18 février - 15:15 - Lausanne 5D, Guantanamo version anniversaire',
+	'19 février - 16:59 - Lausanne 5D, soleil, neige, pluie...',
+	'20 février - 18:45 - Lausanne Gare, débarquez, embarquez, débarquez...',
+	'21 février - 11:10 - Direction Valerette, une descente qui promet',
+	'22 février - 13:45 - Col des Pauvres, riche en émotions. Pur plaisir',
+	'23 février - 18:44 - Montreux Gare, mouvement et position statique',
+	'24 février - 20:25 - Chernex, un film (re)découvert "The Interpreter"',
+	'25 février - 06:45 - Chernex, vis...',
+	'26 février - 00:00 - Lausanne, la photo n\'est que lumière: voir 11 janvier',
+	'27 février - 15:35 - Chernex, nature morte sicilienne',
+	'28 février - 13:20 - Chernex, le repos de Léon le lion',
+	'1 mars - 07:45 - Lausanne, double jeu '
+
+
+
+	);
+	
+/*
+ * @param ImgArray						[array] List of image's file names
+ * @param ImgComment 					[array] List of comentaries
+ * @param ImgRep						[string] Path to the Images folder
+ * @param ImgActuel						[string] Image's file name of the first Image to show;
+ * @param TransitionMode				[bolean] true = Do transition; false = Don't do transition;
+ * @param TransitionSpeed				[int] Miliseconds
+ * @param TransitionNbSteps				[int] Regulates the transition fluidity.
+ * @param TableNbCellsPerRow			[int] Indicate the nb of cells per row of the Thumbs table that is in the HTML code
+ * @param TableThumbsPercentCellSize	[int] Percentage of the thumbs width in the cell
+ * @param TableThumbsHighlight			[boolean] true = Do the mouseover highlight effect
+ * @param TableThumbsBorderWidth		[int] width of the hightlight effect
+ * @param TableThumbsBorderColor		[string] color of the border (on normal status)
+ * @param TableThumbsBorderColorOver	[string] color of the border (on mouseover status)
+ * @param ImgDimensionToDisplay 		[string] 'height' or 'width' - Indicates the default mode on the page load 
+ * @param InstanceName 					[string] Name of the instance of this object 
+ */
+	
+	var screenGalery = new FullScreenGalery( ImgArrayList, ImgCommentList, 'images/bkgs/', '001.jpg', true, 10, 10, 25, 100, false, 1, '#000000', '#ffffff', 'height', 'screenGalery' );
+</script>
+
+</head>
+
+<body>
+    	<div id="hideImageFromScreen"></div>
+        
+    <div id="page">
+        <div id="imageBKG"></div>
+        <div id="tittle">010<span>:</span></div>
+        <div id="subtittle"><h1>1 jour:1 image</h1></div>
+        <div id="TransitionMode"></div>
+        <div id="jour">Jour:</div>
+        <div id="num"></div>
+        <!--  Ne pas supprimer ou modifier les lignes ci-dessus -->
+        
+        
+<!-- LEGEND -->
+		<div class="fondcommentaires"></div>
+    	<div id="commentaires"></div> <!-- commentaires -->
+    
+
+<!-- NAVIGATION -->
+    <div id="navigation">
+        <span onclick="screenGalery.imagePrevious();"><img src="images/nav/btn_prev.png" alt="image précédente" title="image précédente" /></span> 
+        <span onclick="screenGalery.imageNext();"><img src="images/nav/btn_next.png" alt="image suivante" title="prochaine image" /></span><br />
+        <span onclick="screenGalery.displayTable();"><img src="images/nav/btn_table.png" alt="2010:en 365 images" title="2010:en 365 images" /></span>
+        <span onclick="screenGalery.displayInfo();"><img src="images/nav/btn_info.png" alt="idée et concept" title="idée et concept" /></span>
+    </div> <!-- navigation --> 
+    
+<!-- INFOS -->
+    	<div id="info" class="hideinfo">
+   		 <span onclick="screenGalery.hideInfo();"><img class="closeInfo" src="images/nav/close.png" alt="Fermer la fenêtre d'information" title="Fermer la fenêtre d'information" /></span>
+        <h3>1 jour:1 image </h3>
+        <p>Cette projet est né d'une idée simple, pratiquer la photo chaque jour de 2010, choisir une image pour en faire
+        un journal de bord personnel en images: 365 photos pour 365 jours. <br /><br />Ce concept a été développé dans le cadre de 5D Multimédia et Communication Web.
+        Il devait permettre de mixer une idée visuelle avec un travail purement technique - la conception d'un portfolio sur une base JS. <br />
+        Je profite de la mise en ligne de ce projet, pour remercier Olivier pour sa contribution, son aide, sa passion et le travail qu'il a consacré au développement JS. <br /><br />
+        Cette galerie de photos est un travail de fond, évolutif. Comme une grande randonnée à travers 2010. De jour en jour, de mois en mois, il est comme le carnet de croquis du peintre. Dans tous les cas une vision en images des petites choses insignifiantes qui nous entourent, des belles rencontre et du hasard. Comme une tranche de vie.<br /><br />
+        pa.chopard, février 2010 </p>
+        </div> <!-- info -->
+    
+
+<!-- TABLE -->
+        <div id="containerTable" class="containerTable" onclick="screenGalery.hideTable();"></div> <!-- containerTable -->
+        <div id="tableDates" class="hidetable">
+        <span onclick="screenGalery.hideTable();" class="closetable"><img src="images/nav/close.png" alt="fermer" title="fermer" class="close" /></span>
+        <table cellpadding="0" cellspacing="0" class="table" style="margin:0 auto;">
+
+<!-- Ligne 01 -->
+    <tr>
+        <td><img onclick="screenGalery.setImage('001.jpg');" src="images/thumb/imgThumb001.jpg" alt="001" title="1 janvier"/></td> <!-- 1 jan -->
+        <td><img onclick="screenGalery.setImage('002.jpg');" src="images/thumb/imgThumb002.jpg" alt="002" title="2 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('003.jpg');" src="images/thumb/imgThumb003.jpg" alt= "003" title="3 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('004.jpg');" src="images/thumb/imgThumb004.jpg" alt= "004" title="4 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('005.jpg');" src="images/thumb/imgThumb005.jpg" alt= "005" title="5 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('006.jpg');" src="images/thumb/imgThumb006.jpg" alt= "006" title="6 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('007.jpg');" src="images/thumb/imgThumb007.jpg" alt= "007" title="7 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('008.jpg');" src="images/thumb/imgThumb008.jpg" alt= "008" title="8 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('009.jpg');" src="images/thumb/imgThumb009.jpg" alt= "009" title="9 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('010.jpg');" src="images/thumb/imgThumb010.jpg" alt= "010" title="10 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('011.jpg');" src="images/thumb/imgThumb011.jpg" alt= "011" title="11 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('012.jpg');" src="images/thumb/imgThumb012.jpg" alt= "012" title="12 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('013.jpg');" src="images/thumb/imgThumb013.jpg" alt= "013" title="13 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('014.jpg');" src="images/thumb/imgThumb014.jpg" alt= "014" title="14 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('015.jpg');" src="images/thumb/imgThumb015.jpg" alt= "015" title="15 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('016.jpg');" src="images/thumb/imgThumb016.jpg" alt= "016" title="16 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('017.jpg');" src="images/thumb/imgThumb017.jpg" alt= "017" title="17 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('018.jpg');" src="images/thumb/imgThumb018.jpg" alt= "018" title="18 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('019.jpg');" src="images/thumb/imgThumb019.jpg" alt= "019" title="19 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('020.jpg');" src="images/thumb/imgThumb020.jpg" alt= "020" title="20 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('021.jpg');" src="images/thumb/imgThumb021.jpg" alt= "021" title="21 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('022.jpg');" src="images/thumb/imgThumb022.jpg" alt= "022" title="22 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('023.jpg');" src="images/thumb/imgThumb023.jpg" alt= "023" title="23 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('024.jpg');" src="images/thumb/imgThumb024.jpg" alt= "024" title="24 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('025.jpg');" src="images/thumb/imgThumb025.jpg" alt= "025" title="25 janvier"/></td> <!-- 25 jan -->
+     </tr>
+ 
+ <!-- Ligne 02 -->
+     <tr>  
+        <td><img onclick="screenGalery.setImage('026.jpg');" src="images/thumb/imgThumb026.jpg" alt= "026" title="26 janvier"/></td> <!-- 26 jan -->
+        <td><img onclick="screenGalery.setImage('027.jpg');" src="images/thumb/imgThumb027.jpg" alt= "027" title="27 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('028.jpg');" src="images/thumb/imgThumb028.jpg" alt= "028" title="28 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('029.jpg');" src="images/thumb/imgThumb029.jpg" alt= "029" title="29 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('030.jpg');" src="images/thumb/imgThumb030.jpg" alt= "030" title="30 janvier"/></td>
+        <td><img onclick="screenGalery.setImage('031.jpg');" src="images/thumb/imgThumb031.jpg" alt= "031" title="31 janvier"/></td> <!-- 31 jan -->
+        <td><img onclick="screenGalery.setImage('032.jpg');" src="images/thumb/imgThumb032.jpg" alt= "032" title="1 février"/></td> <!-- 1 fev -->
+        <td><img onclick="screenGalery.setImage('033.jpg');" src="images/thumb/imgThumb033.jpg" alt= "033" title="2 février"/></td> <!-- 2 fev -->
+        <td><img onclick="screenGalery.setImage('034.jpg');" src="images/thumb/imgThumb034.jpg" alt= "034" title="3 février"/></td> <!-- 3 fev -->
+        <td><img onclick="screenGalery.setImage('035.jpg');" src="images/thumb/imgThumb035.jpg" alt= "035" title="4 février"/></td> <!-- 4 fev -->
+        <td><img onclick="screenGalery.setImage('036.jpg');" src="images/thumb/imgThumb036.jpg" alt= "036" title="5 février"/></td> <!-- 5 fev -->
+        <td><img onclick="screenGalery.setImage('037.jpg');" src="images/thumb/imgThumb037.jpg" alt= "037" title="6 février"/></td> <!-- 6 fev -->
+        <td><img onclick="screenGalery.setImage('038.jpg');" src="images/thumb/imgThumb038.jpg" alt= "038" title="7 février"/></td> <!-- 7 fev -->
+        <td><img onclick="screenGalery.setImage('039.jpg');" src="images/thumb/imgThumb039.jpg" alt= "039" title="8 février"/></td> <!-- 8 fev -->
+        <td><img onclick="screenGalery.setImage('040.jpg');" src="images/thumb/imgThumb040.jpg" alt= "040" title="9 février"/></td> <!-- 9 fev -->
+        <td><img onclick="screenGalery.setImage('041.jpg');" src="images/thumb/imgThumb041.jpg" alt= "041" title="10 février"/></td> <!-- 10 fev -->
+        <td><img onclick="screenGalery.setImage('042.jpg');" src="images/thumb/imgThumb042.jpg" alt= "042" title="11 février"/></td> <!-- 11 fev -->
+        <td><img onclick="screenGalery.setImage('043.jpg');" src="images/thumb/imgThumb043.jpg" alt= "043" title="12 février"/></td> <!-- 12 fev -->
+        <td><img onclick="screenGalery.setImage('044.jpg');" src="images/thumb/imgThumb044.jpg" alt= "044" title="13 février"/></td> <!-- 13 fev -->
+        <td><img onclick="screenGalery.setImage('045.jpg');" src="images/thumb/imgThumb045.jpg" alt= "045" title="14 février"/></td> <!-- 14 fev -->
+        <td><img onclick="screenGalery.setImage('046.jpg');" src="images/thumb/imgThumb046.jpg" alt= "046" title="15 février"/></td> <!-- 15 fev -->
+        <td><img onclick="screenGalery.setImage('047.jpg');" src="images/thumb/imgThumb047.jpg" alt= "047" title="16 février"/></td> <!-- 16 fev -->
+        <td><img onclick="screenGalery.setImage('048.jpg');" src="images/thumb/imgThumb048.jpg" alt= "048" title="17 février"/></td> <!-- 17 fev -->
+        <td><img onclick="screenGalery.setImage('049.jpg');" src="images/thumb/imgThumb049.jpg" alt= "049" title="18 février"/></td> <!-- 18 fev -->
+        <td><img onclick="screenGalery.setImage('050.jpg');" src="images/thumb/imgThumb050.jpg" alt= "050" title="19 février"/></td> <!-- 19 fev -->
+    </tr>
+
+<!-- Ligne 03 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('051.jpg');" src="images/thumb/imgThumb051.jpg" alt= "051" title="20 février" /></td> <!-- 20 fev -->
+        <td><img onclick="screenGalery.setImage('052.jpg');" src="images/thumb/imgThumb052.jpg" alt= "052" title="21 février" /></td> <!-- 21 fev -->
+        <td><img onclick="screenGalery.setImage('053.jpg');" src="images/thumb/imgThumb053.jpg" alt= "053" title="22 février"/></td> <!-- 22 fev -->
+        <td><img onclick="screenGalery.setImage('054.jpg');" src="images/thumb/imgThumb054.jpg" alt= "054" title="23 février"/></td> <!-- 23 fev -->
+        <td><img onclick="screenGalery.setImage('055.jpg');" src="images/thumb/imgThumb055.jpg" alt= "055" title="24 février"/></td> <!-- 24 fev -->
+        <td><img onclick="screenGalery.setImage('056.jpg');" src="images/thumb/imgThumb056.jpg" alt= "056" title="25 février"/></td> <!-- 25 fev -->
+        <td><img onclick="screenGalery.setImage('057.jpg');" src="images/thumb/imgThumb057.jpg" alt= "057" title="26 février"/></td> <!-- 26 fev -->
+        <td><img onclick="screenGalery.setImage('058.jpg');" src="images/thumb/imgThumb058.jpg" alt= "058" title="27 février"/></td> <!-- 27 fev -->
+        <td><img onclick="screenGalery.setImage('059.jpg');" src="images/thumb/imgThumb059.jpg" alt= "059" title="28 février"/></td> <!-- 28 fev -->
+        <td><img onclick="screenGalery.setImage('060.jpg');" src="images/thumb/imgThumb060.jpg" alt= "060" title= "1 mars"/></td> <!-- 1 mar -->
+        <td><img onclick="screenGalery.setImage('061.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "061" title= "2 mars"/></td> <!-- 2 mar -->
+        <td><img onclick="screenGalery.setImage('062.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "062" title= "3 mars"/></td> <!-- 3 mar -->
+        <td><img onclick="screenGalery.setImage('063.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "063" title= "4 mars"/></td> <!-- 4 mar -->
+        <td><img onclick="screenGalery.setImage('064.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "064" title= "5 mars"/></td> <!-- 5 mar -->
+        <td><img onclick="screenGalery.setImage('065.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "065" title= "6 mars"/></td> <!-- 6 mar -->
+        <td><img onclick="screenGalery.setImage('066.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "066" title= "7 mars"/></td> <!-- 7 mar -->
+        <td><img onclick="screenGalery.setImage('067.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "067" title= "8 mars"/></td> <!-- 8 mar -->
+        <td><img onclick="screenGalery.setImage('068.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "068" title= "9 mars"/></td> <!-- 9 mar -->
+        <td><img onclick="screenGalery.setImage('069.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "069" title= "10 mars"/></td> <!-- 10 mar -->
+        <td><img onclick="screenGalery.setImage('070.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "070" title= "11 mars"/></td> <!-- 11 mar -->
+        <td><img onclick="screenGalery.setImage('071.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "071" title= "12 mars"/></td> <!-- 12 mar -->
+        <td><img onclick="screenGalery.setImage('072.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "072" title= "13 mars"/></td> <!-- 13 mar -->
+        <td><img onclick="screenGalery.setImage('073.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "073" title= "14 mars"/></td> <!-- 14 mar -->
+        <td><img onclick="screenGalery.setImage('074.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "074" title= "15 mars"/></td> <!-- 15 mar -->
+        <td><img onclick="screenGalery.setImage('075.jpg');" src="images/thumb/imgThumbMar.jpg" alt= "075" title= "16 mars"/></td> <!-- 16 mar -->
+    </tr> 
+
+<!-- Ligne 04 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('076.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 17 mar -->
+        <td><img onclick="screenGalery.setImage('077.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 18 mar -->
+        <td><img onclick="screenGalery.setImage('078.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 19 mar -->
+        <td><img onclick="screenGalery.setImage('079.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 20 mar -->
+        <td><img onclick="screenGalery.setImage('080.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 21 mar -->
+        <td><img onclick="screenGalery.setImage('081.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 22 mar -->
+        <td><img onclick="screenGalery.setImage('082.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 23 mar -->
+        <td><img onclick="screenGalery.setImage('083.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 24 mar -->
+        <td><img onclick="screenGalery.setImage('084.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 25 mar -->
+        <td><img onclick="screenGalery.setImage('085.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 26 mar -->
+        <td><img onclick="screenGalery.setImage('086.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 27 mar -->
+        <td><img onclick="screenGalery.setImage('087.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 28 mar -->
+        <td><img onclick="screenGalery.setImage('088.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 29 mar -->
+        <td><img onclick="screenGalery.setImage('089.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 30 mar -->
+        <td><img onclick="screenGalery.setImage('090.jpg');" src="images/thumb/imgThumbMar.jpg" /></td> <!-- 31 mar -->
+        <td><img onclick="screenGalery.setImage('091.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 1 avril -->
+        <td><img onclick="screenGalery.setImage('092.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 2 avril -->
+        <td><img onclick="screenGalery.setImage('093.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 3 avril -->
+        <td><img onclick="screenGalery.setImage('094.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 4 avril -->
+        <td><img onclick="screenGalery.setImage('095.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 5 avril -->
+        <td><img onclick="screenGalery.setImage('096.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 6 avril -->
+        <td><img onclick="screenGalery.setImage('097.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 7 avril -->
+        <td><img onclick="screenGalery.setImage('098.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 8 avril -->
+        <td><img onclick="screenGalery.setImage('099.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 9 avril -->
+        <td><img onclick="screenGalery.setImage('100.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 10 avril -->
+    </tr>
+
+<!-- Ligne 05 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('101.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 11 avril -->
+        <td><img onclick="screenGalery.setImage('102.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 12 avril -->
+        <td><img onclick="screenGalery.setImage('103.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 13 avril -->
+        <td><img onclick="screenGalery.setImage('104.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 14 avril -->
+        <td><img onclick="screenGalery.setImage('105.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 15 avril -->
+        <td><img onclick="screenGalery.setImage('106.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 16 avril -->
+        <td><img onclick="screenGalery.setImage('107.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 17 avril -->
+        <td><img onclick="screenGalery.setImage('108.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 18 avril -->
+        <td><img onclick="screenGalery.setImage('109.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 19 avril -->
+        <td><img onclick="screenGalery.setImage('110.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 20 avril -->
+        <td><img onclick="screenGalery.setImage('111.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 21 avril -->
+        <td><img onclick="screenGalery.setImage('112.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 22 avril -->
+        <td><img onclick="screenGalery.setImage('113.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 23 avril -->
+        <td><img onclick="screenGalery.setImage('114.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 24 avril -->
+        <td><img onclick="screenGalery.setImage('115.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 25 avril -->
+        <td><img onclick="screenGalery.setImage('116.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 26 avril -->
+        <td><img onclick="screenGalery.setImage('117.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 27 avril -->
+        <td><img onclick="screenGalery.setImage('118.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 28 avril -->
+        <td><img onclick="screenGalery.setImage('119.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 29 avril -->
+        <td><img onclick="screenGalery.setImage('120.jpg');" src="images/thumb/imgThumbAvr.jpg" /></td> <!-- 30 avril -->
+        <td><img onclick="screenGalery.setImage('121.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 1 mai -->
+        <td><img onclick="screenGalery.setImage('122.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 2 mai -->
+        <td><img onclick="screenGalery.setImage('123.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 3 mai -->
+        <td><img onclick="screenGalery.setImage('124.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 4 mai -->
+        <td><img onclick="screenGalery.setImage('125.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 5 mai -->
+    </tr>
+    
+<!-- Ligne 06 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('126.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 6 mai -->
+        <td><img onclick="screenGalery.setImage('127.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 7 mai -->
+        <td><img onclick="screenGalery.setImage('128.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 8 mai -->
+        <td><img onclick="screenGalery.setImage('129.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 9 mai -->
+        <td><img onclick="screenGalery.setImage('130.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 10 mai -->
+        <td><img onclick="screenGalery.setImage('131.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 11 mai -->
+        <td><img onclick="screenGalery.setImage('132.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 12 mai -->
+        <td><img onclick="screenGalery.setImage('133.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 13 mai -->
+        <td><img onclick="screenGalery.setImage('134.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 14 mai -->
+        <td><img onclick="screenGalery.setImage('135.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 15 mai -->
+        <td><img onclick="screenGalery.setImage('136.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 16 mai -->
+        <td><img onclick="screenGalery.setImage('137.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 17 mai -->
+        <td><img onclick="screenGalery.setImage('138.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 18 mai -->
+        <td><img onclick="screenGalery.setImage('139.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 19 mai -->
+        <td><img onclick="screenGalery.setImage('140.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 20 mai -->
+        <td><img onclick="screenGalery.setImage('141.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 21 mai -->
+        <td><img onclick="screenGalery.setImage('142.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 22 mai -->
+        <td><img onclick="screenGalery.setImage('143.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 23 mai -->
+        <td><img onclick="screenGalery.setImage('144.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 24 mai -->
+        <td><img onclick="screenGalery.setImage('145.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 25 mai -->
+        <td><img onclick="screenGalery.setImage('146.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 26 mai -->
+        <td><img onclick="screenGalery.setImage('147.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 27 mai -->
+        <td><img onclick="screenGalery.setImage('148.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 28 mai -->
+        <td><img onclick="screenGalery.setImage('149.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 29 mai -->
+        <td><img onclick="screenGalery.setImage('150.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 30 mai -->
+    </tr>                  
+ 
+<!-- Ligne 07 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('151.jpg');" src="images/thumb/imgThumbMai.jpg" /></td> <!-- 31 mai -->
+        <td><img onclick="screenGalery.setImage('152.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 1 juin -->
+        <td><img onclick="screenGalery.setImage('153.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 2 juin -->
+        <td><img onclick="screenGalery.setImage('154.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 3 juin -->
+        <td><img onclick="screenGalery.setImage('155.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 4 juin -->
+        <td><img onclick="screenGalery.setImage('156.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 5 juin -->
+        <td><img onclick="screenGalery.setImage('157.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 6 juin -->
+        <td><img onclick="screenGalery.setImage('158.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 7 juin -->
+        <td><img onclick="screenGalery.setImage('159.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 8 juin -->
+        <td><img onclick="screenGalery.setImage('160.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 9 juin -->
+        <td><img onclick="screenGalery.setImage('161.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 10 juin -->
+        <td><img onclick="screenGalery.setImage('162.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 11 juin -->
+        <td><img onclick="screenGalery.setImage('163.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 12 juin -->
+        <td><img onclick="screenGalery.setImage('164.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 13 juin -->
+        <td><img onclick="screenGalery.setImage('165.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 14 juin -->
+        <td><img onclick="screenGalery.setImage('166.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 15 juin -->
+        <td><img onclick="screenGalery.setImage('167.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 16 juin -->
+        <td><img onclick="screenGalery.setImage('168.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 17 juin -->
+        <td><img onclick="screenGalery.setImage('169.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 18 juin -->
+        <td><img onclick="screenGalery.setImage('170.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 19 juin -->
+        <td><img onclick="screenGalery.setImage('171.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 20 juin -->
+        <td><img onclick="screenGalery.setImage('172.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 21 juin -->
+        <td><img onclick="screenGalery.setImage('173.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 22 juin -->
+        <td><img onclick="screenGalery.setImage('174.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 23 juin -->
+        <td><img onclick="screenGalery.setImage('175.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 24 juin -->
+    </tr> 
+               
+<!-- Ligne 08 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('176.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 25 juin -->
+        <td><img onclick="screenGalery.setImage('177.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 26 juin -->
+        <td><img onclick="screenGalery.setImage('178.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 27 juin -->
+        <td><img onclick="screenGalery.setImage('179.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 28 juin -->
+        <td><img onclick="screenGalery.setImage('180.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 29 juin -->
+        <td><img onclick="screenGalery.setImage('181.jpg');" src="images/thumb/imgThumbJuin.jpg" /></td> <!-- 30 juin -->
+        <td><img onclick="screenGalery.setImage('182.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 1 juillet -->
+        <td><img onclick="screenGalery.setImage('183.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 2 juillet -->
+        <td><img onclick="screenGalery.setImage('184.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 3 juillet -->
+        <td><img onclick="screenGalery.setImage('185.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 4 juillet -->
+        <td><img onclick="screenGalery.setImage('186.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 5 juillet -->
+        <td><img onclick="screenGalery.setImage('187.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 6 juillet -->
+        <td><img onclick="screenGalery.setImage('188.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 7 juillet -->
+        <td><img onclick="screenGalery.setImage('189.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 7 juillet -->
+        <td><img onclick="screenGalery.setImage('190.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 8 juillet -->
+        <td><img onclick="screenGalery.setImage('191.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 9 juillet -->
+        <td><img onclick="screenGalery.setImage('192.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 10 juillet -->
+        <td><img onclick="screenGalery.setImage('193.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 11 juillet -->
+        <td><img onclick="screenGalery.setImage('194.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 12 juillet -->
+        <td><img onclick="screenGalery.setImage('195.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 13 juillet -->
+        <td><img onclick="screenGalery.setImage('196.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 14 juillet -->
+        <td><img onclick="screenGalery.setImage('197.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 15 juillet -->
+        <td><img onclick="screenGalery.setImage('198.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 16 juillet -->
+        <td><img onclick="screenGalery.setImage('199.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 17 juillet -->
+        <td><img onclick="screenGalery.setImage('200.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 18 juillet -->
+    </tr>
+    
+<!-- Ligne 09 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('201.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 19 juillet -->
+        <td><img onclick="screenGalery.setImage('202.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 20 juillet -->
+        <td><img onclick="screenGalery.setImage('203.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 21 juillet -->
+        <td><img onclick="screenGalery.setImage('204.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 22 juillet -->
+        <td><img onclick="screenGalery.setImage('205.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 23 juillet -->
+        <td><img onclick="screenGalery.setImage('206.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 24 juillet -->
+        <td><img onclick="screenGalery.setImage('207.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 25 juillet -->
+        <td><img onclick="screenGalery.setImage('208.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 26 juillet -->
+        <td><img onclick="screenGalery.setImage('209.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 27 juillet -->
+        <td><img onclick="screenGalery.setImage('210.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 28 juillet -->
+        <td><img onclick="screenGalery.setImage('211.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 29 juillet -->
+        <td><img onclick="screenGalery.setImage('212.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 30 juillet -->
+        <td><img onclick="screenGalery.setImage('213.jpg');" src="images/thumb/imgThumbJuil.jpg" /></td> <!-- 31 juillet -->
+        <td><img onclick="screenGalery.setImage('214.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 1 aout -->
+        <td><img onclick="screenGalery.setImage('215.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 2 aout -->
+        <td><img onclick="screenGalery.setImage('216.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 3 aout -->
+        <td><img onclick="screenGalery.setImage('217.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 4 aout -->
+        <td><img onclick="screenGalery.setImage('218.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 5 aout -->
+        <td><img onclick="screenGalery.setImage('219.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 6 aout -->
+        <td><img onclick="screenGalery.setImage('220.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 7 aout -->
+        <td><img onclick="screenGalery.setImage('221.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 8 aout -->
+        <td><img onclick="screenGalery.setImage('222.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 9 aout -->
+        <td><img onclick="screenGalery.setImage('223.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 10 aout -->
+        <td><img onclick="screenGalery.setImage('224.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 11 aout -->
+        <td><img onclick="screenGalery.setImage('225.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 12 aout -->
+    </tr>
+    
+<!-- Ligne 10 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('226.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 13 aout -->
+        <td><img onclick="screenGalery.setImage('227.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 14 aout -->
+        <td><img onclick="screenGalery.setImage('228.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 15 aout -->
+        <td><img onclick="screenGalery.setImage('229.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 16 aout -->
+        <td><img onclick="screenGalery.setImage('230.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 17 aout -->
+        <td><img onclick="screenGalery.setImage('231.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 18 aout -->
+        <td><img onclick="screenGalery.setImage('232.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 19 aout -->
+        <td><img onclick="screenGalery.setImage('233.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 20 aout -->
+        <td><img onclick="screenGalery.setImage('234.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 21 aout -->
+        <td><img onclick="screenGalery.setImage('235.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 22 aout -->
+        <td><img onclick="screenGalery.setImage('236.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 23 aout -->
+        <td><img onclick="screenGalery.setImage('237.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 24 aout -->
+        <td><img onclick="screenGalery.setImage('238.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 25 aout -->
+        <td><img onclick="screenGalery.setImage('239.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 26 aout -->
+        <td><img onclick="screenGalery.setImage('240.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 27 aout -->
+        <td><img onclick="screenGalery.setImage('241.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 28 aout -->
+        <td><img onclick="screenGalery.setImage('242.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 29 aout -->
+        <td><img onclick="screenGalery.setImage('243.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 30 aout -->
+        <td><img onclick="screenGalery.setImage('244.jpg');" src="images/thumb/imgThumbAout.jpg" /></td> <!-- 31 aout -->
+        <td><img onclick="screenGalery.setImage('245.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 1 sept -->
+        <td><img onclick="screenGalery.setImage('246.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 2 sept -->
+        <td><img onclick="screenGalery.setImage('247.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 2 sept -->
+        <td><img onclick="screenGalery.setImage('248.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 3 sept -->
+        <td><img onclick="screenGalery.setImage('249.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 4 sept -->
+        <td><img onclick="screenGalery.setImage('250.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 5 sept -->
+    </tr>
+
+<!-- Ligne 10 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('251.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 6 sept -->
+        <td><img onclick="screenGalery.setImage('252.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 7 sept -->
+        <td><img onclick="screenGalery.setImage('253.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 8 sept -->
+        <td><img onclick="screenGalery.setImage('254.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 9 sept -->
+        <td><img onclick="screenGalery.setImage('255.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 10 sept -->
+        <td><img onclick="screenGalery.setImage('256.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 11 sept -->
+        <td><img onclick="screenGalery.setImage('257.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 12 sept -->
+        <td><img onclick="screenGalery.setImage('258.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 13 sept -->
+        <td><img onclick="screenGalery.setImage('259.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 14 sept -->
+        <td><img onclick="screenGalery.setImage('260.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 15 sept -->
+        <td><img onclick="screenGalery.setImage('261.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 16 sept -->
+        <td><img onclick="screenGalery.setImage('262.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 17 sept -->
+        <td><img onclick="screenGalery.setImage('263.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 18 sept -->
+        <td><img onclick="screenGalery.setImage('264.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 19 sept -->
+        <td><img onclick="screenGalery.setImage('265.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 20 sept -->
+        <td><img onclick="screenGalery.setImage('266.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 21 sept -->
+        <td><img onclick="screenGalery.setImage('267.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 22 sept -->
+        <td><img onclick="screenGalery.setImage('268.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 23 sept -->
+        <td><img onclick="screenGalery.setImage('269.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 24 sept -->
+        <td><img onclick="screenGalery.setImage('270.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 25 sept -->
+        <td><img onclick="screenGalery.setImage('271.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 26 sept -->
+        <td><img onclick="screenGalery.setImage('272.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 27 sept -->
+        <td><img onclick="screenGalery.setImage('273.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 28 sept -->
+        <td><img onclick="screenGalery.setImage('274.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 29 sept -->
+        <td><img onclick="screenGalery.setImage('275.jpg');" src="images/thumb/imgThumbSep.jpg" /></td> <!-- 30 sept -->
+    </tr>
+
+<!-- Ligne 11 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('276.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 1 oct -->
+        <td><img onclick="screenGalery.setImage('277.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 2 -->
+        <td><img onclick="screenGalery.setImage('278.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 3 -->
+        <td><img onclick="screenGalery.setImage('279.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 4 -->
+        <td><img onclick="screenGalery.setImage('280.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 5 -->
+        <td><img onclick="screenGalery.setImage('281.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 6 -->
+        <td><img onclick="screenGalery.setImage('282.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 7 -->
+        <td><img onclick="screenGalery.setImage('283.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 8 -->
+        <td><img onclick="screenGalery.setImage('284.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 9 -->
+        <td><img onclick="screenGalery.setImage('285.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 10 -->
+        <td><img onclick="screenGalery.setImage('286.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 11 -->
+        <td><img onclick="screenGalery.setImage('287.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 12 -->
+        <td><img onclick="screenGalery.setImage('288.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 13 -->
+        <td><img onclick="screenGalery.setImage('289.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 14 -->
+        <td><img onclick="screenGalery.setImage('290.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 15 -->
+        <td><img onclick="screenGalery.setImage('291.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 16 -->
+        <td><img onclick="screenGalery.setImage('292.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 17 -->
+        <td><img onclick="screenGalery.setImage('293.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 18 -->
+        <td><img onclick="screenGalery.setImage('294.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 19 -->
+        <td><img onclick="screenGalery.setImage('295.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 20 -->
+        <td><img onclick="screenGalery.setImage('296.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 21 -->
+        <td><img onclick="screenGalery.setImage('297.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 22 -->
+        <td><img onclick="screenGalery.setImage('298.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 23 -->
+        <td><img onclick="screenGalery.setImage('299.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 24 -->
+        <td><img onclick="screenGalery.setImage('300.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 25 -->
+    </tr>
+    
+    <!-- Ligne 12 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('301.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 26 oct -->
+        <td><img onclick="screenGalery.setImage('302.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 27 -->
+        <td><img onclick="screenGalery.setImage('303.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 28 -->
+        <td><img onclick="screenGalery.setImage('304.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 29 -->
+        <td><img onclick="screenGalery.setImage('305.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 30 -->
+        <td><img onclick="screenGalery.setImage('306.jpg');" src="images/thumb/imgThumbOct.jpg" /></td> <!-- 31 -->
+        <td><img onclick="screenGalery.setImage('307.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 1 nov -->
+        <td><img onclick="screenGalery.setImage('308.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 2 -->
+        <td><img onclick="screenGalery.setImage('309.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 3 -->
+        <td><img onclick="screenGalery.setImage('310.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 4 -->
+        <td><img onclick="screenGalery.setImage('311.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 5 -->
+        <td><img onclick="screenGalery.setImage('312.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 6 -->
+        <td><img onclick="screenGalery.setImage('313.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 7 -->
+        <td><img onclick="screenGalery.setImage('314.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 8 -->
+        <td><img onclick="screenGalery.setImage('315.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 9 -->
+        <td><img onclick="screenGalery.setImage('316.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 10 -->
+        <td><img onclick="screenGalery.setImage('317.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 11 -->
+        <td><img onclick="screenGalery.setImage('318.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 12 -->
+        <td><img onclick="screenGalery.setImage('319.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 13 -->
+        <td><img onclick="screenGalery.setImage('320.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 14 -->
+        <td><img onclick="screenGalery.setImage('321.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 15 -->
+        <td><img onclick="screenGalery.setImage('322.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 16 -->
+        <td><img onclick="screenGalery.setImage('323.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 17 -->
+        <td><img onclick="screenGalery.setImage('324.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 18 -->
+        <td><img onclick="screenGalery.setImage('325.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 19 nov -->
+    </tr>
+    
+    <!-- Ligne 13 -->
+    <tr>  
+        <td><img onclick="screenGalery.setImage('326.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 20 nov -->
+        <td><img onclick="screenGalery.setImage('327.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 21 -->
+        <td><img onclick="screenGalery.setImage('328.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 22 -->
+        <td><img onclick="screenGalery.setImage('329.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 23 -->
+        <td><img onclick="screenGalery.setImage('330.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 24 -->
+        <td><img onclick="screenGalery.setImage('331.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 25 -->
+        <td><img onclick="screenGalery.setImage('332.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 26 -->
+        <td><img onclick="screenGalery.setImage('333.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 27 -->
+        <td><img onclick="screenGalery.setImage('334.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 28 -->
+        <td><img onclick="screenGalery.setImage('335.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 29 -->
+        <td><img onclick="screenGalery.setImage('336.jpg');" src="images/thumb/imgThumbNov.jpg" /></td> <!-- 30 -->
+        <td><img onclick="screenGalery.setImage('337.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 1 décembre -->
+        <td><img onclick="screenGalery.setImage('338.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 2 -->
+        <td><img onclick="screenGalery.setImage('339.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 3 -->
+        <td><img onclick="screenGalery.setImage('340.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 4 -->
+        <td><img onclick="screenGalery.setImage('341.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 5 -->
+        <td><img onclick="screenGalery.setImage('342.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 6 -->
+        <td><img onclick="screenGalery.setImage('343.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 7 -->
+        <td><img onclick="screenGalery.setImage('344.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 8 -->
+        <td><img onclick="screenGalery.setImage('345.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 9 -->
+        <td><img onclick="screenGalery.setImage('346.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 10 -->
+        <td><img onclick="screenGalery.setImage('347.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 11 -->
+        <td><img onclick="screenGalery.setImage('348.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 12 -->
+        <td><img onclick="screenGalery.setImage('349.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 13 -->
+        <td><img onclick="screenGalery.setImage('350.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 14 -->
+    </tr>
+    <tr>
+        
+        <td><img onclick="screenGalery.setImage('351.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 15 décembre -->
+        <td><img onclick="screenGalery.setImage('352.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 16 -->
+        <td><img onclick="screenGalery.setImage('353.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 17 -->
+        <td><img onclick="screenGalery.setImage('354.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 18 -->
+        <td><img onclick="screenGalery.setImage('355.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 19 -->
+        <td><img onclick="screenGalery.setImage('356.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 20 -->
+        <td><img onclick="screenGalery.setImage('357.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 21 -->
+        <td><img onclick="screenGalery.setImage('358.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 22 -->
+        <td><img onclick="screenGalery.setImage('359.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 23 -->
+        <td><img onclick="screenGalery.setImage('360.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 24 -->
+        <td><img onclick="screenGalery.setImage('361.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 25 -->
+        <td><img onclick="screenGalery.setImage('362.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 26 -->
+        <td><img onclick="screenGalery.setImage('363.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 27 -->
+        <td><img onclick="screenGalery.setImage('364.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 28 -->
+        <td><img onclick="screenGalery.setImage('365.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 29 -->
+        <td><img onclick="screenGalery.setImage('342.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 30 -->
+        <td><img onclick="screenGalery.setImage('343.jpg');" src="images/thumb/imgThumbDec.jpg" /></td> <!-- 31 -->
+        <td><img onclick="screenGalery.setImage('001.jpg');" src="images/thumb/imgThumbGoToFirst.gif" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+        <td><img src="images/thumb/imgThumbBlack.jpg" /></td> <!-- 00 -->
+   	</tr>
+	</table>
+	</div> <!-- table -->
+
+</div> <!-- page -->
+
+
+</body></html>

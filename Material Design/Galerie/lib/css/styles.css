@@ -1,0 +1,45 @@
+*{box-sizing:border-box;}
+body{margin:0; padding:0; font-family: 'Roboto', sans-serif; font-size:12px;}
+body>div{padding:64px 0 0 0; display:-webkit-box; display:-moz-box; display:-ms-flexbox; display:-webkit-flex; display:flex; justify-content:space-around; flex-wrap:wrap; flex-direction:row; width:100%;}
+
+.materitalicon{font-family:materialicons; font-weight:normal; font-style:normal; font-size:34px; letter-spacing:normal; text-transform:none; display:block; white-space:nowrap; word-wrap:normal; direction:ltr; -webkit-font-feature-settings:'liga'; -webkit-font-smoothing:antialiased;}
+
+header{height:64px; background-color:#0288D1; position:fixed; z-index:900; width:100%; padding:16px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+header>nav{position:absolute; right:10%; top:34px;}
+header>nav>i{transition:all 0.5s; background:#FDD835; position:absolute; top:0px; left:0px; width:60px; height:60px; line-height:60px; cursor:pointer; border-radius:30px; box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); text-align:center; color:#fff;}
+header>nav>i.menu{z-index:1;}
+header>nav>i:not(:first-child){display:none;}
+header>nav>i:hover{box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+header>nav>i:active, header>nav>i:hover, figure.hover>nav>i:focus{background:#F9A825}
+header h1{font-size:32px; line-height:32px; font-weight:100; margin:0; padding:0; color:#fff;}
+
+figure{position:relative; min-height:200px; padding:0px 0px 80px 0px; box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); transition:all 0.5s; display:block; border:1px solid #fff; width:250px; border:1px solid #fff; background:#fff;}
+figure.hover{box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+figure.selected, figure.selected.hover{background:#eee; border:8px solid #333;}        
+
+figure>img{width:100%; display:block;}
+figure.selected>img{}
+
+figure>figcaption{position:absolute; width:100%; height:80px; bottom:0px; right:0px; background:#fff; padding:10px; overflow:auto;}
+
+figure>nav>q{transition:all 0.5s; z-index:2; cursor:pointer; background:#0288D1; color:#fff; font-size:20px; font-weight:400; box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); position:absolute; width:70px; height:70px; line-height:70px; text-align:center; top:-5px; left:-35px; border-radius:40px;}
+figure>nav>q:after, figure>nav>q:before {content: "";}
+figure.hover>nav>q{width:80px; height:80px; line-height:80px; left:-40px;}
+figure.hover>nav>q:hover{box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+figure.hover>nav.open>q, figure.hover>nav>q:active, figure.hover>nav>q:hover, figure.hover>nav>q:focus{background:#01579B}
+
+figure>nav>i{transition:all 0.5s; position:absolute; z-index:1; cursor:pointer; width:60px; height:60px; line-height:60px; border-radius:30px; top:10px; left:-30px; box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); text-align:center; color:#fff; }
+figure>nav>i.favorite{top:0px; background:#0288D1;}
+figure>nav>i.launch{top:0px; background:#0288D1;}
+figure.hover>nav>i:hover{box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+figure.hover>nav>i:active, figure.hover>nav>i:hover, figure.hover>nav>i:focus{background:#01579B}
+figure.selected>nav>i.favorite{background:#000;}
+
+
+body>div#overlay{transition:all 0.5s; width:0px; background-color:rgb(240, 240, 240); position:fixed; margin:auto; top:0px; bottom:0px; right:0px; left:0px; z-index:1000;}
+
+body>i.close{transition:all 0.5s; position:fixed; cursor:pointer; line-height:60px; border-radius:30px; box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); z-index:1004; text-align:center; background:#0288D1; color:#fff;}
+body>i.close:hover{box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+body>i.close:active, div#overlay i.close:hover, div#overlay i.close:focus{background:#01579B}
+
+body>img{position:fixed; opacity:0; box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); z-index:1001}

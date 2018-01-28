@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fullscreen</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	
+<style>
+        body{font-family:Verdana, Geneva, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;}
+        #page{}
+        div#sliderzone{position:relative;}
+        div#sliderzone div#slider{overflow:hidden; display:inline-block; position:relative;}
+        div#sliderzone div#slider ul{margin:0; padding:0; list-style:none;}
+        div#sliderzone div#slider li{margin:0; padding:0; display:block; float:left; position:relative;}
+        div#sliderzone div#slider li img{display:block; position:absolute;}
+        div#sliderzone div#slider li span{display:block; width:40%; margin:5%; color:#fff; font-size:18px; line-height:30px; overflow:auto; text-align:center; position:absolute; top:30%; right:50px; min-height:50px; background:rgba(0, 0, 0, 0.6);}
+        img.arrow{cursor:pointer; z-index:800; position:absolute;}
+        img#arrow_left{left:0px;}
+        img#arrow_right{right:0px;}
+
+        #navSlider{position:fixed; bottom:0px; z-index:500;}
+        #navSlider ul{margin:10px 0 10px 20px; padding:0; list-style:none; height:20px; width:100%;}
+        #navSlider li{margin:0 4px 0 0; display:block; float:left; width:45px; border:1px solid #000; padding:1px; cursor:pointer;}
+        #navSlider li img{width:45px; float:left;}
+        .clear{clear:both;}
+
+        h1{margin:0; padding:0;}
+
+        img#fullscreen{position:fixed; z-index:1000; cursor:pointer; top:10px; right:10px; height:32px;}
+
+
+</style>
+<script>
+$(document).ready( function(){
+    slideshow();
+    $('#fullscreen').click(function(){
+        var elem = document.body; // Make the body go full screen.
+        requestFullScreen(elem);
+    });
+});
+
+$( window ).resize(function() {
+    
+    clearInterval( animateAuto );
+    slideshow();
+});   
+
+var slideshow = function(){
+    var windowWidth = $(window).width();                //retrieve current window width
+    var windowHeight = $(window).height();              //retrieve current window height
+    var speedSlide = 500;				// Temps de l'animation millieme de seconde
+    var waitSlide = 8000;				// Temps d'attente sur une slide
+    var marginUL = 0;                                   // margin initial du <ul> qui contient toutes les images
+    var numCurrentSlide = 0;                            // Index of the current slide shown
+    var nbImage = $( 'div#slider ul li' ).length; 	// compte le nombre d'images dans un tableau array
+    var widthUL = nbImage * windowWidth;
+    $('div#slider').css( {width:windowWidth, height:windowHeight} );
+    $('div#slider ul').css( {width:widthUL, height:windowHeight} );
+    $('div#slider ul li').css( {width:windowWidth, height:windowHeight} );
+    $('div#sliderzone div#slider li img').show();
+    $('div#sliderzone div#slider li img').css( {width:windowWidth, height:windowHeight} );
+    $('div#sliderzone img.arrow').css({top:''+( windowHeight / 2 +15)+'px'});
+    $('div#slider ul').animate({marginLeft:0}, speedSlide);
+
+    var animateSlider = function(){
+        if( marginUL < ( widthUL - windowWidth ) ){
+            $('div#slider ul').animate({marginLeft:'-=' + windowWidth}, speedSlide);
+            numCurrentSlide++;
+            marginUL += windowWidth;
+        }else{
+            $('div#slider ul').animate({marginLeft:'+=' + ( widthUL - windowWidth )}, speedSlide);
+            numCurrentSlide = 0;
+            marginUL = 0;
+        }
+        highLightThumb();
+    };
+
+    var highLightThumb = function(){
+        $( 'div#navSlider ul li' ).css( 'borderColor','#000' );
+        $( $( 'div#navSlider ul li' )[ numCurrentSlide ] ).css( 'borderColor','#fff' );
+    };
+
+    animateAuto = setInterval(function(){ 				// Animation automatique au demarrage 
+            animateSlider();
+    }, waitSlide);
+
+    $( 'img#arrow_left' ).click(
+        function(){
+            clearInterval( animateAuto );
+            if( marginUL > 0 ){
+                    $('div#slider ul').animate({marginLeft:'+=' + windowWidth}, speedSlide);
+                    marginUL -= windowWidth;
+                    numCurrentSlide--;
+                    highLightThumb();
+            }
+        }
+    );
+
+    $( 'img#arrow_right' ).click(
+        function(){
+            clearInterval( animateAuto );
+            animateSlider();				
+        }
+    );
+
+    $( 'div#slider ul li' ).click(
+        function(){
+            clearInterval( animateAuto );
+            $('div#descriptions div').slideUp();
+            $($('div#descriptions div')[ $(this).index() ]).slideDown();	
+        }
+    );
+
+    $( 'div#navSlider ul li' ).click(
+        function(){
+            clearInterval( animateAuto );
+            if ($(this).index() != numCurrentSlide) {
+                    numCurrentSlide = $(this).index();
+                    $('div#descriptions div').slideUp();
+                    var distanceToSet = windowWidth * numCurrentSlide;
+                    var distanceToSlide = distanceToSet - marginUL;
+                    marginUL = distanceToSet;
+                    $('div#slider ul').animate({marginLeft: '-=' + distanceToSlide}, speedSlide);
+                    highLightThumb();
+            }
+        }
+    );
+
+    highLightThumb();
+
+}
+            
+function requestFullScreen(element) {
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+}
+
+
+</script>
+            
+            
+    </head>
+    <body>
+        
+        
+        
+        
+        
+<div id="page">
+	
+	<div id="navSlider">
+		<ul>
+		<li><img src="images/grandes/blue.jpg" /></li>
+		<li><img src="images/grandes/green.jpg" /></li>
+		<li><img src="images/grandes/orange.jpg" /></li>
+		<li><img src="images/grandes/green.jpg" /></li>
+		<div class="clear"></div>
+		</ul>
+	</div>
+    
+	<div id="sliderzone">
+		<img class="arrow" id="arrow_left" src="images/arrow_previous.png" />
+		<div id="slider">
+			<ul>
+			<li><img src="images/grandes/blue.jpg" /><br />
+                            <span>
+                                <p> 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis aliquet augue vitae tincidunt. 
+                                    Phasellus ut enim quis elit gravida tincidunt. Maecenas quis diam quis urna iaculis vestibulum. 
+                                    Fusce quis sem id nunc fringilla condimentum. Donec a lectus risus, sed pellentesque diam. 
+                                    Sed suscipit molestie risus ac malesuada. Curabitur auctor enim a ipsum adipiscing blandit. 
+                                    Ut viverra nibh at nisi auctor laoreet.
+                                </p>
+                            </span>
+                        </li>
+			<li><img src="images/grandes/green.jpg" />
+                            <span>
+                                <p>
+                                    Donec ipsum dolor, faucibus sed facilisis eu, tempor in mi. Maecenas placerat imperdiet volutpat. 
+                                    Aliquam in quam tortor, vitae hendrerit metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                    Nulla varius leo non orci hendrerit in mattis quam sollicitudin. Suspendisse potenti. 
+                                </p>
+                            </span>
+                        </li>
+			<li><img src="images/grandes/orange.jpg" /><br />
+                            <span>
+                                <p>
+                                    Proin auctor, neque ut condimentum fringilla, augue elit rhoncus arcu, nec porttitor mi odio vitae sem. 
+                                    Nunc eget lectus vel nisl venenatis commodo. Cras in mollis metus. 
+                                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+                                </p>
+                            </span>
+                        </li>
+			<li><img src="images/grandes/green.jpg" />
+                            <span>
+                                <p>
+                                    Donec ipsum dolor, faucibus sed facilisis eu, tempor in mi. Maecenas placerat imperdiet volutpat. 
+                                    Aliquam in quam tortor, vitae hendrerit metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                    Nulla varius leo non orci hendrerit in mattis quam sollicitudin. Suspendisse potenti. 
+                                </p>
+                            </span>
+                        </li>
+			</ul>
+		</div>
+		<img class="arrow" id="arrow_right" src="images/arrow_next.png" />
+	</div>
+	
+</div>
+        
+<img id="fullscreen" src="images/fullscreen.png" alt="Mode plein écran" />
+
+</body>
+
+</html>

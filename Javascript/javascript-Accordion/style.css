@@ -1,0 +1,53 @@
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+}
+dt{
+	width:620px;
+	padding:0px 0px 0px 0px;
+	height:15px;
+	margin:0px 0px 0px 0px;
+	border:1px solid #ddd;
+	cursor:pointer;
+}
+dt.entete_normal{
+	background-color:#eee;
+}
+dt.entete_roll{
+	background-color:#ddd;
+}
+
+dd.slider_content{  /* Espace du diaporama */
+	width:620px;
+	height:1px;
+	overflow:hidden;
+	border:1px solid #aaa;
+	position:relative;
+	margin:0px 0px 10px 0px;
+	padding:0px 0px 0px 0px;
+}
+div.content_hide{
+	display:none;
+}
+div.content_show{
+	width:500px;
+	display:block;
+	margin:10px;
+	position:absolute;
+}
+
+div.nav_zone{
+	height:20px;
+	width:80px;
+	margin:15px 0px 0px 0px;
+}
+div.arrow{
+	width:25px;
+	height:20px;
+	float:left;
+	margin:0px 0px 0px 0px;
+	padding:0px 7px 0px 8px;
+	cursor:pointer;
+}
+
+dd{margin:0px 0px 50px 0px}

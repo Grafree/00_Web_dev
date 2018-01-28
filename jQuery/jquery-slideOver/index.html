@@ -1,0 +1,463 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery - SlideOver</title>
+
+<style>
+html{font-size:100%;}
+body{margin:0; padding:0; font-family:Arial, Helvetica, sans-serif;}
+*{outline:0;}
+
+/* DESKTOP and MOBILE BROWSERS (with jQuery) */
+div.container{width:600px; margin:0 auto;}
+ul{padding:0; margin:0 0 70px 0; height:29px;}
+ul li{display:block; position:relative; float:left; width:11px; height:29px; background:#1b97b1; box-shadow:inset 1px 1px 5px #2e4347; margin:0 1px 0 0;}
+div.pointer{height:122px; width:96px; position:absolute; top:-117px; left:-42px; background:url(images/pointer.png) no-repeat; z-index:2; cursor:pointer;}
+div.pointer span{display:block; margin:22px 0 0 0; font-size:36px; text-shadow:1px 1px 2px #fff, -1px -1px 1px #ccc; text-align:center;}  
+
+
+/* HTML and CSS only */
+ul#active li{display:block; position:relative; float:left; width:11px; height:29px; background:#1b97b1; box-shadow:inset 1px 1px 5px #2e4347; margin:0 1px 0 0;}
+ul#active li div{display:none; color:#000; height:122px; width:96px;  position:absolute; top:-117px; left:-42px; background:url(images/pointer.png) no-repeat; z-index:2; cursor:pointer;}
+ul#active li div span{display:block; margin:22px 0 0 0; font-size:36px; text-shadow:1px 1px 2px #fff, -1px -1px 1px #ccc; text-align:center;}  
+ul#active li:active{background:#000;}
+ul#active li:active div{display:block;}
+ul#active li:focus{background:#000;}
+ul#active li:focus div{display:block;}
+
+
+/* HTML and CSS only */
+div#ahover{padding:0; margin:0; height:59px;}
+div#ahover a{display:block; position:relative; float:left; width:11px; height:29px; background:#1b97b1; box-shadow:inset 1px 1px 5px #2e4347; margin:0 1px 0 0;
+transition: background 0.5s;}
+div#ahover a div{display:none; color:#000; height:122px; width:96px;  position:absolute; top:-117px; left:-42px; background:url(images/pointer.png) no-repeat; z-index:2; cursor:pointer;}
+div#ahover a div span{display:block; margin:22px 0 0 0; font-size:36px; text-shadow:1px 1px 2px #fff, -1px -1px 1px #ccc; text-align:center;}  
+div#ahover a:hover{background:#000;}
+div#ahover a:hover div{display:block;}
+</style>
+
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // MOBILE MOVE BROWSERS
+    var pointerMobileMove = $( 'ul#mobileMoveBrowsers li div.pointer' ).parent().html();
+    $( 'ul#mobileMoveBrowsers li div.pointer' ).remove();
+    var indexLi = 0;
+    var numLi = -1;
+    
+    var animHover = function( event, tool, currentIndexLi ){
+        if( currentIndexLi != indexLi ){
+            $( 'ul#mobileMoveBrowsers li div.pointer' ).remove();
+            $( $( 'ul#mobileMoveBrowsers li' )[ indexLi ] ).find( 'div' ).hide();
+            indexLi = currentIndexLi;
+            if( numLi == -1 ) numLi = indexLi + 1;
+            var currentObject = $( $( 'ul#mobileMoveBrowsers li' )[ indexLi ] );
+            currentObject.append( pointerMobileMove );
+            var pointerCurrentMobileMove = currentObject.find( 'div' );
+            pointerCurrentMobileMove.html( '<span>' + ( indexLi + 1 ) + '</span>' );
+            pointerCurrentMobileMove.click(function(){
+                alert( 'Vous avez cliqué sur le pointeur ' + numLi );
+            });
+            numLi = indexLi + 1;
+            setTimeout( function(){ 
+                pointerCurrentMobileMove.fadeOut(); 
+                }, 
+            1500);
+        }
+    }
+    
+    /*
+    var animHover = function( event, tool ){
+        var e = event.originalEvent ;
+        event.stopPropagation();
+        event.preventDefault(); 
+        var liWidth = ( $( 'ul#mobileMoveBrowsers li' ).outerWidth(true) ); 
+        if( tool == 'touch'){
+            var positionPage = e.touches[ 0 ].pageX;
+        }else{
+            var positionPage = e.clientX;
+        }
+        
+        var positionElement = positionPage + $(document).scrollLeft() - $( 'ul#mobileMoveBrowsers' ).offset().left;
+        var currentIndexLi = Math.floor( positionElement / liWidth );
+        if( currentIndexLi != indexLi ){
+            $( 'ul#mobileMoveBrowsers li div.pointer' ).remove();
+            $( $( 'ul#mobileMoveBrowsers li' )[ indexLi ] ).find( 'div' ).hide();
+            indexLi = currentIndexLi;
+            if( numLi == -1 ) numLi = indexLi + 1;
+            var currentObject = $( $( 'ul#mobileMoveBrowsers li' )[ indexLi ] );
+            currentObject.append( pointerMobileMove );
+            var pointerCurrentMobileMove = currentObject.find( 'div' );
+            pointerCurrentMobileMove.html( '<span>' + ( indexLi + 1 ) + '</span>' );
+            pointerCurrentMobileMove.click(function(){
+                alert( 'Vous avez cliqué sur le pointeur ' + numLi );
+            });
+            numLi = indexLi + 1;
+            setTimeout( function(){ 
+                pointerCurrentMobileMove.fadeOut(); 
+                }, 
+            1500);
+        }
+    }
+    */
+    
+    $( 'ul#mobileMoveBrowsers li' ).bind( 'mousemove', function(bEvent){ 
+        if( bEvent.target == $( this )[0] ){ // Event affects only the <li> object (and not it's child)
+            animHover(bEvent, 'mouse', $( $( this )[0] ).index() );
+        }
+    }) ;
+    
+    $( 'ul#mobileMoveBrowsers li' ).bind( 'touchmove', function(bEvent){  
+        if( bEvent.target == $( this )[0] ){ // Event affects only the <li> object (and not it's child)
+            animHover(bEvent, 'touch', $( $( this )[0] ).index() );
+        }
+    }) ;
+
+
+    
+    // DESKTOP BROWSERS
+    var pointer = $( 'ul#desktopBrowsers li div.pointer' ).parent().html();
+    $( 'ul#desktopBrowsers li div.pointer' ).remove();
+    
+    $( 'ul#desktopBrowsers li' ).hover(
+      function(){
+        $( 'ul#desktopBrowsers li div.pointer' ).hide();
+        var indexPointer = $(this).index(); 
+        $(this).append( pointer );   
+        $(this).find( 'div' ).html( '<span>' + ( indexPointer + 1 ) + '</span>' );
+        $(this).find( 'div' ).stop().click(function(){
+            alert( 'Vous avez cliqué sur le pointeur ' + ( indexPointer + 1 ) );
+        });
+      },
+      function(){
+        var pointerCurrent = $(this).find( 'div' );
+        setTimeout( function(){ 
+            pointerCurrent.fadeOut(); 
+            }, 
+        1000);
+      }
+    ); 
+   
+    
+    // MOBILE BROWSERS
+    var pointerMobile = $( 'ul#mobileBrowsers li div.pointer' ).parent().html();
+    $( 'ul#mobileBrowsers li div.pointer' ).hide();
+    
+    $( 'ul#mobileBrowsers li' ).click(
+      function(){
+        $( 'ul#mobileBrowsers li div.pointer' ).hide();
+        var indexPointer = $(this).index(); 
+        $(this).append( pointerMobile );   
+        var pointerMobileCurrent = $(this).find( 'div' );
+        pointerMobileCurrent.fadeIn( 'slow' );
+        pointerMobileCurrent.html( '<span>' + ( indexPointer + 1 ) + '</span>' );
+        setTimeout( function(){ 
+            pointerMobileCurrent.fadeOut();
+            pointerMobileCurrent.remove(); 
+            }, 
+        1000);
+        
+        $(this).find( 'div' ).stop().click(function(){
+            alert( 'Vous avez cliqué sur le pointeur ' + ( indexPointer + 1 ) );
+        });
+      }
+    );  
+   
+   
+    $('div#ahover a').bind('click',function(event){
+        event.preventDefault(); // Supprime l'action de rechargement de la page lors du clic sur la balise <a>
+    });
+    
+});
+
+</script>
+</head>
+<body>
+<div class="container">	
+    <h1>Desktop and mobile browsers</h1>
+    <h4>Use jQuery touchmove and mousmove event.</h4>
+    <ul id="mobileMoveBrowsers">
+        <li><div class="pointer"><span></span></div></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    
+    
+    <h1>Desktop browsers</h1>
+    <h4>Use jQuery hover event. Useless on mobile</h4>
+    <ul id="desktopBrowsers">
+        <li><div class="pointer"><span></span></div></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    
+    
+    <h1>Mobile browsers</h1>
+    <h4>Use jQuery click event. Mobile alternative but only on a "tap" on the objects</h4>
+    <ul id="mobileBrowsers">
+        <li><div class="pointer"><span></span></div></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    
+    
+        
+    <h1>CSS :active</h1>
+    <h4>Use the :active CSS pseuo-class. Useless on mobile</h4>
+    <ul id="active">
+        <li><div><span>1</span></div></li>
+        <li><div><span>2</span></div></li>
+        <li><div><span>3</span></div></li>
+        <li><div><span>4</span></div></li>
+        <li><div><span>5</span></div></li>
+        <li><div><span>6</span></div></li>
+        <li><div><span>7</span></div></li>
+        <li><div><span>8</span></div></li>
+        <li><div><span>9</span></div></li>
+        <li><div><span>10</span></div></li>
+        <li><div><span>11</span></div></li>
+        <li><div><span>12</span></div></li>
+        <li><div><span>13</span></div></li>
+        <li><div><span>14</span></div></li>
+        <li><div><span>15</span></div></li>
+        <li><div><span>16</span></div></li>
+        <li><div><span>17</span></div></li>
+        <li><div><span>18</span></div></li>
+        <li><div><span>19</span></div></li>
+        <li><div><span>20</span></div></li>
+        <li><div><span>21</span></div></li>
+        <li><div><span>22</span></div></li>
+        <li><div><span>23</span></div></li>
+        <li><div><span>24</span></div></li>
+        <li><div><span>25</span></div></li>
+        <li><div><span>26</span></div></li>
+        <li><div><span>27</span></div></li>
+        <li><div><span>28</span></div></li>
+        <li><div><span>29</span></div></li>
+        <li><div><span>30</span></div></li>
+        <li><div><span>31</span></div></li>
+        <li><div><span>32</span></div></li>
+        <li><div><span>33</span></div></li>
+        <li><div><span>34</span></div></li>
+        <li><div><span>35</span></div></li>
+        <li><div><span>36</span></div></li>
+        <li><div><span>37</span></div></li>
+        <li><div><span>38</span></div></li>
+        <li><div><span>39</span></div></li>
+        <li><div><span>40</span></div></li>
+        <li><div><span>41</span></div></li>
+        <li><div><span>42</span></div></li>
+        <li><div><span>43</span></div></li>
+        <li><div><span>44</span></div></li>
+        <li><div><span>45</span></div></li>
+        <li><div><span>46</span></div></li>
+        <li><div><span>47</span></div></li>
+        <li><div><span>48</span></div></li>
+        <li><div><span>49</span></div></li>
+        <li><div><span>50</span></div></li>
+    </ul>
+    
+    
+    
+    <h1>CSS :hover</h1>
+    <h4>Use the :hover CSS pseuo-class and the CSS 3 translate proprety. Useless on mobile</h4>
+    <div id="ahover">
+        <a href=""><div><span>1</span></div></a>
+        <a href=""><div><span>2</span></div></a>
+        <a href=""><div><span>3</span></div></a>
+        <a href=""><div><span>4</span></div></a>
+        <a href=""><div><span>5</span></div></a>
+        <a href=""><div><span>6</span></div></a>
+        <a href=""><div><span>7</span></div></a>
+        <a href=""><div><span>8</span></div></a>
+        <a href=""><div><span>9</span></div></a>
+        <a href=""><div><span>10</span></div></a>
+        <a href=""><div><span>11</span></div></a>
+        <a href=""><div><span>12</span></div></a>
+        <a href=""><div><span>13</span></div></a>
+        <a href=""><div><span>14</span></div></a>
+        <a href=""><div><span>15</span></div></a>
+        <a href=""><div><span>16</span></div></a>
+        <a href=""><div><span>17</span></div></a>
+        <a href=""><div><span>18</span></div></a>
+        <a href=""><div><span>19</span></div></a>
+        <a href=""><div><span>20</span></div></a>
+        <a href=""><div><span>21</span></div></a>
+        <a href=""><div><span>22</span></div></a>
+        <a href=""><div><span>23</span></div></a>
+        <a href=""><div><span>24</span></div></a>
+        <a href=""><div><span>25</span></div></a>
+        <a href=""><div><span>26</span></div></a>
+        <a href=""><div><span>27</span></div></a>
+        <a href=""><div><span>28</span></div></a>
+        <a href=""><div><span>29</span></div></a>
+        <a href=""><div><span>30</span></div></a>
+        <a href=""><div><span>31</span></div></a>
+        <a href=""><div><span>32</span></div></a>
+        <a href=""><div><span>33</span></div></a>
+        <a href=""><div><span>34</span></div></a>
+        <a href=""><div><span>35</span></div></a>
+        <a href=""><div><span>36</span></div></a>
+        <a href=""><div><span>37</span></div></a>
+        <a href=""><div><span>38</span></div></a>
+        <a href=""><div><span>39</span></div></a>
+        <a href=""><div><span>40</span></div></a>
+        <a href=""><div><span>41</span></div></a>
+        <a href=""><div><span>42</span></div></a>
+        <a href=""><div><span>43</span></div></a>
+        <a href=""><div><span>44</span></div></a>
+        <a href=""><div><span>45</span></div></a>
+        <a href=""><div><span>46</span></div></a>
+        <a href=""><div><span>47</span></div></a>
+        <a href=""><div><span>48</span></div></a>
+        <a href=""><div><span>49</span></div></a>
+        <a href=""><div><span>50</span></div></a>
+    </div>
+
+  
+</body>
+</html>

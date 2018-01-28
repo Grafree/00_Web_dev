@@ -1,0 +1,206 @@
+
+<?php 
+
+if( isset( $_GET['module'] ) ){
+	
+	$_SESSION['module'] = $_GET['module'];
+	
+}else if( !isset( $_SESSION['module'] ) || $_SESSION['module'] == 0 ){
+	
+	$_SESSION['module'] = 1;
+	
+}
+
+?>
+<script language="JavaScript">
+	/*
+	accrodionWindow(	[int | distance en px], 
+				[int | vitesse en milliseconde], 
+				[string | id des fenêtres coulissantes], 
+				[int | % de décération], 
+				[bolean | fermeture automatique des fenêtres coulissantes a l'ouverture d'une autre = true], 
+				[int | Id de la slide ouverte au chargement. 0 indique aucune],
+				[bolean | Indique si l'ouverture de la fenetre coulissante au chargement dervait se faire avec un coulissement], 
+				[int | Nb de px des fenêtres fermées. Correspond a la propriete CSS height de la classe slider_content],
+				[int | Correspond au padding indiqué dans le CSS pour content_show]		);
+	*/
+	var menuAcc = new accordionWindow( 50, 25, 'slider', 75, true, <?php echo $_SESSION['module']; ?>, false, 1, 10 );
+</script>
+
+<dl id="allslides">
+<dt class="entete_normal" id="1" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+Horaires
+</dt>
+<dd class="slider_content" id="slider_1">
+	<div class="content_show">
+				<table>
+					<tr>
+						<th></th>
+						<th>Avant-midi</th>
+						<th>Après-midi</th>
+					</tr>
+					<tr>
+						<td>Lundi</td>
+						<td>9h - 12h</td>
+						<td>12h-19h</td>
+					</tr>
+					<tr>
+						<td>Mardi</td>
+						<td>9h - 12h</td>
+						<td>12h-19h</td>
+					</tr>
+					<tr>
+						<td>Mercredi</td>
+						<td>9h - 12h</td>
+						<td>12h-19h</td>
+					</tr>
+					<tr>
+						<td>Jeudi</td>
+						<td>9h - 12h</td>
+						<td>12h-19h</td>
+					</tr>
+					<tr>
+						<td>Vendredi</td>
+						<td>9h - 12h</td>
+						<td>12h-19h</td>
+					</tr>
+					
+				</table>
+				
+
+				<h3 class="title_sub" onclick="menuAcc.subaction( 1 );">Jours fériés</h3>
+
+				<div class="content_sub" id="slider_1_sub">
+					<div class="content_show">
+				
+						Férié<br />
+						Férié<br />
+						Férié<br />
+						Férié<br />
+						Férié<br />
+						Férié<br /><br />
+					</div>
+				</div>
+
+    </div>
+</dd>
+
+
+<dt class="entete_normal" id="2" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+Plan d'accès	
+</dt>
+<dd class="slider_content" id="slider_2">
+	<div class="content_show">
+
+				<iframe width="229" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=Chemin+de+Saugy+1+Crissier&amp;sll=46.550479,6.569695&amp;sspn=0.006729,0.021157&amp;ie=UTF8&amp;ll=46.553371,6.574631&amp;spn=0.020658,0.019655&amp;z=14&amp;output=embed"></iframe>
+				<br /><small><a href="http://maps.google.ch/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Chemin+de+Saugy+1+Crissier&amp;sll=46.550479,6.569695&amp;sspn=0.006729,0.021157&amp;ie=UTF8&amp;ll=46.553371,6.574631&amp;spn=0.020658,0.019655&amp;z=14" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>			
+			
+    </div>
+</dd>
+
+<dt class="entete_normal" id="3" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+Contact		
+</dt>
+<dd class="slider_content" id="slider_3">
+	<div class="content_show">
+		
+		<?php if($envoi == 'oksend'){ ?>
+			<p>
+			<b>Le message a été envoyé.</b><br />Nous vous en sommes reconnaissant.
+			</p>
+		<?php }elseif($envoi == 'nosend'){ ?>
+			<p>
+			<b>Nous avons malheureusement rencontré un problème d'envoi de ce message.
+			</p>
+		<?php }else{ ?> 	
+			
+			<form method="post" action="<?php echo _URL; ?>/site/<?php echo _ACTUALFILE; ?>?envoi&module=3"> 	
+				Nom: <?php if($msgnom == 'nom'){echo '<span style="color:red;">(Vous devez indiquer un nom)</span>';} ?>
+				<br />
+				<input name="nom" size="30" value="<?php if(isset($_POST['nom'])){echo $_POST['nom'];} ?>" />
+				<br /><br />
+				E-mail: <?php if($msgemail == 'email'){echo '<span style="color:red;">(Vous devez indiquer une adresse e-mail)</span>';}elseif($msgemail == 'novalid'){echo '<span style="color:red;">(Votre adresse e-mail n\'est pas valide)</span>';} ?>
+				<br />
+				<input name="email" size="30" value="<?php if(isset($_POST['email'])){echo $_POST['email'];} ?>" />
+				<br /><br />
+				Message: <?php if($msgmessage == 'message'){echo '<span style="color:red;">(Vous devez indiquer un message)</span>';} ?>
+				<br />
+				<textarea name="message" rows="6" cols="30"><?php if( isset( $_POST['message'] ) ){echo $_POST['message'];} ?></textarea>
+				     <input type="submit" value="Envoyer" />
+			</form>    
+		
+		<?php } ?>
+
+
+				<h3 class="title_sub" onclick="menuAcc.subaction( 3 );">Tests</h3>
+
+				<div class="content_sub" id="slider_3_sub">
+					<div class="content_show">
+				
+						Férié<br />
+						Férié<br />
+						Férié<br />
+						Férié<br />
+						Férié<br />
+						Férié<br />
+					</div>
+				</div>
+
+
+
+
+
+
+    </div>
+</dd>
+
+<dt class="entete_normal" id="4" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+	Newsletter
+</dt>
+<dd class="slider_content" id="slider_4">
+	<div class="content_show">
+				<?php 
+					$newsletterForm = TRUE; 
+					$newsletterMsg = '';
+					$newsletterEmailMsg = '';
+				?>
+				<?php if( isset( $_GET['module'] ) && $_GET['module'] == '4' ){ ?>
+					<?php
+					$NewsletterSub = AddMember();
+					if($NewsletterSub == 'oksend'){ 
+						$newsletterForm = FALSE; ?>					
+						<p>
+						<b>L'inscription a bien été faite.</b><br />Nous vous remercions de l'intérêt que vous nous portez.
+						</p>
+					<?php }elseif($NewsletterSub == 'nosend'){ 
+						$newsletterForm = TRUE;
+						$newsletterMsg = '
+						<p>
+						<b>Nous avons malheureusement rencontré un problème concernant votre inscription.
+						</p>';
+						?>
+					<?php }elseif($NewsletterSub == 'novalid'){ 
+						$newsletterForm = TRUE;
+						$newsletterEmailMsg = '<span style="color:red;">(Votre adresse e-mail n\'est pas valide)</span>';
+					} ?>
+					
+				<?php } ?>
+				
+				<?php if( $newsletterForm ){ ?>
+				
+				<form action="<?php echo _URL; ?>/site/<?php echo _ACTUALFILE; ?>?module=4" method="post">
+					Inscrivez-vous à la newsletter.
+					<p>
+					<?php if( $newsletterMsg != '' ) echo $newsletterMsg; ?>
+					Email : <?php if( $newsletterEmailMsg != '' ) echo $newsletterEmailMsg; ?><br />
+					<input type="text" name="emailnewsletter" value="<?php if(isset($_POST['emailnewsletter'])){echo $_POST['emailnewsletter'];} ?>" />
+					</p><br />
+					<input type="submit" name="envoyer" value="Envoyer" />
+					
+				<?php } ?>
+				</form>
+
+    </div>
+</dd>
+
+</dl>

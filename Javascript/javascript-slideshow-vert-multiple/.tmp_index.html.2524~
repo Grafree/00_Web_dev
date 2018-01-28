@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+	<head>
+    	<title>Galerie</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script language="javascript">
+
+/**
+ * Classe de mise en mouvement d'un slide show. 
+ * @author Olivier Dommange
+ * @version 1.0
+ * @param distancevalue		[int] File de la pièce à déplacer
+ * @param speedvalue 		[int] Rangée de la pièce à déplacer
+ * @param idvalue			[string] File de la case de destination 
+ * @return void
+ */
+function SlideClass ( distancevalue, speedvalue, idvalue ) {
+
+	var distance = parseInt( distancevalue );
+	var speed = speedvalue;						
+	var id = idvalue;
+	var progress = 0;
+	
+	var moveback = function(){
+		var espaceVignette = document.getElementById(id);
+		var support = document.getElementById(id).getElementsByTagName( 'div' )[0];
+		
+		var distanceNeg = 0 - distance;
+		var progressDiff = progress - distanceNeg;
+		
+		if( progressDiff < 0 ){
+			var progressInt = parseInt( progress );
+
+			var valeur = progressInt + distance;
+			var getvaleur = parseInt( valeur );
+			support.style.left = getvaleur + 'px';	
+			progress = getvaleur; 
+		}else{
+			support.style.left = '0px';		
+			progress = 0; 
+		}
+	}
+
+	var move = function(){
+		var dist = 0 - distance; // Correspond à la distance négative parcouru en pixel lors de chaque clic de déplacement
+		
+		var espaceVignette = document.getElementById(id);
+		var support = document.getElementById(id).getElementsByTagName( 'div' )[0];
+		var nbli = support.getElementsByTagName( 'li' ).length; // Indique le nombre d'images dans le diaporama
+					
+		var espaceVignetteWidth = document.getElementById(id).offsetWidth; // Largeur de la partie visible
+		
+		var totalEspacevignette = 0;
+
+		for ( i = 0; i < nbli; i++ ){
+			
+			totalEspacevignette += support.getElementsByTagName( 'img' )[i].offsetWidth; // Indique la largeur de chaque image
+
+		}
+		
+		support.style.width = totalEspacevignette + 'px'; // Redéfini la largeur du diaporama en fonction de la largeur de toutes les images
+
+		//var progress = document.getElementById(this.id + 'prog').value;   
+		var progressInt = parseInt( progress );
+		
+		// Calcul la distance maximum de la totalité des vignettes assemblées.
+		var espaceWidthDiff = 0 - ( totalEspacevignette - espaceVignetteWidth );
+					
+		if( progressInt > espaceWidthDiff ){
+			
+			var reste = espaceWidthDiff - progressInt;
+			var doubleDist = parseInt( dist ) * 2 ;
+
+			if ( reste > doubleDist) {
+				var getvaleur = espaceWidthDiff; // Permet de vérifier s'il y a une distance suffisante pour encore un clic
+				support.style.left = getvaleur + 'px';		
+				progress = getvaleur;
+			}else{
+				var valeur = progressInt + dist;
+				var getvaleur = parseInt( valeur );
+				support.style.left = getvaleur + 'px';		
+				progress = getvaleur;
+			}
+			
+		}else{
+			support.style.left = espaceWidthDiff + 'px';		
+			progress = espaceWidthDiff;
+		}
+		
+	}
+
+
+	this.mouseRightGo = function(){
+		moveIntervalId = setInterval( function(){move()}, speed ); 
+	}
+	this.mouseRightStop = function(){
+		clearInterval( moveIntervalId );
+	}
+	
+	this.mouseLeftGo = function(){
+		moveIntervalId = setInterval( function(){moveback()}, speed ); 
+	}
+	this.mouseLeftStop = function(){
+		clearInterval( moveIntervalId );
+	}
+
+}	
+
+/**
+ * Déclaration des instances. Une pour chaque slideshow de la page.
+ * Elle sont en relation avec les objets de navigation de chaque slideshow.
+ * 
+ * var mavariable = new SlideClass( [distance en pixel], [vitesse en milliseconde], [id de la div contenant le slide show] );
+ */
+var objslide = new SlideClass( 1, 10, 'vi_5' );
+var objslide2 = new SlideClass( 5, 25, 'vi_6' );
+		
+</script>
+                            
+</head>
+ 
+ 
+<body>
+	
+<div class="vignette_show">
+	<div class="espace_vignette" id="vi_5">
+		<div class="support">						
+			<ul id="slideshow">
+	        
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+	                    
+			</ul>
+		</div>
+		</div>
+	<div id="vi_5_left" class="arrow" onmouseover="objslide.mouseLeftGo();" onmouseout="objslide.mouseLeftStop();">
+	    &lt;&lt;
+	</div>
+	<div id="vi_5_right" class="arrow" onmouseover="objslide.mouseRightGo();" onmouseout="objslide.mouseRightStop();">
+		&gt;&gt;
+	</div>
+
+
+
+	<div class="espace_vignette" id="vi_6">
+		<div class="support">						
+			<ul id="slideshow">
+	        
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+	                    
+			</ul>
+		</div>
+		</div>
+	<div id="vi_6_left" class="arrow" onmouseover="objslide2.mouseLeftGo();" onmouseout="objslide2.mouseLeftStop();">
+	    &lt;&lt;
+	</div>
+	<div id="vi_6_right" class="arrow" onmouseover="objslide2.mouseRightGo();" onmouseout="objslide2.mouseRightStop();">
+		&gt;&gt;
+	</div>
+
+</div>
+
+                
+	</body>
+</html>

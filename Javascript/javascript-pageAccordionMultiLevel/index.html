@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Slide Page Show</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" src="script.js"></script>
+	<script language="javascript">
+
+	/*
+	accrodionWindow(	[int | distance en px], 
+				[int | vitesse en milliseconde], 
+				[string | id des fenêtres coulissantes], 
+				[int | % de décération], 
+				[bolean | fermeture automatique des fenêtres coulissantes a l'ouverture d'une autre = true], 
+				[int | Id de la slide ouverte au chargement. 0 indique aucune],
+				[bolean | Indique si l'ouverture de la fenetre coulissante au chargement dervait se faire avec un coulissement], 
+				[int | Nb de px des fenêtres fermées. Correspond a la propriete CSS height de la classe slider_content],
+				[int | Correspond au padding indiqué dans le CSS pour content_show]		);
+	*/
+	var menuAcc = new accordionWindow( 50, 25, 'slider', 75, true, 1, false, 1, 10 );
+</script>
+                      
+</head> 
+<body>
+
+<dl id="allslides">
+<dt class="entete_normal" id="1" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+Qui sommes-nous ?
+</dt>
+<dd class="slider_content" id="slider_1">
+	<div class="content_show">
+		<p>
+			Nam quibusdam, quos audio sapientes habitos in Graecia, placuisse opinor mirabilia quaedam (sed nihil est quod illi non persequantur argutiis): partim fugiendas esse nimias amicitias, ne necesse sit unum sollicitum esse pro pluribus; satis superque esse sibi suarum cuique rerum, alienis nimis implicari molestum esse; commodissimum esse quam laxissimas habenas habere amicitiae, quas vel adducas, cum velis, vel remittas; caput enim esse ad beate vivendum securitatem, qua frui non possit animus, si tamquam parturiat unus pro pluribus.
+		</p>
+		<p>
+			Nunc vero inanes flatus quorundam vile esse quicquid extra urbis pomerium nascitur aestimant praeter orbos et caelibes, nec credi potest qua obsequiorum diversitate coluntur homines sine liberis Romae.
+		</p>
+				
+
+				<h3 class="title_sub" onclick="menuAcc.subaction( 1 );">Mais encore...</h3>
+
+				<div class="content_sub" id="slider_1_sub">
+					<div class="content_show">
+						<p>
+						Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.
+						</p>
+						<br />
+					</div>
+				</div>
+
+    </div>
+</dd>
+
+
+<dt class="entete_normal" id="2" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+Comment nous contacter ?	
+</dt>
+<dd class="slider_content" id="slider_2">
+	<div class="content_show">
+	
+			<form method="post" action="#"> 	
+				Nom:
+				<br />
+				<input name="nom" size="30" value="" />
+				<br /><br />
+				E-mail:
+				<br />
+				<input name="email" size="30" value="" />
+				<br /><br />
+				Message:
+				<br />
+				<textarea name="message" rows="6" cols="30"></textarea>
+				<br />
+			     <input type="submit" value="Envoyer" />
+			</form>    
+		
+				<h3 class="title_sub" onclick="menuAcc.subaction( 2 );">Adresse</h3>
+
+				<div class="content_sub" id="slider_2_sub">
+					<div class="content_show">
+						<p>
+						Chemin de l'espoir 20<br />
+						1000 Lausanne<br />
+						Suisse
+						</p>
+						<p>
+						Tél. : 021/333.44.55	
+						</p>
+						<br />
+					</div>
+				</div>
+
+    </div>
+</dd>
+
+<dt class="entete_normal" id="3" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+	Comment rester en contact ?
+</dt>
+<dd class="slider_content" id="slider_3">
+	<div class="content_show">				
+		<form action="#" method="post">
+			Inscrivez-vous à la newsletter.
+			<p>
+			Email : <br />
+			<input type="text" name="emailnewsletter" value="" />
+			</p><br />
+			<input type="submit" name="envoyer" value="Envoyer" />
+		</form>
+
+    </div>
+</dd>
+
+</dl>

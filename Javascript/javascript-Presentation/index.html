@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="" />
+	<title>Présentation</title>
+	<script type="text/javascript"> 
+            
+        var defaultDuration = 10; // in seconds
+        
+	var presentation = null;
+        var slides = null;
+        var controler = null;
+        var progressBar = null;
+        var progressBarImg = null;
+        var nbSlides = 0;
+        var slideIndex = 0;
+        var progressBarWidthOriginal = 0;
+        var progressBarWidth = 0;
+        var widthBarStep = 0;
+        var controlers = [];
+        var slidesOrdered = [];
+        var slidesHeight = [];
+        
+        var slideState = true; // 'on', 'off' or 'standby'
+        var standby = false;
+
+
+	function initialize(){
+            presentation = document.getElementById( 'presentation' );
+            slides = document.getElementsByTagName( 'article' );
+            nbSlides = slides.length;
+            
+            controler = document.getElementById( 'controler' );
+            progressBar = document.getElementById( 'progressBar' );
+            progressBarWidthOriginal = document.getElementById( 'progressBar' ).offsetWidth;
+            progressBarWidth = progressBarWidthOriginal;
+            //widthBarStep = progressBarWidthOriginal / ( speedBetweenSlides * 100 );
+            
+            var div = document.createElement( 'div' );
+            div.setAttribute( 'style', 'background-color:#999; width:' + progressBarWidthOriginal + 'px; margin-left:-'+ progressBarWidthOriginal + 'px; height: ' + progressBar.offsetHeight + 'px;' );
+            progressBar.appendChild( div );
+            progressBarImg = progressBar.getElementsByTagName( 'div' )[ 0 ];
+            
+            var span = document.createElement( 'span' );
+            span.setAttribute( 'id', 'counter' );
+            controler.appendChild( span );
+            span = document.getElementById( 'counter' );
+            controlers[ 'counter' ] = span;
+            
+            var span = document.createElement( 'span' );
+            span.setAttribute( 'id', 'play' );
+            span.setAttribute( 'style', 'cursor:pointer;' );
+            controler.appendChild( span );
+            span = document.getElementById( 'play' );
+            span.innerHTML = 'Pause';
+            controlers[ 'play' ] = span;
+            setPlayControl();
+  
+            var j = 0;
+            //for( i = ( nbSlides - 1 ); i >= 0; i-- ){
+            for( i = 0; i < nbSlides; i++ ){ // Starts with the first slide on top
+                slides[ i ].style.opacity = 0;
+                slides[ i ].style.position = 'relative';
+                slidesOrdered[ j ] = [];
+                slidesOrdered[ j ][ 'slide' ] = slides[ i ];
+                //console.debug( typeof( slides[ i ].getAttribute( 'data-duration' ) ) );
+                if( typeof( slides[ i ].getAttribute( 'data-duration' ) ) == 'string' )
+                    slidesOrdered[ j ][ 'duration' ] = slides[ i ].getAttribute( 'data-duration' );
+                else 
+                    slidesOrdered[ j ][ 'duration' ] = defaultDuration;
+                slidesOrdered[ j ][ 'height' ] = slides[ i ].offsetHeight + slides[ i ].style.marginTop + slides[ i ].style.marginBottom;
+                if( slides[ i ].getElementsByTagName( 'blockquote' )[0] ){
+                    slides[ i ].getElementsByTagName( 'blockquote' )[0].style.position = 'absolute';
+                    slides[ i ].getElementsByTagName( 'blockquote' )[0].style.right = '-' + ( slides[ i ].getElementsByTagName( 'blockquote' )[0].offsetWidth - 5 ) + 'px';
+                    slides[ i ].getElementsByTagName( 'blockquote' )[0].style.top = '5px';
+                    slides[ i ].getElementsByTagName( 'blockquote' )[0].style.opacity = 0;
+                }
+                slidesOrdered[ j ][ 'quote' ] = slides[ i ].getElementsByTagName( 'blockquote' )[0];
+                
+                j++;
+            }          
+            startShow();
+	}
+	
+        function setPlayControl(){
+            controlers[ 'play' ].null;
+            if( controlers[ 'play' ].innerHTML == 'Play' ){
+                controlers[ 'play' ].onclick = function(){
+                   slideState = true;
+                   standby = false;
+                   nextSlide();
+                   controlers[ 'play' ].innerHTML = 'Pause';
+                   setPlayControl();
+               } 
+            }else{
+                controlers[ 'play' ].onclick = function(){
+                   slideState = false;
+                   standby = true;
+                   controlers[ 'play' ].innerHTML = 'Play';
+                   setPlayControl();
+               }
+            }
+        }
+        
+        function updateCounter(){
+            controlers[ 'counter' ].innerHTML = ( slideIndex + 1 ) + '/' + nbSlides;
+        }
+        
+        function startShow(){
+            for( j = 0; j < slidesOrdered.length; j++ ){
+                slidesOrdered[ j ][ 'slide' ].style.opacity = 0;
+                slidesOrdered[ j ][ 'quote' ].style.opacity = 0;
+            }
+            presentation.innerHTML = '';
+            nextSlide();
+
+        }
+        
+        function nextSlide(){
+            if( slideIndex == 0 || standby ){
+                 slideState = true;
+                 progressBarImg.style.marginLeft = '-' + progressBarWidthOriginal + 'px';
+                 progressBarWidth = progressBarWidthOriginal;
+                 progressDoBar();
+                 slideDisplayOneByOne();  
+            }
+            if( slideIndex < ( nbSlides - 1 ) ){
+             var slideDisplay = setInterval( function(){ 
+                if( slideState ){
+                    progressBarImg.style.marginLeft = '-' + progressBarWidthOriginal + 'px';
+                    progressBarWidth = progressBarWidthOriginal;
+                    progressDoBar();
+                    slideDisplayOneByOne();  
+                    clearInterval( slideDisplay );
+                }else{
+                    clearInterval( slideDisplay );
+                }
+
+              }, ( slidesOrdered[ slideIndex ][ 'duration' ] * 1000 ) );
+            }
+        }
+        
+        function progressDoBar(){
+            widthBarStep =  progressBarWidthOriginal / ( slidesOrdered[ slideIndex ][ 'duration' ] * 100 );
+            var animateProgressBar = setInterval( function(){
+                if( slideState ){
+                    if( progressBarWidth > ( progressBarWidthOriginal - progressBarWidthOriginal ) ){
+                        progressBarImg.style.marginLeft = '-' + ( progressBarWidth -= widthBarStep )  + 'px';
+                    }else{
+                        clearInterval( animateProgressBar );
+                    }
+                }else{
+                    clearInterval( animateProgressBar );
+                    progressBarImg.style.marginLeft = '-' + progressBarWidthOriginal + 'px';
+                    progressBarWidth = progressBarWidthOriginal;
+                }
+            }, 10 );
+        }
+        
+        function slideDisplayOneByOne(){
+            
+            if( slideIndex > 0 ){
+                var marginProcess = 0;
+                var animateSlide = setInterval( function(){
+                    if( marginProcess < slidesOrdered[ slideIndex ][ 'height' ] ){
+                        presentation.getElementsByTagName( 'article' )[ 0 ].style.marginTop = ( marginProcess += 10 ) + 'px';
+                    }else{
+                       presentation.getElementsByTagName( 'article' )[ 0 ].style.marginTop = '0px'; 
+                       presentation.insertBefore( slidesOrdered[ slideIndex ][ 'slide' ], presentation.getElementsByTagName( 'article' )[ 0 ] );
+                       slideDisplayOneByOneEnd();
+                       clearInterval( animateSlide );
+                    }
+                    
+                }, 10);
+            }else{
+                presentation.appendChild( slidesOrdered[ slideIndex ][ 'slide' ] );
+                slideDisplayOneByOneEnd();
+            }
+
+        }
+        
+        function slideDisplayOneByOneEnd(){
+            
+            var opacityProcess = 0;
+            var animateOpacity = setInterval(
+                function(){
+                    if( opacityProcess < 1 ){
+                        presentation.getElementsByTagName( 'article' )[ 0 ].style.opacity = ( opacityProcess += 0.1 );
+                     }else{
+                        updateCounter();
+                        if( slidesOrdered[ slideIndex ][ 'quote' ] ){
+                            presentation.getElementsByTagName( 'article' )[ 0 ].appendChild( slidesOrdered[ slideIndex ][ 'quote' ] );
+                            var opacityQuoteProcess = 0;
+                            var animateDisplayQuote = setInterval( function(){
+                                if( opacityQuoteProcess < 1 ){
+                                   presentation.getElementsByTagName( 'article' )[ 0 ].getElementsByTagName( 'blockquote' )[ 0 ].style.opacity = ( opacityQuoteProcess += 0.1 );
+                                }else{
+                                   initNextSlide(); 
+                                   clearInterval( animateDisplayQuote );
+                                }
+                            }, 50);
+                        }else{
+                            initNextSlide();
+                        }
+                        clearInterval( animateOpacity );
+                    }
+                }, 50);
+        }
+
+        function initNextSlide(){
+            
+            if( slideIndex < ( nbSlides - 1 ) ){
+                if( slideState ){
+                    slideIndex++;
+                    //clearInterval( slideDisplay );
+                    nextSlide();
+                }
+            }else{
+                controlers[ 'play' ].innerHTML = 'Restart';
+                controlers[ 'play' ].onclick = function(){
+                    slideIndex = 0;
+                    updateCounter();
+                    startShow();
+                    controlers[ 'play' ].innerHTML = 'Pause';
+                    setPlayControl();
+                };
+
+                //clearInterval( slideDisplay );
+            }
+        
+        }
+
+	window.onload = function(){ initialize(); };
+
+	
+	</script>
+        <style>
+            body{margin: 30px 0; padding:0; font-family:Arial, Helvetica, sans-serif; background:#eee;}
+            nav{display:block; width:100%; top:0px; position:absolute; height:20px; background:#000; color:#fff;}
+            nav div{width:900px; margin:0 auto;}
+            nav div h1{font-size:15px; width:300px; float:left; font-weight:normal; margin:0; padding:0; line-height:20px;}
+            nav div div#controler{ width:300px; font-size:10px; float:right; line-height:20px;}
+            nav div div#controler span{display:inline-block; padding:0 2px; margin:0 2px; background:#444;}
+            nav div div#progressBar{float:left; width:100px; height:10px; margin:5px; background:#333; overflow:hidden;}
+            div#page{width:900px; margin:0 auto;}
+            article{display:block; width:320px; margin:10px auto; height:245px; padding:10px; box-shadow:0px 0px 5px #666; background:#fff;}
+            article blockquote{width:100px; background-color:yellow; border:1px solid orange; padding:5px; font-size:10px; margin:0; box-shadow:0px 1px 3px #ccc;}
+            
+        </style>
+</head>
+<body>
+
+<nav>
+    <div>
+        <h1>Slide</h1>
+        <div id="progressBar"></div>
+        <div id="controler"></div>
+    </div>
+</nav>
+    <div id="page">
+        <div id="presentation">
+            
+            <article data-duration="3">
+                Slide 1
+                <blockquote>This slide is an example</blockquote>
+            </article>
+            
+            <article data-duration="5">
+                Slide 2
+                <blockquote>This slide is an example</blockquote>
+            </article>
+            
+            <article data-duration="2">
+                Slide 3
+                <blockquote>This slide is an example Another one</blockquote>
+            </article>
+            
+        </div>
+        
+        
+    </div>
+		
+</body>
+</html>

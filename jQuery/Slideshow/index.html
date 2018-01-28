@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>jQuery - EasySlider</title>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	
+	<style>
+		body{font-family:Verdana, Geneva, Arial, Helvetica, sans-serif; font-size:12px;}
+		#page{width:350px;}
+		
+		#sliderzone{width:300px;}
+		div#slider{width:250px;	height:250px; overflow:hidden; display:inline-block; position:relative;}
+		#slider ul{margin:0; padding:0; list-style:none; width:750px;}
+		#slider li{margin:0; padding:0; display:block; float:left; position:relative;}
+		#slider li span{display:block; width:100%; text-align:center; position:absolute; bottom:0px; height:50px; line-height:50px; background:rgba(255, 255, 255, 0.6);}
+		img.arrow{display:inline-block; margin:0 0 120px 0; cursor:pointer;}
+		
+		#navSlider ul{margin:10px 0 10px 20px; padding:0; list-style:none; height:20px; width:100%;}
+		#navSlider li{margin:0 4px 0 0; display:block; float:left; width:15px; border:1px solid #fff; padding:1px; cursor:pointer;}
+		#navSlider li img{width:15px; float:left;}
+		.clear{clear:both;}
+		
+		div#descriptions{width:250px; margin:0 0 0 20px;}
+		h1{margin:0; padding:0;}
+		
+		
+	</style>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+
+		var speedSlide = 500;							// Temps de l'animation millieme de seconde
+		var waitSlide = 3000;							// Temps d'attente sur une slide
+		var marginUL = 0; 								// margin initial du <ul> qui contient toutes les images
+		var numCurrentSlide = 0;						// Index of the current slide shown
+	   	var nbImage = $( 'div#slider ul li' ).length; 	// compte le nombre d'images dans un tableau array  	
+	   	var sliderWidth = parseInt( $('div#slider').css('width') );
+		var widthUL = nbImage * sliderWidth;		
+		$('div#slider ul').css( {width:widthUL} );
+		$('div#descriptions div').hide();
+		
+		var animateSlider = function(){
+			$('div#descriptions div').slideUp();
+			if( marginUL < ( widthUL - sliderWidth ) ){
+				$('div#slider ul').animate({marginLeft:'-=' + sliderWidth}, speedSlide);
+				numCurrentSlide++;
+				marginUL += sliderWidth;
+			}else{
+				$('div#slider ul').animate({marginLeft:'+=' + ( widthUL - sliderWidth )}, speedSlide);
+				numCurrentSlide = 0;
+				marginUL = 0;
+			}
+			highLightThumb();
+		}
+		
+		var highLightThumb = function(){
+			$( 'div#navSlider ul li' ).css( 'borderColor','#fff' );
+			$( $( 'div#navSlider ul li' )[ numCurrentSlide ] ).css( 'borderColor','#000' );
+		}
+		
+		animateAuto = setInterval(function(){ 				// Animation automatique au demarrage 
+			animateSlider();
+		}, waitSlide);
+		
+		$( 'img#arrow_left' ).click(
+			function(){
+				clearInterval( animateAuto );
+				if( marginUL > 0 ){
+					$('div#descriptions div').slideUp();
+					$('div#slider ul').animate({marginLeft:'+=' + sliderWidth}, speedSlide);
+					marginUL -= sliderWidth;
+					numCurrentSlide--;
+					highLightThumb();
+				}
+			}
+		);
+		
+		$( 'img#arrow_right' ).click(
+			function(){
+				clearInterval( animateAuto );
+				animateSlider();				
+			}
+		);
+		
+		$( 'div#slider ul li' ).click(
+			function(){
+				clearInterval( animateAuto );
+				$('div#descriptions div').slideUp();
+				$($('div#descriptions div')[ $(this).index() ]).slideDown();	
+			}
+		);
+		
+		$( 'div#navSlider ul li' ).click(
+			function(){
+				clearInterval( animateAuto );
+				if ($(this).index() != numCurrentSlide) {
+					numCurrentSlide = $(this).index();
+					$('div#descriptions div').slideUp();
+					var distanceToSet = sliderWidth * numCurrentSlide;
+					var distanceToSlide = distanceToSet - marginUL;
+					marginUL = distanceToSet;
+					$('div#slider ul').animate({marginLeft: '-=' + distanceToSlide}, speedSlide);
+					highLightThumb();
+				}
+			}
+		);
+		
+		highLightThumb();
+    });
+	
+	</script>
+</head>
+<body>
+
+<div id="page">
+	
+	<div id="navSlider">
+		<ul>
+		<li><img src="images/grandes/blue.jpg" /></li>
+		<li><img src="images/grandes/green.jpg" /></li>
+		<li><img src="images/grandes/orange.jpg" /></li>
+		<li><img src="images/grandes/green.jpg" /></li>
+		<div class="clear"></div>
+		</ul>
+	</div>
+    
+	<div id="sliderzone">
+		<img class="arrow" id="arrow_left" src="images/arrow_previous.png" />
+		<div id="slider">
+			<ul>
+			<li><img src="images/grandes/blue.jpg" /><br /><span>Bleu</span></li>
+			<li><img src="images/grandes/green.jpg" /><br /><span>Vert</span></li>
+			<li><img src="images/grandes/orange.jpg" /><br /><span>Orange</span></li>
+			<li><img src="images/grandes/green.jpg" /><br /><span>Vert</span></li>
+			</ul>
+		</div>
+		<img class="arrow" id="arrow_right" src="images/arrow_next.png" />
+	</div>
+	
+	<div id="descriptions">
+		<div>
+			<h1>Bleu</h1>
+		    <p> 
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis aliquet augue vitae tincidunt. 
+			Phasellus ut enim quis elit gravida tincidunt. Maecenas quis diam quis urna iaculis vestibulum. 
+			Fusce quis sem id nunc fringilla condimentum. Donec a lectus risus, sed pellentesque diam. 
+			Sed suscipit molestie risus ac malesuada. Curabitur auctor enim a ipsum adipiscing blandit. 
+			Ut viverra nibh at nisi auctor laoreet.
+		    </p>
+		</div>
+		
+		<div>
+			<h1>Vert</h1>
+			<p>Donec ipsum dolor, faucibus sed facilisis eu, tempor in mi. Maecenas placerat imperdiet volutpat. 
+			Aliquam in quam tortor, vitae hendrerit metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+			Nulla varius leo non orci hendrerit in mattis quam sollicitudin. Suspendisse potenti. 
+		    </p>
+		</div>
+		
+		
+		<div>
+			<h1>Orange</h1>
+			Proin auctor, neque ut condimentum fringilla, augue elit rhoncus arcu, nec porttitor mi odio vitae sem. 
+			Nunc eget lectus vel nisl venenatis commodo. Cras in mollis metus. 
+			Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+		    </p>
+		</div>
+		
+		<div>
+			<h1>Vert</h1>
+			<p>Donec ipsum dolor, faucibus sed facilisis eu, tempor in mi. Maecenas placerat imperdiet volutpat. 
+			Aliquam in quam tortor, vitae hendrerit metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+			Nulla varius leo non orci hendrerit in mattis quam sollicitudin. Suspendisse potenti. 
+		    </p>
+		</div>
+	
+	</div>
+</div>
+
+</body>
+</html>

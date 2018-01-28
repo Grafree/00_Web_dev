@@ -1,0 +1,126 @@
+@charset "utf-8";
+/* CSS Document */
+		.body1 {
+			text-align: center;
+			background-color: #CCF;
+		}
+		.body2 {
+			text-align:justify;
+			background-color:#CCC;
+		}		
+		.titre1 {
+			text-align: center; 
+			font-weight:bold; 
+			color:#0000FF; 
+			font-size: 36px;
+		}
+		.titre2 {
+			text-align:left; 
+			font-weight:bold; 
+			color:#09F; 
+			font-size: 18px;
+		}
+		.titre3 {
+			text-align:left; 
+			font-weight:bold; 
+			color:#996; 
+			font-size: 14px;
+		}
+		.textQ1{
+			background-color:#FFC;
+			text-align:left;
+			color:#000;
+			width:300px;
+			height:60px;
+			
+		}
+		.textR1{
+			background-color:#FFC;
+			text-align:left;
+			color:#000;
+			width:300px;
+			height:120px;
+		}
+		.textQM{
+			background-color:#FFF;
+			text-align:left;
+			color:#000;
+			width:300px;
+			height:60px;
+			
+		}
+		.textRM{
+			background-color:#9FF;
+			text-align:left;
+			color:#000;
+			width:300px;
+			height:120px;
+		}
+		.textQN{
+			background-color:#CFF;
+			text-align:left;
+			color:#000;
+			width:300px;
+			height:60px;
+			
+		}
+		.textRN{
+			background-color:#CFF;
+			text-align:left;
+			color:#000;
+			width:300px;
+			height:120px;
+		}		
+		.text2{
+			background-color:#FCF;
+			text-align:left;
+			color:#90F;
+			width:300px;
+		}
+		.text3{
+			background-color:#FFF;
+			text-align:left;
+			color:#F00;
+		}		
+		#td_text1{
+			text-align:left;
+			vertical-align:baseline;
+			font-weight:bold;
+			color:#000; 
+			font-size: 12px;			
+		}
+		#td_text2{
+			text-align:left; 
+			color:#00F; 
+			font-size: 12px;			
+		}		
+		.form_input {
+			text-align:left;
+			font:Arial, Helvetica, sans-serif;
+			font-size:12px;
+			color:#333;
+			background-color:#CCC
+		}
+		.form_submit {
+			background-color:#CCC;
+			color:#333;
+			text-align:center;
+			border:dotted;
+			border-color:#00F;
+		}
+		.TabUser { border:hidden;
+			
+		}
+		.Tab_td {
+			text-align:left;
+		}
+		.btSubmit1{
+			color:#36C;			
+		}
+		.bt1{
+			color:#36C;		
+		}
+		.bt2{
+			color:#F90;
+			background-color:#FCF;
+		}		

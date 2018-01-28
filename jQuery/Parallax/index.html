@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>jQuery - My Slider</title>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	
+	<style>
+html{font-size:100%;}
+body{background:#fff; font-size:12px; margin:0px; padding:100px 0 0 0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+div#header_marges{width:600px; margin:0 auto;}
+div.container{width:600px; margin:0 auto;}
+header{position:fixed; z-index:1000; top:0px; height:70px; width:100%; background:#fff; border-radius:4px; box-shadow:0px 0px 4px #aaa;}
+
+.clear{clear:both;}
+
+p{font-size:12px; margin:0 0 10px 0;}
+h1{font-size:35px; margin:0 0 15px 0; font-weight:bold; text-transform:uppercase;}
+header h1{padding:0; font-size:50px; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc;}
+
+/* 
+Tous les objets doivent être en position:relative;
+Indiquer l'ordre de superposition en precisant une valeur au z-index
+*/
+article{display:block; position:relative; height:800px; padding:30px;}
+article#support{background:#f39500; z-index:1;}
+article#responsive{background:#40c21d; z-index:2;}
+article#mobiles{background:#0b40a1; z-index:3;}
+article#etude{background:#a10b8a; z-index:4;}
+      
+	</style>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		// Distance depuis le haute de la page a partir de laquelle 
+		// l'objet doit rester bloque
+		var distFromTop = 70; 
+		
+		/* Version 1 :: pour definir un a un les objets => Recupere la position des objets */
+		//var initTop = $('article#responsive').offset().top; 
+		
+		/* Version 2 :: automatise pour tous les balises <article> => Recupere la position des objets  */
+		var iTop = [];
+		var i = 0;
+		$('div.container article').each( function(){
+			iTop[ i ] = $(this).offset().top;
+			i++;
+		});
+		
+		
+		$(window).scroll(function() {
+			
+			scrollT = $(document).scrollTop();
+
+			/* Version 1 :: pour definir un a un les objets => Repositionnement */
+			/*
+			if( ( initTop - scrollT ) <= distFromTop ){
+				var pos = ( scrollT - initTop + distFromTop );
+				$('article#responsive').css({'top':pos });
+			}else{
+				$('article#responsive').css({'top':0 });
+			}
+			*/
+		   
+			/* Version 2 :: automatise pour tous les balises <article> => Repositionnement  */
+			var i = 0;
+			$('div.container article').each( function(){
+
+				if( ( iTop[i] - scrollT ) <= distFromTop ){
+					var pos = ( scrollT - iTop[i] + distFromTop );
+					$(this).css({'top':pos });
+				}else{
+					$(this).css({'top':0 });
+				}
+				
+				i++;
+
+			});
+			
+		});	
+	
+    });
+	
+	</script>
+</head>
+<body>
+
+  <header>
+	<div id="header_marges">
+		<h1>Titre</h1>
+	</div>
+  </header>
+
+<div class="container">	
+	<article id="support">
+	<h1>Supports</h1>
+	<p>On peut considérer qu'il n'existe plus de références ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	</article>
+  
+	<article id="responsive">
+	<h1>Responsive Design</h1>
+	<p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	</article>
+  
+	<article id="mobiles">
+	<h1>Mobiles</h1>
+	<p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	</article>
+  
+	<article id="etude">
+	<h1>Etude de cas</h1>
+	<p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+    </article>
+	
+  <div class="clear"></div>
+</div>
+
+  
+</body>
+</html>

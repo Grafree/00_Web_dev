@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>L'arborescence DOM</title>
+<script type="text/javascript" language="javascript">
+function deviner()
+{
+	var elelment1 = document.lastChild;
+	alert('Je suis un(e) '+ elelment1.nodeName);
+	var elelment2 = document.getElementsByTagName("h1")[0];
+	alert('Je suis un(e) '+ elelment2.nodeValue);
+	var elelment3 = elelment2.firstChild;
+	alert('Je suis un(e) '+ elelment3.nodeValue);
+	var element4 = document.getElementById("Grenouille").lastChild;
+	alert('Je suis un(e) '+ element4.nodeValue);
+	var element5 = element4.parentNode.getAttributeNode("id");
+	alert('Je suis un(e) '+ element5.nodeValue);
+	
+}
+</script>
+</head>
+<body>
+    <h1>Dans le ZOO de Vaud</h1>
+    <div id = "zoo">
+        Je suis un
+        <em>Têtard</em>
+        , mais je voudrais être une
+        <span id="Grenouille">grenouille</span>
+    </div>
+    <form>
+    	<input type="button" value="Qui suis-je?" onclick="deviner();" />        
+</body>
+</html>

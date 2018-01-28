@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery - Slide Page</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+<style>
+html{font-size:100%;}
+body{color:#fff; background:#000; line-height:1.5em; font-size:14px; margin:0; padding:0; font-family: Georgia, Times, 'Times New Roman', serif;}
+*{outline:0;}
+div#page{width:100%;}
+article{display:block; margin:0px auto 0px auto; padding:100px 0 0 0; width:300px; min-height:200px;}
+footer{position:fixed; bottom:0px; right:50px;}
+footer a{color:#fff; white-space:nowrap; display:block; background:rgba(0, 0, 0, 0.6); width:80px; padding:20px; font-size:11px; text-decoration:none; text-align:center;}
+h1{font-size:30px; margin:0 0 35px 0; font-weight:normal;}
+p{text-shadow:0px 0px 2px #000;}
+
+/*************************** PARTS **/
+div#bkg1{width:100%; height:650px; background:url(images/bkg1-1.jpg) top center no-repeat fixed}
+div#bkg2{width:100%; height:650px; background:url(images/bkg2-1.jpg) top center no-repeat fixed}
+div#bkg3{width:100%; height:650px; background:url(images/bkg3-1.jpg) top center no-repeat fixed}
+div#bkg4{width:100%; height:650px; background:url(images/bkg4-1.jpg) top center no-repeat fixed}
+
+div#bkg1.bkg1-1{background:url(images/bkg1-1.jpg) top center no-repeat fixed;}
+div#bkg1.bkg1-2{background:url(images/bkg1-2.jpg) top center no-repeat fixed;}
+div#bkg1.bkg1-3{background:url(images/bkg1-3.jpg) top center no-repeat fixed;}
+div#bkg1.bkg1-4{background:url(images/bkg1-4.jpg) top center no-repeat fixed;}
+div#bkg2.bkg2-1{background:url(images/bkg2-1.jpg) top center no-repeat fixed;}
+div#bkg2.bkg2-2{background:url(images/bkg2-2.jpg) top center no-repeat fixed;}
+div#bkg2.bkg2-3{background:url(images/bkg2-3.jpg) top center no-repeat fixed;}
+div#bkg2.bkg2-4{background:url(images/bkg2-4.jpg) top center no-repeat fixed;}
+div#bkg3.bkg3-1{background:url(images/bkg3-1.jpg) top center no-repeat fixed;}
+div#bkg3.bkg3-2{background:url(images/bkg3-2.jpg) top center no-repeat fixed;}
+div#bkg3.bkg3-3{background:url(images/bkg3-3.jpg) top center no-repeat fixed;}
+div#bkg3.bkg3-4{background:url(images/bkg3-4.jpg) top center no-repeat fixed;}
+div#bkg4.bkg4-1{background:url(images/bkg4-1.jpg) top center no-repeat fixed;}
+div#bkg4.bkg4-2{background:url(images/bkg4-2.jpg) top center no-repeat fixed;}
+div#bkg4.bkg4-3{background:url(images/bkg4-3.jpg) top center no-repeat fixed;}
+div#bkg4.bkg4-4{background:url(images/bkg4-4.jpg) top center no-repeat fixed;}
+
+/*************************** MENU **/
+ul.nav{list-style:none; position:fixed; bottom:250px; left:50px;}
+ul.nav li{}
+ul.nav li a{text-decoration:none; color:#fff; font-size:14px;}
+ul.nav li a:hover{font-weight:bold;}
+ul.nav li.actif a{text-decoration:underline; font-weight:bold;}
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function() { 
+	
+    var wHeight = $(window).height();
+    var wWidth = $(window).width();
+    
+    $( 'div#page > div' ).height( wHeight ); // Same height for each zones
+	var nbPart = $( 'div#page > div' ).length;
+	
+	var load = '<div id="load" style="position:fixed; z-index:9999; top:0px; left:0px; background:#000; width:'+wWidth+'px; height:'+wHeight+'px;">';
+		load += '<img style="position:absolute; margin-left:'+((wWidth-400)/2)+'px; top:50%; margin-top:-150px;" src="images/loading_ani.gif" />';
+		load += '</div>';
+	
+	$('div#page').append(load);
+	
+    var scrollT = $( document ).scrollTop();
+	var partH = wHeight;
+    var subPartH = partH / 4;
+    var scrollExec = false;
+    $( 'footer' ).hide();
+    $( 'div h1' ).hide(); 
+    $( 'div p' ).hide(); 
+	
+	$('html, body').stop().animate({ scrollTop: ( nbPart * wHeight ) }, 2500, function(){
+		$('html, body').stop().animate({ scrollTop: ( 0 ) }, 500, function(){ 
+			$('div#load').animate({'opacity': 0}, 1000, function(){
+				$('div#load').remove();
+				scrollExec = true;
+				$( 'div#page > div:first-child' ).find('h1').fadeIn(500);
+				$( 'div#page > div:first-child'  ).find('p').fadeIn(1500);
+			});
+		});
+	});
+	
+    $('nav ul a').bind('click',function(event){
+            event.preventDefault(); 
+            var anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: (  $(anchor.attr('href')).offset().top )
+            }, 1500);
+    });
+
+    $('a#top').bind('click',function(event){
+        event.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: ( 0 )
+        }, 1500);
+    });
+	
+    $(window).scroll(function() {
+        
+        scrollT = $(document).scrollTop();
+        
+        $('nav ul li').each( function(){
+                var anchor = $(this).find('a');
+                // Check wich <li> of the menu to highlight
+                if( ( $(anchor.attr('href')).offset().top  - scrollT - partH ) < 0 ){
+                    $('nav ul li').removeClass( 'actif' );
+                    anchor.parent().addClass( 'actif' );
+                }
+        });
+        
+		
+		$('div#page > div').each( function( index ){
+			var bkg = $(this).attr('id');
+			var dist = ( scrollT - $(this).offset().top );
+
+			// Check wich slide we are in (Divide the slide by 4 and add the correspondant class)
+			if( dist > 0 && dist < partH ){
+				for( i = 1; i <= 4; i++ ){
+					var dPart = i * subPartH;
+					if( dPart > dist && ( dPart - subPartH ) < dist ){
+						$( this ).removeClass();
+						$( this ).addClass( bkg + '-' + i );
+					}
+				}
+			}
+			if( scrollExec ){
+				// Check when we Enter in the slide (to make content fade in)
+				if( dist + (partH/2) > 0 && dist + (partH/2) < partH ){
+					$( this ).find('h1').fadeIn(1000);
+					$( this ).find('p').fadeIn(1500);
+				}
+				// Check when we Exit the slide (to mak the content fade out)
+				if( dist + (partH/2) < 0 ||  dist  > (partH/2) ){
+					console.log( index );
+					$( this ).find('h1').fadeOut(1500);
+					$( this ).find('p').fadeOut(500);
+				}
+			}
+		});
+            
+        if( scrollExec ){
+            if( scrollT > partH ){
+                $('footer').slideDown(500);
+            }else{
+                $('footer').slideUp(500);
+            }
+        }
+    });	
+});
+
+</script>
+</head>
+<body>
+<div id="page"> 
+    <div id="bkg1">
+    <article>
+        <h1>Supports</h1>
+        <p>On peut considérer qu'il n'existe plus de références ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+    </article>
+    </div>
+
+    <div id="bkg2">
+    <article>
+        <h1>Responsive Design</h1>
+        <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+        <p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+        <p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+        <p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+    </article>
+    </div>
+
+    <div id="bkg3">
+    <article>
+        <h1>Mobiles</h1>
+        <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+        <p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+        <p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+        <p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+    </article>
+    </div>
+
+    <div id="bkg4">
+    <article>
+        <h1>Last</h1>
+        <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+        <p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+        <p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+        <p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+    </article>
+    </div>
+
+<footer>
+    <a id="top" href="">Haut de page</a>
+</footer>
+
+</div>	
+	
+  <header>
+      <nav>			
+          <ul class="nav">
+              <li class=""><a href="#bkg1">Supports</a></li>
+              <li class=""><a href="#bkg2">Responsive Design</a></li>
+              <li class=""><a href="#bkg3">Mobiles</a></li>
+              <li class=""><a href="#bkg4">Last</a></li>
+          </ul>
+      </nav>
+  </header>
+</body>
+</html>

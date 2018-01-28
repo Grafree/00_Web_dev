@@ -1,0 +1,57 @@
+*{margin:0px; padding:0px; list-style:none; text-decoration:none;}
+body{color:#000; font-family:Arial, Helvetica, sans-serif;}
+
+header{height:130px; width:960px; background-image:url(../images/trame.png); position:fixed; top:0; z-index:1000; box-shadow:0px 3px 3px 0px #666;}
+
+div#page{width:960px; margin:130px auto 0 auto;}
+section.contenu_about{position:relative; z-index:1;}
+.slide_image{height:300px; background:url(../images/photo.png) #fff;}
+div.clear{clear:both;}
+
+h1{font-size:22px; width:960px; height:22px; margin:0; padding:10px 0 0 14px; text-transform:uppercase; color:#999;}
+h2{font-size:15px; font-style:italic; font-weight:normal; padding:2px 0 15px 14px; color:#999;}
+h3{font-weight:100; font-size:14px; margin:0px auto; padding:30px 0px 0px 10px; height:35px; width:950px; border-top:1px  solid #000; position:relative;}
+h5{font-size:25px; padding:15px 0 0 0;}
+
+a:link {color:#666666;}
+a:visited {color: #666666;}
+a:hover {color: #000000;}
+a:active {color: #000000;}
+
+/* Navigation */
+nav{height:80px;}
+
+ul#navigation{position:relative; margin:0 10px; text-transform:uppercase;}
+ul#navigation li a{font-size:20px; font-weight:bold; height:25px; float:left; text-decoration:none; color:#000; padding:0 10px 0 10px;}
+ul#navigation li a:hover{background-color: #FFFF00;}
+ul#navigation li.actif > a{background-color: #FFFF00;}
+ul#navigation li ul.sousmenu{position:absolute; left:0px; width:900px; top:25px; display:none;}
+ul#navigation li ul.sousmenu li a{font-size:16px; height:20px;}
+ul#navigation li ul.sousmenu li a:hover{background:#FFFF00;}
+
+/* A propos */
+p.slide_txt{margin:0 auto; width:950px; padding: 30px 10px 20px 10px; font-size:20px; font-style:italic; line-height:1.2;}
+
+dt.filet{float:left; width:960px; border-top:1px solid #000; display:none;}
+div#conteneur_blocs{width:960px;}
+
+div#conteneur_blocs dl{width:320px; float:left;}
+div#conteneur_blocs dt{font-size:14px; font-style:italic; padding:10px 0 5px 0; width:95%; border-bottom:1px solid #000;}
+div#conteneur_blocs dd{padding:10px;}
+div#conteneur_blocs dd p{font-size:12px; margin:5px 0px;}
+.slide_txt, .slide_image, div#conteneur_blocs dt, div#conteneur_blocs dd{display:none;}
+
+
+/* Portfolio */
+section#realisation{padding-bottom: 50px; background-color:#FFF; text-align:center;}
+section#portfolio_content{margin:10px auto 0px auto; background-color:#FFF; position:relative; z-index:2;}
+
+ul#vignettes li {position:relative; width:300px; height:150px; display:block; float:left; margin:0px 10px 20px 10px;}
+ul#vignettes div.bkg{width:300px; height:150px; position:absolute; top:0px; background:#FFFF00; display:none;}
+ul#vignettes div.texte{width:300px; height:150px; position:absolute; top:0px; display:none;}
+ul#vignettes h4{font-size:15px; font-weight:bold; width:270px; height:34px; padding:80px 10px 5px 0; margin-left:10px; position:absolute; border-bottom:1px solid #000;}
+ul#vignettes p{font-size:11px; font-style:italic; width:270px; height:20px; padding:100px 0 0 10px; position:absolute;}
+
+/* Footer */
+p.copyright{color:#999999; text-align:left; padding-top:25px;}
+footer{margin:0 auto; height:200px; width:960px; background-color:#FFF; border-top:1px solid #000; font-size:10px; font-weight:bold; position:relative; z-index:4;}

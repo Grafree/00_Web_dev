@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>jQuery - My Slider</title>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	
+	<style>
+html{font-size:100%;}
+body{background:#fff; font-size:12px; margin:0px; padding:100px 0 0 0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+div.container{width:600px; margin:0 auto;}
+article{display:block;  margin:0 0 40px 0;}
+header{position:fixed; top:0px; height:70px; width:100%; background:#fff; border-radius:4px; box-shadow:0px 0px 4px #ddd;}
+nav{width:600px; height:100px; margin:0 auto;}
+footer{margin:10px 0 0 0; padding:10px; background:#fafafa; box-shadow:0px 0px 4px #ddd; display:block; font-family:alegreyabold_italic; font-weight:bold; font-style:italic; font-size:13px; color:#6A615E;}
+.clear{clear:both;}
+
+p{font-size:12px; color:#666; margin:0 0 10px 0;}
+h1{font-size:36px; margin:0 0 15px 0; font-weight:bold; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc; text-transform:uppercase;}
+header h1{float:left; padding:0; line-height:20px; width:150px; font-size:20px; margin:20px 0 0 0; font-weight:normal; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc; text-transform:none;}
+
+/*************************** MENU **/
+ul.nav{list-style:none; padding:0; text-align:right; height:40px; margin:17px 0 0 0; float:right;}
+ul.nav li{margin:0px; padding:0; display:inline-block; position:relative;}
+ul.nav li a{display:inline-block; margin:5px 0 0 0; line-height:36px; text-align:center; padding:0 10px; margin:1px; text-decoration:none; box-shadow:1px 1px 0px #ddd; color:#fff; font-weight:bold; font-size:12px; text-shadow:1px 1px 0px #BA5D00, -1px -1px 0px #ED8200; border:1px solid #fff; border-radius:6px;
+background: #ffb76b; /* Old browsers */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmYjc2YiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmYTczZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2ZmN2MwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjdmMDQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top, #ffb76b 0%, #ffa73d 50%, #ff7c00 51%, #ff7f04 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffb76b), color-stop(50%,#ffa73d), color-stop(51%,#ff7c00), color-stop(100%,#ff7f04)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* IE10+ */
+background: linear-gradient(to bottom, #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ff7f04',GradientType=0 ); /* IE6-8 */
+}
+ul.nav li a:hover{color:#222; background:#fefefe; box-shadow:0px 0px 4px #ccc; text-shadow:none;}
+ul.nav li.actif a{box-shadow:0px 0px 3px #999; border-color:#fff;}
+ul.nav li em{display:none; position:absolute; bottom:-8px; background:url(images/marqueur.png) bottom center no-repeat; height:10px; width:100%;}
+ul.nav li.actif em{display:block;}
+
+      
+	</style>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+      
+      var topMenuHeight = 100; // Indiquer la hauteur du menu
+      
+      $('nav ul a').bind('click',function(event){
+          var $anchor = $(this);
+          
+          $('html, body').stop().animate({
+              scrollTop: (  $($anchor.attr('href')).offset().top - topMenuHeight )
+          }, 1500);
+
+          event.preventDefault(); // Supprime l'action de rechargement de la page lors du clic sur la balise <a>
+          
+          // Change la classe aux objets.
+           $('nav ul li').removeClass( 'actif' );
+          $anchor.parent().addClass( 'actif' );
+          
+      });
+      
+    });
+	
+	</script>
+</head>
+<body>
+
+  <header>
+      <nav>			
+          <h1>Slide page jQuery</h1>
+          <ul class="nav">
+              <li class="actif"><a href="#support">Supports</a><em></em></li>
+              <li class=""><a href="#responsive">Responsive Design</a><em></em></li>
+              <li class=""><a href="#mobiles">Mobiles</a><em></em></li>
+              <li class=""><a href="#etude">Etude de cas</a><em></em></li>
+          </ul>
+      </nav>
+  </header>
+
+<div class="container">	
+	<article id="support">
+	<h1>Supports</h1>
+	<p>On peut considérer qu'il n'existe plus de références ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	<img src="images/ScreenSize.jpg"/>
+
+	</article>
+  
+	<article id="responsive">
+	<h1>Responsive Design</h1>
+	<p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	<p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+	<p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+	<p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+	<img src="images/ScreenSize.jpg" alt="Tailles d'écran des supports mobiles" />
+
+	</article>
+  
+	<article id="mobiles">
+	<h1>Mobiles</h1>
+	<p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	<p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+	<p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+	<p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+	<img src="images/ScreenSize.jpg" alt="Tailles d'écran des supports mobiles" />
+
+	</article>
+  
+	<article id="etude">
+	<h1>Etude de cas</h1>
+	<p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	<p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+	<p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+	<p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+	<img src="images/ScreenSize.jpg" alt="Tailles d'écran des supports mobiles" />
+    </article>
+	
+  <div class="clear"></div>
+</div>
+
+<footer>
+    Pied de page / [<a href="#support">Haut de page</a>]
+</footer>
+  
+</body>
+</html>

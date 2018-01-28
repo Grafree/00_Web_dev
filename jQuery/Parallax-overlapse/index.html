@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>jQuery - Parallax</title>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	
+	<style>
+html{font-size:100%;}
+body{background:#fff; font-size:12px; margin:0px; padding:100px 0 0 0; font-family: Arial, Helvetica, Verdana, Geneva, sans-serif;}
+*{outline:0;}
+
+div.container{width:600px; margin:0 auto;}
+header{position:fixed; z-index:1000; top:0px; height:70px; width:100%; background:rgb(255, 255, 255); border-radius:7px; box-shadow:0px 0px 4px #aaa;}
+
+div#header_marges{width:600px; margin:0 auto;}
+div#header_marges ul.mainmenu{padding:0; margin:0px; list-style:none;}
+div#header_marges ul.mainmenu li{}
+div#header_marges ul.mainmenu li a{text-decoration:none; float:left; color:#fff; display:block; padding:10px 20px; margin:10px 6px 0 10px; border:1px solid #7DB9E8; background:#207cca; border-radius:3px;}
+div#header_marges ul.mainmenu li.actif a{background:#7DB9E8;}
+
+div#header_marges div.menulist{width:100px; float:right; text-align:right; position:relative; margin:10px;}
+div#header_marges div.menulist ul{padding:0; width:150px; left:-50px; margin:0px; background:#fff; text-align:left; box-shadow:0px 0px 4px #aaa; list-style:none; border:1px solid rgb(240, 240, 240); border-radius:3px; position:absolute;}
+div#header_marges div.menulist ul li{padding:5px; border-bottom:1px solid rgb(240, 240, 240); }
+div#header_marges div.menulist ul li a{display:block; text-decoration:none; color:#fff; border:1px solid #7DB9E8; padding:10px 20px; background:#207cca; border-radius:3px; text-align:center;}
+div#header_marges div.menulist ul li:last-child a{border-bottom:none;}
+div#header_marges div.menulist ul li a:hover{background-color:#7DB9E8; color:#fff;}
+
+.clear{clear:both;}
+
+p{font-size:12px; margin:0 0 10px 0;}
+h1{font-size:35px; margin:0 0 15px 0; font-weight:bold; text-transform:uppercase;}
+header h1{padding:0; font-size:50px; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc;}
+
+/* 
+Tous les objets doivent être en position:relative;
+Indiquer l'ordre de superposition en precisant une valeur au z-index
+*/
+article{display:block; position:relative; padding:100px 30px 30px 30px; color:#fff; box-shadow:0px 10px 8px #000}
+article#part1{background:rgba(30, 87, 153, 0.8); z-index:1; top:0px; left:-40px;}
+article#part2{background:rgba(30, 87, 153, 0.8); z-index:2; top:0px; left:-20px;}
+article#part3{background:rgba(30, 87, 153, 0.8); z-index:3; top:0px; left:0px;}
+article#part4{background:rgba(30, 87, 153, 0.8); z-index:4; top:0px; left:20px;}
+
+article nav{position:absolute; margin:0; top:30px;}
+article nav a{text-decoration:none; color:#fff; display:block; padding:10px 20px; border:1px solid #7DB9E8; background:#207cca; border-radius:3px;}
+article#part1 nav{left:50px;}
+article#part2 nav{left:130px;}
+article#part3 nav{left:210px;}
+article#part4 nav{left:290px;}
+
+div#downtop{background:rgba(0, 0, 0, 0.9); cursor:pointer; padding:10px 0; width:60px; position:fixed; bottom:0px; left:50%; margin-left:330px; z-index:1000; text-align:center;}
+
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        // Distance depuis le haute de la page a partir de laquelle 
+        // l'objet doit rester bloque
+        var distFromTop = 0; 
+        var menuHeight = $('header').height();
+        var iTop = [];
+        var iHeight = [];
+        var curSlide = 0;
+        var scrollT = 0;
+        var windowHeight = $(window).height();
+        $('div.container article').css({'min-height':windowHeight});
+        var documentHeight = 0;
+        var downtopTolerance = 100;
+        
+        $('div.menulist ul').hide();
+        
+        $('div.menulist img').click( function(){
+            if( $(this).hasClass('select') ){
+                $(this).next().fadeOut(300);
+                $(this).removeClass('select');
+            }else{
+                $(this).next().fadeIn(300);
+                $(this).addClass('select');
+            }
+        });
+        
+        $('div.menulist ul li a').click( function(event){
+            event.preventDefault(); // Supprime le rechargement de page de la balise <a>
+            $('div.menulist ul').fadeOut(300);
+            $('div.menulist img').removeClass('select');
+        });
+        
+        
+        var updateMenu = function(){
+            $('header ul.mainmenu li').removeClass( 'actif' ); // Active la rubrique du menu.
+            $('header ul.mainmenu li').eq( curSlide ).addClass( 'actif' );
+            var activeFound = false;
+            $('header ul.mainmenu li').each( function(){
+                var i = $(this).index();
+                if( $(this).hasClass('actif') ){
+                    $(this).fadeIn();
+                    $('div.container article').eq( i ).find( 'nav a' ).fadeOut();
+                    activeFound = true;
+                }else if( !activeFound ){
+                    $(this).fadeIn();
+                    $('div.container article').eq( i ).find( 'nav a' ).fadeOut();
+                }else{
+                    $(this).fadeOut();
+                    if( ( iTop[i] - scrollT ) > menuHeight){
+                    $('div.container article').eq( i ).find( 'nav a' ).fadeIn();
+                    }
+                }
+                i++;
+            });
+            
+            if( downtopTolerance > scrollT ){
+                $('div#downtop img').attr('src', 'images/bottom.png');
+            }else{
+                $('div#downtop img').attr('src', 'images/top.png');
+            }
+        }
+        
+        var i = 0;
+        $('div.container article').each( function(){
+            iTop[ i ] = $(this).offset().top;
+            iHeight[ i ] = $(this).height();
+            documentHeight += iHeight[ i ];
+            i++;
+        });
+        
+        
+        $('div#downtop').click(function(){
+            scrollT = $(document).scrollTop();
+            if( downtopTolerance > scrollT ){
+              $('html, body').stop().animate({
+                    scrollTop: (  iTop[ (iTop.length - 1) ] )
+                }, 1500); 
+            }else{
+              $('html, body').stop().animate({
+                    scrollTop: ( 0 )
+                }, 1500); 
+            }
+        });
+        
+        
+        $('header ul li a').bind('click',function(event){
+            event.preventDefault(); // Supprime le rechargement de page de la balise <a>
+            $('html, body').stop().animate({
+                scrollTop: (  iTop[ $(this).parent().index() ] - distFromTop )
+            }, 1500);
+        });
+
+        updateMenu();
+            
+        $(window).scroll(function() {
+
+            scrollT = $(document).scrollTop();
+
+           if( documentHeight > ( scrollT ) && windowHeight <= ( $('div.container article').eq(iTop.length-1).innerHeight() + distFromTop ) ){
+            /* Automatise pour toutes les balises <article> => Repositionnement  */
+            var i = 0;
+                $('div.container article').each( function(){
+                        if( ( iTop[i] - scrollT ) <= distFromTop ){
+                            var pos = ( scrollT - iTop[i] + distFromTop );
+                            $(this).css({'top':pos });
+                            curSlide = i;
+                        }else{
+                            $(this).css({'top':0 });
+                        }
+                    i++;
+
+                });
+            }else{
+               curSlide = iTop.length-1;
+            }
+            updateMenu();
+
+        });	
+
+    });
+	
+</script>
+</head>
+<body>
+
+  <header>
+	<div id="header_marges">
+            <ul class="mainmenu">
+                <li><a href="#part1">Partie 1</a></li>
+                <li><a href="#part2">Partie 2</a></li>
+                <li><a href="#part3">Partie 3</a></li>
+                <li><a href="#part4">Partie 4</a></li>
+            </ul>
+            <div class="menulist">
+            <img src="images/nav.jpg" />
+            <ul>
+                <li><a href="#part1">Partie 1</a></li>
+                <li><a href="#part2">Partie 2</a></li>
+                <li><a href="#part3">Partie 3</a></li>
+                <li><a href="#part4">Partie 4</a></li>
+            </ul>
+            </div>
+	</div>
+  </header>
+
+<div class="container">	
+	<article id="part1">
+            <nav><a href="#part1">Partie 1</a></nav>
+            <h1>Partie 1</h1>
+            <p>On peut considérer qu'il n'existe plus de références ou de standards.</p>
+            <p>On peut considérer qu'il n'existe plus de références ou de standards.</p>
+            <p>On peut considérer qu'il n'existe plus de références ou de standards.</p>
+            <p>On peut considérer qu'il n'existe plus de références ou de standards.</p>
+            <p>On peut considérer qu'il n'existe plus de références ou de standards.</p>
+            <p>On peut considérer qu'il n'existe plus de références ou de standards.</p>
+	</article>
+  
+	<article id="part2">
+            <nav><a href="#part2">Partie 2</a></nav>
+            <h1>Partie 2</h1>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+	</article>
+  
+	<article id="part3">
+            <nav><a href="#part3">Partie 3</a></nav>
+            <h1>Partie 3</h1>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+	</article>
+  
+	<article id="part4">
+            <nav><a href="#part4">Partie 4</a></nav>
+            <h1>Partie 4</h1>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+            <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards.</p>
+    </article>
+	
+  <div class="clear"></div>
+</div>
+    
+<div id="downtop"><img src="images/bottom.png" /></div>
+
+  
+</body>
+</html>

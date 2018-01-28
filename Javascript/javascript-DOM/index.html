@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Untitled Document</title>
+		<script type="text/javascript">
+			function AddInput(){
+				
+				var NbInput = document.getElementsByTagName("input").length;
+				
+				var monInput;
+				
+				monInput = document.createElement("input");
+				monInput.type = "text";  
+				monInput.name = "nameInput" + NbInput; 
+				 
+				monInput.id = "idInput" + NbInput;
+				monInput.value = "";
+				
+				var monBr = document.createElement("br");
+				 
+				document.form.appendChild(monInput);  //append signifie Ajouter, Apposer
+				document.form.appendChild(monBr);
+
+			}
+			function DelInput(){
+				
+				var NodeListe = document.form.getElementsByTagName('input');
+				var nbInput = document.form.getElementsByTagName('input').length;
+				
+			    var Enfant = document.form.getElementsByTagName('input')[ ( nbInput - 1 ) ];
+				var EnfantBr = document.form.getElementsByTagName('br')[ ( nbInput - 1 ) ];
+			    document.form.removeChild(Enfant);
+			 	document.form.removeChild(EnfantBr);
+
+			}
+		</script>
+	</head>
+	<body>
+		
+		<form name="form">
+			<span onclick="AddInput();">Add</span> | <span onclick="DelInput();">Supprimer</span><br />
+			<input type="text" name="inputtext" /><br />
+			
+		</form>
+		
+	</body>
+</html>

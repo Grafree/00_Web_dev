@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Field check</title>
+		<style>
+			body{font-family:Verdana, Geneva, Arial, Helvetica, sans-serif; font-size:11px;}
+			div#page{width:500px;}
+			table{width:95%; margin:0 0 0 5%; background-color:#deedff;}
+			th{}
+			td{width:70%; white-space:nowrap;}
+			td:first-child{width:30%; white-space:nowrap;}
+			
+			h2{color:#a7b4c2; font-weight:normal; font-size:16px;}
+			p{}
+			
+			label{line-height:24px;}
+			
+			input, select, textarea{border:1px solid #999; border-radius:4px; padding:4px 6px; font-family:Verdana, Geneva, Arial, Helvetica, sans-serif; font-size:11px; color:#777;}
+			input[type="text"], input[type="password"]{width:70%;}
+			input[type="text"]:focus, input[type="password"]:focus{border-color:green;}
+			
+			img{vertical-align:middle; margin:0 0 0 5px;}
+			
+			em{color:#999; font-size:9px;}
+			span{cursor:pointer; color:blue; font-size:9px;}
+			
+		</style>
+
+		<script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript">
+		/* 
+		 * @param FormName						[string] Formula name <form name="TheName">
+		 * @param FieldTextColorDefault			[string] Text color for input, select and textarea
+		 * @param FieldBorderColorDefault		[string] Border color for input, select and textarea
+		 * @param FieldWidthDefault				[string] Border width for input, select and textarea
+		 * @param FieldFocusTextColorDefault	[string] Text color for input, select and textarea on focus
+		 * @param InfoTextColorDefault			[string] Text color for message below input
+		 * @return void
+		 */
+			var formCtrl = new FormValidControls( 'myForm', '#777', '#999', '1px', 'green', '#999' );	
+		
+		</script>
+	</head>
+	
+	<body>
+		<div id="page">
+		
+					
+					<h2>Champ simple</h2>
+					
+					<p>Un champ s'accompagne d'une étiquette identifiée par la balise <strong>&lt;label&gt;</strong>. Elle contribue sur le plan sémantique a lier le texte à l'élément du formulaire auquel il se rattache. </p>
+					<p>Un texte explicatif sous le champ contribue à clarifier ce qui est attendu comme information dans l'élément du formulaire. Sa position contribue à</p>
+					<p><strong>L'icône d'aide</strong>, complète les informations sur l'utilisation de l'information indiquée dans l'élément du formulaire. L'attribut <strong>title</strong> permet d'ajouter ces informations afin qu'elles soient visibles lors du survol du curseur sur l'icône.</p>
+					<p>L'attribut <strong>placeholder</strong> (apparue avec la version HTML 5) permet de citer un exemple dans un champ. Ce qui n'était possible auparavant qu'à l'aide de javascript.</p>
+					<p></p>
+		<table>
+			<tr>
+				<td colspan="2">
+			<tr>
+				<td align="right" valign="top">
+					<label for="field1">Etiquette du champ</label>
+				</td>
+				<td>
+					<input type="text" id="field1" placeholder="Exemple..." />
+					<img src="images/checkmark-gray-16.png" />
+					<img title="Indications complémentaires sur l'utilisation qui sera fait du contenu" src="images/help-24.png" />
+					<br />
+					<em>Texte d'explication</em>
+				</td>
+				
+			</tr>
+		</table>
+			
+		<h2>Contrôle du champ (mot de passe)</h2>
+			<p></p>
+		
+		<form name="myForm">	
+			<table>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="pass">Mot de passe</label>
+					</td>
+					<td>
+						<input type="password" id="pass" onFocus="formCtrl.checkTextFieldValue( 'pass', 6, 0, 1, 'none', true, true, 'pass2' );" />
+						<img id="pass_check"src="images/checkmark-gray-16.png" />
+						<img title="Ce mot de passe sera à confirmer" src="images/help-24.png" />
+						<br />
+                        <span id="pass_see" onClick="formCtrl.alternInputTypePassToText( 'pass_see', 'pass' );">Voir</span>
+						<em id="pass_msg">Indiquez au moins 6 caractères</em> 
+                        
+					</td>
+				</tr>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="pass2">Reproduire le mot de passe</label>
+					</td>
+					<td>
+						<input type="password" id="pass2" disabled="disabled" onFocus="formCtrl.compareTextFieldValue( 'pass2', 'pass', true, true );" />
+						<img id="pass2_check" src="images/checkmark-gray-16.png" />
+						<br />
+                        <span id="pass2_see" onClick="formCtrl.alternInputTypePassToText( 'pass2_see', 'pass2' );">Voir</span>
+						<em id="pass2_msg">Reproduisez le mot de passe</em> 
+					</td>
+					
+				</tr>
+			
+			</table>
+		
+        
+			
+		<h2>Contrôle du champ (e-mail)</h2>
+			<p></p>
+			<table>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="email">E-mail</label>
+					</td>
+					<td>
+						<input type="text" id="email" placeholder="ex. email@site.com" onFocus="formCtrl.checkTextFieldValue( 'email', 0, 0, 0, 'email', true, true );" />
+						<img id="email_check" src="images/checkmark-gray-16.png" />
+						<img title="Il vous sera envoyé un message de confirmation" src="images/help-24.png" />
+						<br />
+                        <em id="email_msg">Indiquez votre adresse E-mail</em> 
+                        
+					</td>
+				</tr>			
+			</table>
+        
+        
+        
+        
+			
+		<h2>Contrôle du champ (e-mail)</h2>
+			<p></p>
+		
+			<table>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="emailfirst">E-mail</label>
+					</td>
+					<td>
+						<input type="text" id="emailfirst" onFocus="formCtrl.checkTextFieldValue( 'emailfirst', 0, 0, 0, 'email', true, true, 'emailsec' );" />
+						<img id="emailfirst_check"src="images/checkmark-gray-16.png" />
+						<img title="Il vous sera envoyé un message de confirmation" src="images/help-24.png" />
+						<br />
+						<em id="emailfirst_msg">Indiquez votre adresse E-mail</em> 
+                        
+					</td>
+				</tr>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="emailsec">Reproduire e-mail</label>
+					</td>
+					<td>
+						<input type="text" id="emailsec" disabled="disabled" onFocus="formCtrl.compareTextFieldValue( 'emailsec', 'emailfirst', true, true );" />
+						<img id="emailsec_check" src="images/checkmark-gray-16.png" />
+						<br />
+						<em id="emailsec_msg">Reproduisez l'adresse e-mail</em> 
+					</td>
+					
+				</tr>
+			
+			</table>
+        
+        
+        
+        
+        
+        
+        
+			
+		<h2>Contrôle du champ (npa)</h2>
+			<p></p>
+		
+			<table>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="npa">Npa</label>
+					</td>
+					<td>
+						<input type="text" id="npa" maxlength="4" onFocus="formCtrl.checkTextFieldValue( 'npa', 4, 4, 2, 'none', true, true );" />
+						<img id="npa_check"src="images/checkmark-gray-16.png" />
+						<img title="Nous pouvons ainsi localiser nos clients" src="images/help-24.png" />
+						<br />
+						<em id="npa_msg">Indiquez votre npa</em> 
+                        
+					</td>
+				</tr>
+			
+			</table>
+        
+        
+        
+        
+        
+			
+		<h2>Proposition de texte</h2>
+			<p></p>
+		
+			<table>
+				<tr>
+					<td align="right" valign="top">	
+						<label for="recherche">Recherche</label>
+					</td>
+					<td>
+						<input type="text" id="recherche" placeholder="Sur le site..." onFocus="formCtrl.suggestTextFieldValue( 'recherche' );" />
+						<img title="Nos suggestions peuvent vous aider" src="images/help-24.png" />
+                        <br />
+						<em id="recherche_msg">Mots-clés</em> 
+                        
+					</td>
+				</tr>
+			
+			</table>
+        
+        
+		</form>
+        
+        
+        
+		<div id="test"></div>
+        
+        
+		</div>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+div.vignette_show{  /* Regroupe le tout. Images incluses. */
+	height:310px;
+	width:39px;
+	border:1px solid #ddd;
+}
+
+div.espace_vignette{  /* Espace du diaporama */
+	width:39px;
+	height:258px;
+	overflow:hidden;
+	float:left;
+	position:relative;
+}
+
+div.support{  /* Contient toutes les images */
+	width:auto;
+	white-space:nowrap;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+
+img.arrow{
+	margin:5px 0px 0px 11px;
+	padding:0px 0px 0px 0px;
+	cursor:pointer;
+	}
+
+
+
+div.support ul {
+	width:auto;
+	height:auto;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	border:none;
+	
+}
+
+div.support ul li {
+	padding: 0px 0px 0px 0px;	/* Ne pas mettre de padding left ou right */
+	margin: 0px 0px 0px 0px;	/* Ne pas mettre de margin left ou right */
+	line-height:0px;
+}
+
+div.support ul li img {
+	padding: 0px 0px 0px 0px;	/* Ne pas mettre de padding left ou right */
+	margin: 0px 0px 0px 0px;	/* Ne pas mettre de margin left ou right */
+	border-width:0px;			/* Ne pas mettre de width */
+	border-style:solid;
+	line-height:0px;
+	border-color:#fff;
+}
+
+
+
+
+
+
+

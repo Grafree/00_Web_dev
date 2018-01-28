@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery - Page to Page</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+<style>
+html{font-size:100%;}
+body{background:#fff; font-size:14px; margin:0; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+
+div#page{}
+div.page{overflow:hidden;}
+div.page img{display:block; margin:0 auto;}
+
+div.pagesky{
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+div.pageunder{
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #d3eefb 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#d3eefb)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#d3eefb 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#d3eefb 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#d3eefb 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#d3eefb 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d3eefb',GradientType=0 ); /* IE6-9 */
+}
+
+div#left{position:fixed; left:0px; top:0px; background:url('images/previous.png') no-repeat center rgba(240, 240, 240, 0.5); opacity:0;}
+div#right{position:fixed; right:0px; top:0px; background:url('images/next.png') no-repeat center rgba(240, 240, 240, 0.5); opacity:0;}
+
+/*************************** MENU **/
+ul#nav{list-style:none; height:40px; margin:0; position:fixed; bottom:0px; width:100%; text-align:center;}
+ul#nav li{margin:0px; padding:0; display:inline-block; text-align:center; border:1px solid #999; border-radius:20px; background:rgba(255, 255, 255, 0.3); height:30px; width:30px; line-height:30px; margin:0px 5px;}
+ul#nav li:hover{box-shadow:0px 0px 5px 1px #000;}
+ul#nav li:active{box-shadow:0px 0px 5px 1px #f00;}
+ul#nav li.actif{border:1px solid #000; box-shadow:0px 0px 5px 1px #000; background:rgba(255, 255, 255, 0.8);}
+</style>
+
+<script type="text/javascript">
+
+function pageToPage(){
+    
+    var delayAutoSlide = 2500;
+    
+    var wHeight = $(window).height();
+    var wWidth = $(window).width();
+  
+    var h = 0;
+    var v = 0;
+    var k = 0; // key 
+    var course = [];
+    var dim = 1; 
+    var prcss = false;
+    
+    $('div#left, div#right').css({'width':wWidth/8,'height':wHeight,'cursor':'pointer'});
+    $('div#left, div#right').hover(function(){$(this).css({'opacity':1})},function(){$(this).css({'opacity':0})});
+    $('div#left').hide();
+
+    $('div#right, div#left').click(function(){
+        //if( !prcss ){
+            var o = $(this).attr('id');
+            if( o === 'right' ) k++; 
+
+            var dir = course[k].data('dir');
+            var n = 0;
+            for( d in course ){
+                var t = 0;
+                var l = 0;
+                if( ( o === 'right' && dir === 'T' ) ||  ( o === 'left' && dir === 'B' ) ){
+                    l = parseInt(course[d].css('left'));
+                    t = parseInt(course[d].css('top')) + wHeight;
+                }else if( ( o === 'right' && dir === 'R' ) ||  ( o === 'left' && dir === 'L' ) ){
+                    l = parseInt(course[d].css('left')) - wWidth ;
+                    t = parseInt(course[d].css('top'));
+                }else if( ( o === 'right' && dir === 'B' ) || ( o === 'left' && dir === 'T' ) ){
+                    l = parseInt(course[d].css('left'));
+                    t = parseInt(course[d].css('top')) - wHeight;
+                }else if( ( o === 'right' && dir === 'L' ) || ( o === 'left' && dir === 'R' ) ){
+                    l = parseInt(course[d].css('left')) + wWidth ;
+                    t = parseInt(course[d].css('top'));
+                }
+                course[d].animate({'left':l*dim,'top':t*dim}, 500);
+                n++;
+            }
+
+            if( o === 'left' ) k--;
+
+            $('ul#nav li').removeClass('actif');
+            $('ul#nav li:nth-child('+(k+1)+')').addClass('actif');
+
+            if( k === 0 ) $('div#left').hide(); else $('div#left').show();
+            if( k === ( course.length - 1 ) ) $('div#right').hide(); else $('div#right').show();
+        //}
+    });
+
+    $('div#page').css({'width':wWidth*dim,'height':wHeight*dim,'overflow':'hidden'});
+    $('.fullwidth').css({'width':wWidth*dim});
+    $('.fullheight').css({'height':wHeight*dim});
+    $('ul#nav').html('');
+    $('div#page div').each( function(){
+        var div = $(this);
+        var dir = div.data('dir');
+        
+        course[k]=div;
+        if( k > 0 ){
+            // T:Top, R:Right, B:Botttom, L:Left
+            if( dir === 'T' ){ v-=2; }
+            if( dir === 'R' ){ h++; v--; }
+            if( dir === 'B' ){ }
+            if( dir === 'L' ){ h--; v--; }
+        }
+        $(this).css({'width':wWidth*dim,'height':wHeight*dim,'left':(h*wWidth*dim),'top':(v*wHeight*dim),'position':'relative'});
+        k++;
+        
+        $('ul#nav').css({'width':wWidth*dim,'cursor':'pointer'});
+        $('ul#nav').append('<li>'+k+'</li>');
+    });
+    $('ul#nav li:first-child').addClass('actif');
+    $('ul#nav li').click(function(){
+        if( !prcss ){
+            clearInterval(prClic);
+            $('ul#nav li').removeClass('actif');
+            if( $(this).index() > k ){
+                prcss = true;
+                var w = $(this).index() - k;
+                $('div#right').click();
+                if( w >= 2 ){
+                    var rClic = setInterval(function(){
+                        if( w <= 2 ){clearInterval(rClic); prcss = false;}
+                        $('div#right').click();
+                        w--;
+                    }, 500);
+                }else{
+                    prcss = false;
+                }
+            }else if( $(this).index() < k ){
+                prcss = true;
+                var x = k - $(this).index();
+                $('div#left').click();
+                if( x >= 2 ){
+                    var lClic = setInterval(function(){
+                        if( x <= 2 ){clearInterval(lClic); prcss = false;}
+                        $('div#left').click();
+                        x--;
+                    }, 500);    
+                }else{
+                    prcss = false;
+                }
+            }
+        }
+    });
+    k = 0;
+    
+    var prClic = setInterval(function(){
+        $('div#right').click();
+		if(course.length <= ( k + 1) ) clearInterval( prClic );
+    }, delayAutoSlide);
+    
+}
+
+$(document).ready(function() {
+    pageToPage();
+});
+$(window).resize(function() {
+    //pageToPage();
+    window.location = 'index.html';
+});
+
+</script>
+</head>
+<body>
+<div id="page">
+    <div class="page pagesky" data-dir="R">
+        <img src="images/img1.png" />
+    </div> 
+    <div class="page pagesky" data-dir="R">
+        <img src="images/img2.png" />
+    </div> 
+    <div class="page pageunder" data-dir="B">
+        <img src="images/img3.png" />
+    </div> 
+    <div class="page pageunder" data-dir="R">
+        <img src="images/img4.png" />
+    </div>  
+    <div class="page pageunder" data-dir="R">
+        <img src="images/img5.png" />
+    </div>  
+    <div class="page pagesky" data-dir="T">
+        <img src="images/img6.png" />
+    </div> 
+    <div class="page pagesky" data-dir="L">
+        <img src="images/img7.png" />
+    </div> 
+</div>
+    <div id="left"></div>
+    <div id="right"></div>
+    <ul id="nav"></ul>
+    
+</body>
+</html>

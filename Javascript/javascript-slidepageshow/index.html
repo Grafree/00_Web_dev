@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Slide Page Show</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" src="pageshow.js"></script>
+	<script language="javascript">
+
+	/*
+	=== Déclaration de l'instance ===
+	
+	var mavariable = new SlideClass( [distance en pixel], [vitesse en milliseconde], [id de la div contenant le slide show], [Pourcentage a partir duquel la dégression commence] );
+	*/
+	
+	var objslide = new SlideClass( 30, 15, 'page', 70 );
+	
+	</script>
+                            
+</head> 
+<body>
+	<div id="page_left" class="arrow" onclick="objslide.beginPageShow();">
+	    &lt;&lt;
+	</div>
+	<div id="page_left" class="arrow" onclick="objslide.mouseLeftGo();">
+	    &lt;
+	</div>
+	<div id="page_right" class="arrow" onclick="objslide.mouseRightGo();">
+		&gt;
+	</div>
+	<div id="page_right" class="arrow" onclick="objslide.endPageShow();">
+		&gt;&gt;
+	</div>
+	<div id="pagenum" class="arrow"></div>
+		
+<br />		
+<br style="clear:both; line-height:20px;" />
+
+
+	<div class="espace_page" id="page">
+		<div class="support">						
+			<dl>
+				<p>
+				Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+				</p>
+				<p>1</p>
+			</dl>					
+			<dl>
+				<p>
+				Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+				</p>
+				<p>2</p>
+			</dl>					
+			<dl>
+				<p>
+				Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+				</p>
+				<p>3</p>
+			</dl>				
+			<dl>
+				<p>
+				Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+				</p>
+				<p>4</p>
+			</dl>
+		</div>
+	</div>
+	
+	<ul class="menu">
+	<li>
+		<span onclick="objslide.pageShow( 1 );">page 1</span>
+	</li>
+	<li>
+		<span onclick="objslide.pageShow( 2 );">page 2</span>
+	</li>
+	<li>
+		<span onclick="objslide.pageShow( 3 );">page 3</span>
+	</li>
+	<li>
+		<span onclick="objslide.pageShow( 4 );">page 4</span>
+	</li>
+	</ul>
+	
+	</body>
+</html>

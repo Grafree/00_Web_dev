@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>Modal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{box-sizing:border-box;}
+        html, body{height:100%; display:block; width:100%; margin:0; padding:0; font-family:Arial; background:rgb(21, 34, 47);}
+        div#page{width:1000px; height:100%; background:#ccc; margin:0 auto; padding:1em;}
+        nav{display:block;}
+        nav a{display:inline-block; padding:1em; margin-left:1em; font-size:1.5em; border:3px solid #fff; background:#333; color:#fff;}
+        nav a:hover{border-color:#333; background:#fff; color:#333;}
+        article{display:block; position:fixed; z-index:9999; left:25%; top:100%; width:40%; height:50%; padding:2em 5% 0 5%; 
+                border-radius:1em; background:#000; color:#fff; overflow:auto; padding-bottom:1em; -webkit-transition:all 2s; transition:all 2s;}
+        [data-transition="fade"]{left:25%; top:25%; opacity:0; visibility:hidden;}
+        [data-transition="left"]{left:-100%; top:25%;}
+        [data-transition="right"]{left:100%; top:25%;}
+        [data-transition="zoom"]{visibility:hidden; left:50%; top:50%; width:0; height:0; opacity:0;}
+        
+        article a[data-button="close"]{display:block; float:right; background:#c00; color:#fff; border:3px solid #fff; border-radius:1em; padding:0.2em 0.5em; text-decoration:none;}
+        article a[data-button="close"]:hover{background:#fff; color:#c00; border:3px solid #c00;}
+        
+        article img{display:block; float:left; height:50%; margin:1em;}
+        
+        /* Identifie l'element clique par l'ancre auquel il fait référence */
+        :target{visibility:visible !important; left:25% !important; top:25% !important; width:40% !important; height:50% !important; opacity:1 !important;}
+    </style>
+</head>
+<body>
+    <div id="page">
+        <nav>
+            <a href="#alpha">Alpha</a>
+            <a href="#beta">Beta</a>
+            <a href="#charlie">Charlie</a>
+            <a href="#delta">Delta</a>
+            <a href="#echo">Echo</a>
+        </nav>
+        
+        <article id="alpha">
+            <a href="#" data-button="close">X</a>
+            <img src="images/chrome.png" alt="Chrome" />
+            <h2>Bravo</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </article>
+        
+        <article id="beta" data-transition="left">
+            <a href="#" data-button="close">X</a>
+            <img src="images/chrome.png" alt="Chrome" />
+            <h2>Bravo</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </article>
+        
+        <article id="charlie" data-transition="right">
+            <a href="#" data-button="close">X</a>
+            <img src="images/chrome.png" alt="Chrome" />
+            <h2>Bravo</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </article>
+        
+        <article id="delta" data-transition="zoom">
+            <a href="#" data-button="close">X</a>
+            <img src="images/chrome.png" alt="Chrome" />
+            <h2>Bravo</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </article>
+        
+        <article id="echo" data-transition="fade">
+            <a href="#" data-button="close">X</a>
+            <img src="images/chrome.png" alt="Chrome" />
+            <h2>Bravo</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </article>
+    </div>
+          
+</body>
+</html>

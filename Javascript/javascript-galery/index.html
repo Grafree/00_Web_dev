@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Slider</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="javascript">
+	
+	
+	function showSlide( position ){
+		var content = document.getElementById('box3').getElementsByTagName('img').length;
+		for (i = 1; i <= content; i++) {
+			if( i == position ){
+				document.getElementById( 'slide_' + i ).className = '';
+			}else{
+				document.getElementById( 'slide_' + i ).className = 'hide';				
+			}
+		
+		}
+	}	
+	
+	function showSlideVersion( position, quantite, id ){
+		for (i = 1; i <= quantite; i++) {
+			if( i == position ){
+				document.getElementById( id + '_img_' + i ).className = '';
+			}else{
+				document.getElementById( id + '_img_' + i ).className = 'hide';				
+			}
+		}
+	}
+	
+</script>
+<style>
+	.hide{display:none;}
+</style>                        
+</head>
+ 
+<body>
+
+<div id="box3">
+	<span>
+		<img src="1-vignette.gif" onclick="showSlide( 1 );" />
+		<img src="2-vignette.gif" onclick="showSlide( 2 );" />
+	</span>
+	<span>
+		<img src="3-vignette.gif" onclick="showSlide( 3 );" />
+		<img src="4-vignette.gif" onclick="showSlide( 4 );" />
+	</span>
+</div>
+
+<br /><br /><br />
+
+
+<div id="slide_1" class="">
+	<img id="slide_1_img" width="100" src="1-vignette.gif" class="" />
+</div>
+
+<div id="slide_2" class="hide">
+	<img id="slide_2_img_1" width="100" src="2-vignette.gif" class="" />
+	<img id="slide_2_img_2" width="100" src="3-vignette.gif" class="hide" />
+	<img id="slide_2_img_3" width="100" src="4-vignette.gif" class="hide" />
+	<img id="slide_2_img_4" width="100" src="1-vignette.gif" class="hide" />
+	<p>
+	<span onmouseover="showSlideVersion( 1 , 4, 'slide_2')">1</span>
+	<span onmouseover="showSlideVersion( 2 , 4, 'slide_2')">2</span>
+	<span onmouseover="showSlideVersion( 3 , 4, 'slide_2')">3</span>
+	<span onmouseover="showSlideVersion( 4 , 4, 'slide_2')">4</span>
+	</p>
+</div>
+<div id="slide_3" class="hide">
+	<img id="slide_1_img" width="100" src="3-vignette.gif" class="" />
+</div>
+<div id="slide_4" class="hide">
+	<img id="slide_1_img" width="100" src="4-vignette.gif" class="" />
+</div>
+
+                
+</body>
+</html>

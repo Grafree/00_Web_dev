@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Resize Tool</title>
+<script type="text/javascript">
+    var xDiff, yDiff, topDiff, leftDiff, topCDiff, leftCDiff, cornerCurrent;
+    var cornerImgWidth  = 16;   // Specifies image corner Width
+    var cornerImgHeight = 16;   // Specifies image corner Height
+    var resizeTool      = [];  
+    resizeTool          = [0, 0, null]; // Left position, Top position, Element
+    var imgCache        = null;
+    var imgOverCache    = null;
+    var imgResizeCache  = null;
+
+    var imgResizeCacheDimension = [];
+    imgResizeCacheDimension[ 'width' ]      = 200;  // Specifies Mask Width
+    imgResizeCacheDimension[ 'height' ]     = 200;  // Specifies Mask Height
+    imgResizeCacheDimension[ 'posLeft' ]    = 50;   // Specifies Mask Left position
+    imgResizeCacheDimension[ 'posTop' ]     = 50;   // Specifies Mask Top position
+    
+    var cornerImg           = [];
+    cornerImg[ 'src' ]      = 'images/corner.png';
+    cornerImg[ 'top' ]      = Math.round( cornerImgWidth / 2 ) * -1;
+    cornerImg[ 'left' ]     = Math.round( cornerImgHeight / 2 ) * -1;
+
+    var corners = []; // Left position, Top position, Element
+    corners[ 'LT' ] = [0, 0, 0, 0, null];
+    corners[ 'RT' ] = [0, 0, 0, 0, null];
+    corners[ 'RB' ] = [0, 0, 0, 0, null];
+    corners[ 'LB' ] = [0, 0, 0, 0, null];
+
+    var imageElement = [];
+    imageElement[ 'widthStart' ]    = 0;
+    imageElement[ 'heightStart' ]   = 0;
+    imageElement[ 'width' ]         = 0;
+    imageElement[ 'height' ]        = 0;
+    imageElement[ 'left' ]          = 0;
+    imageElement[ 'top' ]           = 0;
+    imageElement[ 'leftCache' ]     = 0;
+    imageElement[ 'topCache' ]      = 0;
+    imageElement[ 'proportion' ]    = 0;
+
+    var initTool = function(){
+        imgCache        = document.getElementById( 'imgcache' );
+        imgOverCache    = document.getElementById( 'imgovercache' );
+        imgResizeCache  = document.getElementById( 'imgresizecache' );
+        resizeTool      = [ document.getElementById( 'resizetool' ).offsetLeft, document.getElementById( 'resizetool' ).offsetTop, document.getElementById( 'resizetool' ) ];
+
+        imgResizeCache.style.width  = imgResizeCacheDimension[ 'width' ] + 'px';
+        imgResizeCache.style.height = imgResizeCacheDimension[ 'height' ] + 'px';
+        imgResizeCache.style.left   = imgResizeCacheDimension[ 'posLeft' ] + 'px';
+        imgResizeCache.style.top    = imgResizeCacheDimension[ 'posTop' ] + 'px';
+        imgCache.style.left         = ( imgResizeCacheDimension[ 'posLeft' ] * -1 ) + 'px';
+        imgCache.style.top          = ( imgResizeCacheDimension[ 'posTop' ] * -1 ) + 'px';
+
+        imageElement[ 'widthStart' ]    = imgCache.offsetWidth;
+        imageElement[ 'heightStart' ]   = imgCache.offsetHeight;
+        imageElement[ 'width' ]         = imgCache.offsetWidth;
+        imageElement[ 'height' ]        = imgCache.offsetHeight;
+        imageElement[ 'left' ]          = imgCache.offsetLeft;
+        imageElement[ 'top' ]           = imgCache.offsetTop;
+        imageElement[ 'leftCache' ]     = imgOverCache.offsetLeft;
+        imageElement[ 'topCache' ]      = imgOverCache.offsetTop;
+        imageElement[ 'proportion' ]    = imgCache.offsetWidth / imgCache.offsetHeight;
+
+        for( corner in corners ){
+            if(      corner === 'LT' ){ var Limg = cornerImg[ 'left' ];                               var Timg = cornerImg[ 'top' ]; }
+            else if( corner === 'RT' ){ var Limg = imageElement[ 'width' ] + cornerImg[ 'left' ];     var Timg = cornerImg[ 'top' ]; }
+            else if( corner === 'RB' ){ var Limg = imageElement[ 'width' ] + cornerImg[ 'left' ];     var Timg = imageElement[ 'height' ] + cornerImg[ 'top' ]; }
+            else if( corner === 'LB' ){ var Limg = cornerImg[ 'left' ];                               var Timg = imageElement[ 'height' ] + cornerImg[ 'top' ]; }
+
+            var img = document.createElement( 'img' );
+            img.setAttribute( 'id', corner );
+            img.setAttribute( 'src', cornerImg[ 'src' ] );
+            img.setAttribute( 'style', 'position:absolute; top:' + Timg + 'px; left:' + Limg + 'px; cursor:move;' );
+            resizeTool[ 2 ].appendChild( img );
+
+            corners[ corner ] = [ Limg, Timg, Limg, Timg, document.getElementById( corner ) ];
+            corners[ corner ][ 4 ].onmousedown = moveCorner;
+        }
+    }
+    			
+    function moveCorner( event ){
+        var cornerCurrent = this;
+        var topScroll   = window.pageYOffset || document.documentElement.scrollTop;
+        var leftScroll  = window.pageXOffset || document.documentElement.scrollLeft;
+        var xCoord = event.clientX;
+        var yCoord = event.clientY;
+        var applyMove = false;
+        document.onmousemove = function( event2 ){
+            applyMove = false;
+            
+                console.log( 'xCoord - event2.clientX < 0:' + ( xCoord - event2.clientX ) );
+                console.log( 'imgCache.offsetLeft < 0:' + imgCache.offsetLeft );
+                console.log( 'imgCache.offsetWidth:' + imgCache.offsetWidth + '<=' + 'imageElement[ \'widthStart\' ]:' + imageElement[ 'widthStart' ]);
+                console.log( 'yCoord - event2.clientY < 0:' + ( yCoord - event2.clientY ) );
+                console.log( 'imgCache.offsetTop < 0:' + imgCache.offsetTop );
+                console.log( 'imgCache.offsetHeight:' + imgCache.offsetHeight + '<=' + 'imageElement[ \'heightStart\' ]:' + imageElement[ 'heightStart' ] );
+                console.log( '==============================');
+                
+            if( cornerCurrent.id === 'LT' ){ 
+                //console.log( imgCache.offsetLeft );
+                if( ( xCoord - event2.clientX ) < 0 && imgCache.offsetLeft < 0 && imgCache.offsetWidth <= imageElement[ 'widthStart' ] &&
+                    ( yCoord - event2.clientY ) < 0 && imgCache.offsetTop < 0 && imgCache.offsetHeight <= imageElement[ 'heightStart' ] ){
+                    applyMove = true;
+                    leftCDiff   = ( event2.clientX + leftScroll - resizeTool[ 0 ] ) + corners[ cornerCurrent.id ][ 0 ];
+                    topCDiff    = ( event2.clientY + topScroll - resizeTool[ 1 ] ) + corners[ cornerCurrent.id ][ 1 ];
+                    leftDiff    = ( xCoord - event2.clientX );
+                    topDiff     = ( yCoord - event2.clientY ); 
+                    xDiff       = ( event2.clientX - xCoord ); 
+                    yDiff       = ( event2.clientY - yCoord ); 
+                    // corners[ 'LT' ][ 0 ] // Left position
+                    // corners[ 'LT' ][ 1 ] // Top position
+                    // imageElement[ 'proportion' ] // To set proportion scale
+                }
+            }
+            else if(    cornerCurrent.id === 'RT' ){}
+            else if(    cornerCurrent.id === 'RB' ){ 
+                topCDiff    = ( event2.clientX + leftScroll - resizeTool[ 0 ] );
+                topLDiff    = ( event2.clientY + topScroll - resizeTool[ 1 ] );
+                xDiff = ( xCoord - event2.clientX ); yDiff = ( yCoord - event2.clientY ); 
+                topDiff = 0; leftDiff = 0; }
+            else if(    cornerCurrent.id === 'LB' ){}
+            
+            if( applyMove ){
+                cornerCurrent.style.left    = ( leftCDiff )  + 'px';
+                cornerCurrent.style.top     = ( topCDiff )   + 'px';
+                imgCache.style.width        = ( imageElement[ 'width' ]     - xDiff )       + 'px';
+                imgCache.style.height       = ( imageElement[ 'height' ]    - yDiff )       + 'px';
+                imgCache.style.left         = ( imageElement[ 'left' ]      - leftDiff )    + 'px';
+                imgCache.style.top          = ( imageElement[ 'top' ]       - topDiff )     + 'px';
+                imgOverCache.style.width    = ( imageElement[ 'width' ]     - xDiff )       + 'px';
+                imgOverCache.style.height   = ( imageElement[ 'height' ]    - yDiff )       + 'px';
+                imgOverCache.style.left     = ( imageElement[ 'leftCache' ] - leftDiff )    + 'px';
+                imgOverCache.style.top      = ( imageElement[ 'topCache' ]  - topDiff )     + 'px';
+            }
+        }
+        
+        document.onmouseup = function( event3 ){
+            document.onmousemove = null;
+            document.onmouseup = null;
+            
+            corners[ cornerCurrent.id ][ 2 ]        =  leftCDiff;
+            corners[ cornerCurrent.id ][ 3 ]        =  topCDiff;
+            imageElement[ 'width' ]     -= xDiff;
+            imageElement[ 'height' ]    -= yDiff; 
+            imageElement[ 'left' ]      -= leftDiff;
+            imageElement[ 'top' ]       -= topDiff; 
+            imageElement[ 'leftCache' ] -= leftDiff;
+            imageElement[ 'topCache' ]  -= topDiff; 
+
+            cornerCurrent = null;
+        }
+        return false;
+    }
+
+    window.onload = function(){
+        initTool();
+    }
+</script>
+<style>
+    body {font-size:10px; margin:0px; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+
+    div#resizetool {width:1000px; margin:10px auto; height:500px; position:relative;}
+
+    div#imgresizecache{position:absolute; overflow:hidden; border:1px solid #000; box-shadow:0px 0px 3px #999;}
+    img#imgovercache{position:absolute; top:0px; left:0px; opacity:0.2; border:1px solid red;}
+    img#imgcache{position:absolute; opacity:0.8;}
+
+    label{display:block;}
+    input{border:1px solid #ccc; padding:5px;}
+</style>
+</head>
+<body>
+<div id="resizetool">
+    <img id="imgovercache" src="images/03.jpg" />
+    <div id="imgresizecache">
+        <img id="imgcache" src="images/03.jpg" />
+    </div>
+</div>
+<div id="footer">
+    <label>Img Width<input type="text" name="imagewidth" /></label>
+    <label>Img Height<input type="text" name="imagewidth" /></label>
+	&copy; 2013
+</div>
+</body>
+</html>

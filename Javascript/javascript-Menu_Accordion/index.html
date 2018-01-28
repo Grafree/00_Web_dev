@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Menu accordeon</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" src="menuslide.js"></script>
+
+	<script language="javascript">
+	/*
+	Delaration de l'instance
+	accrodionWindow(	[int | distance en px], 
+				[int | vitesse en milliseconde], 
+				[string | id dee menus], 
+				[int | % du demarrage de la deceleration], 
+				[bolean | fermeture automatique des menus coulissants a l'ouverture d'une autre = true], 
+				[int | Id du menu ouverte au chargement. 0 indique aucune],
+				[bolean | Indique si l'ouverture du menu au chargement dervait se faire avec un coulissement]
+	*/
+	var accMenu = new accordionMenu( 8, 15, 'sous_menu', 75, true, 0, false );
+	
+	</script>
+                            
+</head>
+ 
+<body>
+
+<ul id="menu">
+	
+<li>
+	<span id="1" class="titre_menu_normal" onclick="accMenu.action(this.id);" onmouseover="accMenu.entete_roll(this.id);" onmouseout="accMenu.entete_normal(this.id);">Présentation</span>
+	<ul class="sous-menu" id="sous_menu_1">
+		<li><a herf="#">A propos de nous</a></li>
+		<li><a herf="#">L'équipe</a></li>
+		<li><a herf="#">Nos partenaires</a></li>
+	</ul>
+</li>
+<li>
+	<span id="2" class="titre_menu_normal" onclick="accMenu.action(this.id);" onmouseover="accMenu.entete_roll(this.id);" onmouseout="accMenu.entete_normal(this.id);">Services</span>
+	<ul class="sous-menu" id="sous_menu_2">
+		<li><a herf="#">Service à la clientèle</a></li>
+		<li><a herf="#">Nos produits</a></li>
+	</ul>
+</li>
+<li>
+	<span id="3" class="titre_menu_normal" onclick="accMenu.action(this.id);" onmouseover="accMenu.entete_roll(this.id);" onmouseout="accMenu.entete_normal(this.id);">Contact</span>
+	<ul class="sous-menu" id="sous_menu_3">
+		<li><a herf="#">Formulaire</a></li>
+		<li><a herf="#">Coordonnées</a></li>
+		<li><a herf="#">Plan d'accès</a></li>
+	</ul>
+</li>
+
+</ul>
+
+                
+</body>
+</html>

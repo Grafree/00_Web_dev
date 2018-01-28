@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<title>Equilizer</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+    	
+		
+	
+function equilizer( equilizer, mode, orientation, minimum, maximum, initPosition, stepUnit, ajaxFile ) {
+		
+	var equilizer 	= equilizer; 		
+	var mode		= mode;			// 'mono' or 'stereo';			
+	var orientation	= orientation; 	// 'landscape' or 'portrait'
+	var minimum		= minimum;	
+	var maximum		= maximum;
+	var initPosition= initPosition;
+	var stepUnit	= stepUnit;
+	var ajaxFile	= ajaxFile;
+	
+	var x, y;
+	var equilizerElement;
+	var equilizerZone = [];
+	var surfaceEquilizer;
+	var equilizerCursor = document.createElement( 'img' );
+	var equilizerCursorValueMin = document.createElement( 'span' );
+	var equilizerCursorValueMax = document.createElement( 'span' );
+	
+	var nbSteps;
+	var stepDistance;
+	var halfDistance;
+	var evalPosition;
+	var evalDistance;
+	
+	var currentValue = [];
+				
+				
+	var initEquilizer = function(){
+		
+		equilizerElement = document.getElementById( equilizer );
+		equilizerElement.style.position = 'relative';
+		currentValue.min = initPosition;
+		
+		if (orientation == 'landscape') {
+			equilizerZone.max = equilizerElement.offsetLeft + equilizerElement.offsetWidth;
+			equilizerZone.min = equilizerElement.offsetLeft;
+			surfaceEquilizer = equilizerZone.max - equilizerZone.min;
+			equilizerCursor.setAttribute( 'src', 'images/cursor.png' );
+			var curLeftPos = Math.ceil( ( initPosition - minimum ) / ( maximum - minimum ) * surfaceEquilizer );
+			equilizerCursor.setAttribute( 'style', 'top:0px; left:' + curLeftPos + 'px; position:absolute;' );
+			equilizerCursorValueMin.setAttribute( 'style', 'top:-15px; left:' + ( curLeftPos - 4) + 'px; position:absolute;');
+		}else if (orientation == 'portrait') {
+			equilizerZone.min = equilizerElement.offsetTop;
+			equilizerZone.max = equilizerElement.offsetTop + equilizerElement.offsetHeight;
+			surfaceEquilizer = equilizerZone.max - equilizerZone.min;
+			equilizerCursor.setAttribute( 'src', 'images/cursor-portrait.png' );
+			var curTopPos = Math.ceil( ( initPosition - minimum ) / ( maximum - minimum ) * surfaceEquilizer );
+			equilizerCursor.setAttribute( 'style', 'top:' + curTopPos + 'px; left:0px; position:absolute;' );
+			equilizerCursorValueMin.setAttribute( 'style', 'top:' + ( curTopPos - 4 ) + 'px; right:-15px; position:absolute;');
+		}
+		
+		nbSteps = ( maximum - minimum ) / stepUnit;
+		stepDistance = surfaceEquilizer / nbSteps;
+		halfDistance = stepDistance / 2;
+		
+		
+		equilizerElement.appendChild( equilizerCursorValueMin );
+		equilizerCursorValueMin.innerHTML = initPosition;
+		equilizerElement.appendChild( equilizerCursor );
+		equilizerCursor.onmouseover = function(){
+			this.style.cursor = 'pointer';
+		}
+		equilizerCursor.onmousedown = moveObjectBehaviour;
+	}
+	
+	
+	var currentValueStep = function( distance ){
+		var currentEtape = 0;
+		//if (orientation == 'landscape') {
+			var numEtape = 0;
+		//}else if (orientation == 'portrait') {
+			//var numEtape = nbSteps;
+		//}
+			for ( i = equilizerZone.min; i < equilizerZone.max; i += stepDistance ) {
+				if( ( distance - i ) < halfDistance && ( distance - i ) > ( 0 - halfDistance ) ){
+					currentEtape = numEtape;
+				}
+				//if (orientation == 'landscape') {
+					numEtape++;
+				//}else if (orientation == 'portrait') {
+					//numEtape--;
+				//}
+				
+			}
+		currentValue.min = Math.ceil( ( maximum - minimum ) / nbSteps * currentEtape );
+		equilizerCursorValueMin.innerHTML = currentValue.min;
+	}
+	
+	
+	var adjustFinalStep = function(){
+		var evaluate;
+		if( ( evalPosition - equilizerZone.min ) < halfDistance ){
+			evaluate = equilizerZone.min + evalDistance;
+		}else if( ( equilizerZone.max - evalPosition ) < halfDistance ){
+			evaluate = equilizerZone.max + evalDistance;
+		}else{
+			for( i = equilizerZone.min; i < equilizerZone.max; i += stepDistance ){
+				if( ( evalPosition - i ) < halfDistance && ( evalPosition - i ) > ( 0 - halfDistance ) ) evaluate = Math.ceil( i + evalDistance );
+				
+			}
+		}
+		currentValueStep( ( evaluate - evalDistance ) );
+		return evaluate;
+	}
+	
+	
+	var adjustStep = function(){
+		var evaluate;
+		if( evalPosition <= equilizerZone.min ) {
+			evaluate = equilizerZone.min + evalDistance;
+		}
+		else if ( evalPosition >= equilizerZone.max ) {
+			console.log( ' max' ); ////////////////////////// ERREUR Portrait -> Au max = 0.... et pas 100
+			evaluate = equilizerZone.max + evalDistance;
+		}
+		else {
+			evaluate = evalPosition + evalDistance;
+		}		
+		currentValueStep( ( evaluate - evalDistance ) );
+		return evaluate;
+	}
+	
+	var moveObjectBehaviour = function( event ){
+						
+		x = equilizerCursor.offsetLeft - event.clientX;
+		y = equilizerCursor.offsetTop - event.clientY;
+				
+		document.onmousemove = function( event2 ){
+		
+			if (orientation == 'landscape') {
+				evalPosition = event2.clientX;
+				evalDistance = x;
+				var adjustPosition = adjustStep();
+				equilizerCursor.style.left = adjustPosition + 'px';
+				equilizerCursorValueMin.style.left = ( adjustPosition - 4 ) + 'px'; 
+			}else if( orientation == 'portrait' ) {
+				evalPosition = event2.clientY;
+				evalDistance = y;
+				var adjustPosition = adjustStep();
+				equilizerCursor.style.top = adjustPosition + 'px';
+				equilizerCursorValueMin.style.top = ( adjustPosition - 4 ) + 'px'; 
+			}
+		}
+		
+		document.onmouseup = function( event3 ){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			
+			if (orientation == 'landscape') {
+				var adjustFinalPosition = adjustFinalStep();
+				equilizerCursor.style.left = adjustFinalPosition + 'px';
+				equilizerCursorValueMin.style.left = ( adjustFinalPosition - 4 ) + 'px';
+			}else if( orientation == 'portrait' ) {
+				var adjustFinalPosition = adjustFinalStep();
+				equilizerCursor.style.top = adjustFinalPosition + 'px';
+				equilizerCursorValueMin.style.top = ( adjustFinalPosition - 4 ) + 'px';
+			}
+			
+		}
+		
+		return false;
+	}
+			
+	
+	window.onload = function(){
+		initEquilizer();
+	}
+}
+
+//var obj1 = new equilizer( 'equilizer1', 'mono', 'landscape', 0, 100, 50, 5, 'update.php' );	
+var obj2 = new equilizer( 'equilizer2', 'mono', 'portrait', 0, 100, 50, 5, 'update.php' );	
+
+	</script>
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<h1>Javascript:event</h1>
+		</div>	
+		<div id="col_left">
+			
+			<div id="equilizer1"></div>
+			
+			<div id="equilizer2"></div>
+
+		</div>
+		
+		<div id="col_right">
+				
+			<div class="figure">
+			<p>Explications....</p>
+			<p><a href="http://www.alsacreations.com/article/lire/578-La-gestion-des-evenements-en-JavaScript.html">Alsacréation explique les événements</a></p>
+
+            </div>
+			
+		</div>
+	
+		<div id="bas_page">	
+		</div>
+	</div>
+<div id="footer">
+	&copy; 2012 - Ajax
+</div>
+</body>
+</html>

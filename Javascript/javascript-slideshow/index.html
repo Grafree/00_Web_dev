@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+	<head>
+    	<title>Galerie</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script language="javascript">
+
+/*
+var objslide=function(){
+
+	function slider(id, speed, distance){
+		this.id=id; 
+		this.speed=speed;
+		this.distance=distance
+	}
+*/			
+		var distance = parseInt( 5 );
+		var speed = 25;		
+		var id = 'vi_5';
+			
+		window.onload = function(){
+			// Ajouter pour chaque ligne de vignette. Correspond au <input type="hidden" />
+			document.getElementById(id+'prog').value = 0;
+			
+			// Explications --> http://javascript.developpez.com/faq/?page=syntaxe#pseudoUrl
+			document.getElementById(id + '_right').onmouseover = function(){ mouseRightGo(); return false; };
+			document.getElementById(id + '_right').onmouseout = function(){ mouseRightStop(); return false; };
+			
+			document.getElementById(id + '_left').onmouseover = function(){ mouseLeftGo(); return false; };
+			document.getElementById(id + '_left').onmouseout = function(){ mouseLeftStop(); return false; };
+		}
+
+		function moveback(){
+
+			var espaceVignette = document.getElementById(id);
+			var support = document.getElementById(id).getElementsByTagName( 'div' )[0];
+			
+			var progress = document.getElementById(id + 'prog').value;
+
+			var distanceNeg = 0 - distance;
+			var progressDiff = progress - distanceNeg;
+			
+			if( progressDiff < 0 ){
+				progress = parseInt( progress );
+
+				var valeur = progress + distance;
+				var getvaleur = parseInt( valeur );
+				support.style.left = getvaleur + 'px';	
+				document.getElementById(id + 'prog').value = getvaleur;
+			}else{
+				support.style.left = '0px';		
+				document.getElementById(id + 'prog').value = 0;
+			}
+		}
+
+		function move(){
+			
+			var dist = 0 - distance; // Correspond à la distance négative parcouru en pixel lors de chaque clic de déplacement
+			
+			var espaceVignette = document.getElementById(id);
+			var support = document.getElementById(id).getElementsByTagName( 'div' )[0];
+			var nbli = support.getElementsByTagName( 'li' ).length; // Indique le nombre d'images dans le diaporama
+						
+			var espaceVignetteWidth = document.getElementById(id).offsetWidth; // Largeur de la partie visible
+			
+			var totalEspacevignette = 0;
+
+			for ( i = 0; i < nbli; i++ ){
+				
+				totalEspacevignette += support.getElementsByTagName( 'img' )[i].offsetWidth; // Indique la largeur de chaque image
+				
+				//totalEspacevignette += support.getElementsByTagName( 'img' )[i].style.margin-right;
+				//var test = support.getElementsByTagName( 'img' )[i].borderRightWidth;
+			}
+			//alert(test);
+			
+			support.style.width = totalEspacevignette + 'px'; // Redéfini la largeur du diaporama en fonction de la largeur de toutes les images
+
+			var progress = document.getElementById(id + 'prog').value;   
+			progress = parseInt( progress );
+			
+			// Calcul la distance maximum de la totalité des vignettes assemblées.
+			var espaceWidthDiff = 0 - ( totalEspacevignette - espaceVignetteWidth );
+			
+			if( progress > espaceWidthDiff ){
+				
+				var reste = espaceWidthDiff - progress;
+				var doubleDist = parseInt( dist ) * 2 ;
+
+				if ( reste > doubleDist) {
+					var getvaleur = espaceWidthDiff; // Permet de vérifier s'il y a une distance suffisante pour encore un clic
+					support.style.left = getvaleur + 'px';		
+					document.getElementById(id + 'prog').value = getvaleur;
+				}else{
+					var valeur = progress + dist;
+					var getvaleur = parseInt( valeur );
+					support.style.left = getvaleur + 'px';		
+					document.getElementById(id + 'prog').value = getvaleur;
+				}
+				
+			}else{
+				support.style.left = espaceWidthDiff + 'px';
+				document.getElementById(id + 'prog').value = espaceWidthDiff;
+			}
+			
+		}
+		
+		function mouseRightGo(){
+			moveIntervalId = setInterval( "move()", speed ); // REMARQUE : Il est nécessaire de la fonction appelée soit entre parenthèse
+		}
+		function mouseRightStop(){
+			clearInterval( moveIntervalId );
+		}
+		
+		function mouseLeftGo(){
+			moveIntervalId = setInterval( "moveback()", speed ); // REMARQUE : Il est nécessaire de la fonction appelée soit entre parenthèse
+		}
+		function mouseLeftStop(){
+			clearInterval( moveIntervalId );
+		}
+/*
+}				
+*/		
+</script>
+                            
+</head>
+ 
+ 
+<body>
+<div class="vignette_show">
+	<div class="espace_vignette" id="vi_5">
+		<div class="support">						
+			<ul id="slideshow">
+	        
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+	                    
+			</ul>
+		</div>
+		</div>
+	<input type="hidden" id="vi_5prog" value="0" /> 
+	<div id="vi_5_left" class="arrow">
+	<!-- <div id="vi_5_left" class="arrow" onmouseover="mouseLeftGo('vi_5');" onmouseout="mouseLeftStop('vi_5')"> -->
+	    &lt;&lt;
+	</div>
+	<div id="vi_5_right" class="arrow">
+	<!-- <div id="vi_5_right" class="arrow" onmouseover="mouseRightGo('vi_5');" onmouseout="mouseRightStop('vi_5')"> -->
+		&gt;&gt;
+	</div>
+</div>
+
+                
+	</body>
+</html>

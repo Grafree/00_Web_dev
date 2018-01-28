@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+	<head>
+    	<title>Slider</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script language="javascript">
+		
+		var id = 'slider';
+		var distance = parseInt( 50 );	// distance en px que parcours le coulissement
+		var speed = 25;					// vitesse en milliseconde. Plus la valeur est élevé plus l'animation sera lente.
+		//var sliderWidth = 503;			// Largeur de la fenêtre coulissante une fois totalement ouverte
+		var slideHeightMin = 1;			// Ouverture de base de la fenêtre coulissante
+		var start = 75;					// Pourcentage a partir duquel la dégression commence (ex. 20, signifie à 20% de la fin
+		var padding = 10;				// Doit correspondre au padding indiqueé dans le CSS pour content_show
+			
+		window.onload = function(){
+			// Ajouter pour chaque ligne de vignette. Correspond au <input type="hidden" />
+			document.getElementById(id +'_progress').value = 0;
+			
+			
+	// ICI ----> Créer une boucle qui repère tous les éléments qui peuvent slider
+			
+			for (i = 1; i <= 1; i++) {
+			
+				var elementHeight = document.getElementById(id + '_' +  i).getElementsByTagName('div')[0].offsetHeight;
+				var elementHeight = parseInt(elementHeight + padding * 2);
+				document.getElementById(id + '_height').value = elementHeight;
+				
+				document.getElementById(id + '_' + i ).getElementsByTagName('div')[0].className = 'content_hide';
+				
+			}
+	// Fin boucle
+	
+			
+			// Explications --> http://javascript.developpez.com/faq/?page=syntaxe#pseudoUrl
+			//document.getElementById(id + '_open').onclick = function(){ mouseopen(); return false; };
+			
+			//document.getElementById(id + '_close').onclick = function(){ mouseclose(); return false; };
+		}
+
+		function close(){
+
+			var currentSliderId = document.getElementById('current_slider').value		
+			var slider = document.getElementById(id+ '_' + currentSliderId);
+			
+			var progress = document.getElementById(id + '_progress').value;   
+			progress = parseInt( progress );
+
+			var elmtHeight = document.getElementById(id  +'_height').value;
+			
+			var getvaleur = closedecceleration(elmtHeight, progress, distance);	
+		
+			slider.style.height = getvaleur + 'px';	
+			document.getElementById(id + '_progress').value = getvaleur;
+			
+		}
+
+		function closedecceleration(heightTotal, progress, distance){
+			
+			var startCloseDeccelAnim = Math.round( progress * 100 / heightTotal );
+			var currentSliderId = document.getElementById('current_slider').value		
+			var slider = document.getElementById(id + '_' + currentSliderId);
+			
+			if( startCloseDeccelAnim < start ){ 
+			
+				var resteTaux = Math.round( ( progress ) / heightTotal * 100);
+				var distanceDecc = Math.round( distance * resteTaux / 100 );
+				
+				var valeur = progress - distanceDecc;
+				var thevaleur = parseInt(valeur);
+				
+				if( thevaleur <= slideHeightMin ){ 						// Dernier mouvement
+				
+					thevaleur = slideHeightMin; 
+					clearInterval( closeIntervalId ); 
+				
+				}
+				
+				return thevaleur;
+				
+			}else{
+
+				var valeur = progress - distance;
+				return parseInt(valeur);
+
+			}
+			
+			
+		}
+
+
+		function open(){
+			
+			var currentSliderId = document.getElementById('current_slider').value			
+			var slider = document.getElementById(id + '_' + currentSliderId);
+			
+			//alert(currentSliderId);
+			
+			var progress = document.getElementById(id + '_progress').value;   
+			progress = parseInt( progress );
+			
+			//alert(progress);
+			
+			var elmtHeight = document.getElementById(id  +'_height').value;
+										
+			var reste = elmtHeight - progress;
+
+			var getvaleur = decceleration( elmtHeight, progress, reste, distance );
+			
+				slider.style.height = getvaleur + 'px';
+				document.getElementById(id + '_progress').value = getvaleur;
+			
+		}
+		
+		function decceleration(heightTotal, progress, reste, distance){
+			
+			var startDeccelAnim = Math.round( reste * 100 / heightTotal );
+			var currentSliderId = document.getElementById('current_slider').value		
+			var slider = document.getElementById(id + '_' + currentSliderId);
+			
+			if( startDeccelAnim < start ){
+
+				var lastMove = parseInt( heightTotal - 2 );
+				var resteTaux = Math.round( ( reste ) / heightTotal * 100);
+				var distanceDecc = Math.round( distance * resteTaux / 100 );
+				
+				var valeur = progress + distanceDecc;
+				var thevaleur = parseInt(valeur);
+				
+				if( thevaleur >= lastMove ){ 						// Dernier mouvement
+				
+					thevaleur = parseInt(heightTotal); 
+					
+					slider.getElementsByTagName( 'div' )[0].className = 'content_show';
+					clearInterval( openIntervalId ); 
+				
+				}
+				
+				return thevaleur;
+				
+			}else{
+
+				var valeur = progress + distance;
+				return parseInt(valeur);
+
+			}
+			
+			
+		}
+		
+		function mouseopen( sliderId ){
+			document.getElementById('current_slider').value = sliderId;
+			openIntervalId = setInterval( "open()", speed ); // REMARQUE : Il est nécessaire de la fonction appelée soit entre parenthèse
+			//open();
+		}
+		
+		function mouseclose( sliderId ){
+			document.getElementById('current_slider').value = sliderId;
+			document.getElementById(id + '_' + sliderId).getElementsByTagName( 'div' )[0].className = 'content_hide';
+			closeIntervalId = setInterval( "close()", speed ); // REMARQUE : Il est nécessaire de la fonction appelée soit entre parenthèse
+		}
+		
+</script>
+                            
+</head>
+ 
+<body>
+
+<input type="hidden" id="current_slider" value="" />
+
+<div class="nav_zone">
+	<input type="hidden" id="slider_progress" value="0" /> 
+	<input type="hidden" id="slider_height" value="0" /> 
+	<div id="slider_open" class="arrow" onclick="mouseopen('1');">
+		ouvrir
+	</div>
+	<div id="slider_close" class="arrow" onclick="mouseclose('1');">
+	    fermer
+	</div>
+</div>
+<br /><br />					
+<div class="slider_content" id="slider_1">
+	<div class="content_show" id="content_1">
+	<p>
+	Iamque non umbratis fallaciis res agebatur, sed qua palatium est extra muros, armatis omne circumdedit. ingressusque obscuro iam die, ablatis regiis indumentis Caesarem tunica texit et paludamento communi, eum post haec nihil passurum velut mandato principis iurandi crebritate confirmans et statim inquit exsurge et inopinum carpento privato inpositum ad Histriam duxit prope oppidum Polam, ubi quondam peremptum Constantini filium accepimus Crispum.
+	</p>
+	<p>
+	Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.
+	</p>
+	<p>
+	Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+	</p>
+    </div>
+</div>
+
+                
+</body>
+</html>

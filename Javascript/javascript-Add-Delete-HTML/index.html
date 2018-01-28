@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Untitled Document</title>
+		<script type="text/javascript">
+			function transit(){
+				var distance = 5;
+				var MaDiv = document.getElementById('openelement');
+				
+				var MaDistance = parseInt( document.getElementById('Distance').innerHTML );
+				var MaCouleur = parseInt( document.getElementById('Couleur').innerHTML );
+			
+				if( MaDistance < 200 ){
+					
+					MaDistance = MaDistance + distance;
+					MaDiv.style.height = MaDistance + 'px';
+					document.getElementById('Distance').innerHTML = MaDistance;
+					
+					MaCouleur = MaCouleur - ( distance * 2 );
+					if( MaCouleur < 0 ) MaCouleur = 0;
+					MaDiv.style.borderColor = 'rgb(' + MaCouleur + ', ' + MaCouleur + ', ' + MaCouleur + ')';
+					document.getElementById('Couleur').innerHTML = MaCouleur;
+					
+				}else{
+					clearInterval( openIntervalId );
+				}
+			}
+			
+			function dotransit(){
+				openIntervalId = setInterval( transit, 20 );
+			}
+			
+		</script>
+	</head>
+	<body>
+		<span onclick="dotransit()">Ouvrir</span> | <span id="Distance">0</span><span id="Couleur">250</span>
+		<div id="openelement" style="width:200px; height:0px; border:1px solid #fff;"></div>
+	</body>
+</html>

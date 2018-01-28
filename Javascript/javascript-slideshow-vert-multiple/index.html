@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Galerie</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="javascript" src="js/slider_vertical.js"></script>
+	<script language="javascript">
+
+	/**
+	 * Déclaration des instances. Une pour chaque slideshow de la page.
+	 * Elle sont en relation avec les objets de navigation de chaque slideshow.
+	 * 
+	 * var mavariable = new SlideClass( [distance en pixel], [vitesse en milliseconde], [id de la div contenant le slide show] );
+	 */
+	var objslide = new SlideVerticalClass( 2, 10, 'vi_5' );
+			
+	</script>
+                            
+</head>
+ 
+ 
+<body>
+	
+<div class="vignette_show">
+
+	<img src="up.gif" class="arrow" onmouseover="objslide.mouseUpGo();" onmouseout="objslide.mouseUpStop();" />
+	<div class="espace_vignette" id="vi_5">
+		<div class="support">						
+			<ul id="slideshow">
+	        
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="3-vignette.gif" /></li>
+				<li><img src="4-vignette.gif" /></li>
+				<li><img src="1-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+				<li><img src="2-vignette.gif" /></li>
+	                    
+			</ul>
+		</div>
+	</div>
+	<img src="down.gif" class="arrow" onmouseover="objslide.mouseDownGo();" onmouseout="objslide.mouseDownStop();" />
+
+
+
+
+</div>
+
+                
+	</body>
+</html>

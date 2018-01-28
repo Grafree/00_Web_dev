@@ -1,0 +1,241 @@
+/* CSS Document */
+body{
+	font-family:Helvetica, Arial, "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", sans-serif;
+	padding:0;
+	margin:0;
+}
+
+div#page{
+	width:1250px;
+	min-height:1000px;
+	margin:0 auto 0 auto;
+	background:#fff;
+	padding:0 0 50px 0;
+}
+
+header{
+	height:42px;	
+	padding:20px 40px 0 182px;	
+	position:fixed;
+	width:900px;
+	background:#FFFFFF;
+}
+
+header nav{
+	float:right;	
+}
+
+section{
+	width:;
+	padding:62px 114px 0 128px;	
+	margin:0 auto;
+}
+
+.clear{
+	clear:both;	
+}
+
+#accueil{
+	width:900px;
+	margin:0 auto;
+}
+
+article{
+	width:286px;
+	margin:0 14px 14px 14px;
+	float:left;
+}
+
+
+article:nth-child(3n+1){margin:0 7px 14px 0px;}
+article:nth-child(3n+3 ){margin:0 0px 14px 7px;}
+
+
+article figure{
+	height:196px;
+	overflow:hidden;
+	margin:0;
+}
+
+article figure img{
+	width:286px;
+}
+
+article h3{
+	font-size:16px;	
+	margin:10px 0 4px 0;
+	padding:0;
+}
+
+article p{
+	font-size:12px;	
+	font-weight:bold;
+	margin:0;
+	padding:0;
+	line-height:16px;
+}
+
+
+/* Projets */
+
+div#project{
+	
+}
+
+div#project img{
+	width:900px;
+	display:block;
+	margin:0 auto 15px auto;
+}
+div#project figcaption{
+	width:900px;
+	margin:0 auto 15px auto;
+	text-align:left;
+	
+}
+
+div#project figcaption h3{
+	font-size:18px;
+	margin:0;
+	text-indent:35px;
+	line-height:26px;
+}
+
+div#project figcaption p{
+	font-size:12px;
+	margin:0;
+	font-weight:bold;
+	line-height:26px;
+}
+
+
+
+
+
+/* Contact */
+address{
+	font-size:18px;
+	padding:50px;	
+	text-decoration:none;
+	font-weight:bold;
+	font-style:normal;
+	line-height:26px;
+	
+}
+
+/* Titre entete "Maria de Gibert */
+
+h1{
+	font-size:18px;	
+	float:left;
+	margin:0;
+	padding:0;
+	color:#333;
+}
+
+
+/* Menu top */
+nav ul{
+	width:180px;
+	margin:0;
+	padding:0;
+	list-style:none;
+	text-align:right;
+}
+
+nav ul li{
+	display:inline-block;
+}
+
+nav ul li a{
+	display:inline-block;
+	/*float:left;*/
+	font-size:18px;
+	color:#333;
+	text-decoration:none;
+	font-weight:bold;
+	margin:0 0 0 15px;
+}
+
+nav ul li a:hover{
+	color:#BCBCBC;
+}
+
+
+/*  MOBILE */
+
+@media screen and (max-width:1100px){
+	div#page{
+		width:812px;	
+	}
+	
+	header{	
+		width:672px;
+		padding: 20px 0px 0px 72px;
+	}
+	
+	#accueil{
+		width:672px;
+		margin:0 0 0 0px;
+	}
+	
+	section{
+		padding:62px 70px 0 70px;	/* has to be 672px width */
+ 	}
+	
+	div#project img{
+		width:672px;	
+	}
+	
+	address{
+		padding:50px 50px 50px 0;
+	}
+	
+	article figure{
+		width:320px;
+		height:220px;
+	}
+	
+	article figure img{
+		width:320px;	
+	}
+	
+	article:nth-child(2n+1){margin:0 33px 14px 0px;}
+	article:nth-child(2n+2){margin:0 0px 14px 33px;}
+	
+	div#project figcaption{
+		width:672px;	
+	}
+}
+
+
+@media screen and (max-width:800px){
+
+	div#page{
+		width:320px;
+	}
+	
+	header{	
+		width:320px;
+		padding: 20px 0px 0px 0px;
+	}
+	
+	#accueil{
+		width:320px;
+		margin:0 0 0 0;
+	}
+	
+	section{
+		padding:62px 0px 0 0px;	
+	}
+	
+	div#project img{
+		width:320px;	
+	}
+	
+	article{margin:0 0px 15px 0px !important;}
+	
+	div#project figcaption{
+		width:320px;	
+	}
+}

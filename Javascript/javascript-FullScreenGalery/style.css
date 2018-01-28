@@ -1,0 +1,17 @@
+body{margin:0px; background-color:#000; font-family:Verdana, Geneva, sans-serif; }
+div#hideImageFromScreen{position:absolute; top:-10000px; left:-10000px;}
+div#page{width:100%; height:100%; overflow:hidden; position:relative;}
+div#imageBKG{}
+div#imageBKG img{}
+div#num{height:60px; overflow:hidden; font-size:80px; position:absolute; top:50px; left:50px; color:#fff;}
+div#navigation{position:absolute; text-align:center; top:50px; right:150px; color:#fff; background-color:#000; z-index:5;}
+div#navigation span{cursor:pointer; font-size:20px; font-weight:bold; }
+div#commentaires{position:absolute; bottom:50px; left:50px; color:#fff; background-color:#000;}
+
+div.tableDates{position:absolute; top:150px; left:0px; color:#fff; background-color:#000; width:100%;}
+span.closetable{cursor:pointer; color:#fff; font-size:12px;}
+table.table{border-top:38px solid #000; border-bottom:38px solid #000;}
+table.table img{cursor:pointer;}
+div.hidetable{display:none;}
+div.info{ top:120px; padding:30px; background-color:#000; color:#fff; border:2px solid #666; position:absolute; z-index:6;}
+div.hideinfo{display:none;}

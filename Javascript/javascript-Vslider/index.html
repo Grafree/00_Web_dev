@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Slider</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" src="vslider.js"></script>
+	<script language="javascript">
+	/*
+	Delaration de l'instance
+	sindowslideVert(	
+				[int | distance en px], 
+				[int | vitesse en milliseconde], 
+				[string | id de menus], 
+				[int | Pourcent de deceleration de l'animation]
+				[int | Hauteur minimum]
+				[int | Correspond au padding indiqueé dans le CSS pour content_show]
+				);
+	*/
+
+var slide2 = new windowSlideVert( 25, 5, 'slider2', 75, 1, 10 );
+
+var slide = new windowSlideVert( 25, 5, 'slider', 75, 1, 10 );
+
+</script>
+                            
+</head>
+ 
+<body>
+
+<div class="nav_zone">
+	<div class="arrow" onclick="slide.mouseopen();">
+		ouvrir
+	</div>
+	<div class="arrow" onclick="slide.mouseclose();">
+	    fermer
+	</div>
+</div>
+					
+<div class="slider_content" id="slider">
+	<div class="content_hide">
+	<p>
+	Iamque non umbratis fallaciis res agebatur, sed qua palatium est extra muros, armatis omne circumdedit. ingressusque obscuro iam die, ablatis regiis indumentis Caesarem tunica texit et paludamento communi, eum post haec nihil passurum velut mandato principis iurandi crebritate confirmans et statim inquit exsurge et inopinum carpento privato inpositum ad Histriam duxit prope oppidum Polam, ubi quondam peremptum Constantini filium accepimus Crispum.
+	</p>
+	<p>
+	Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.
+	</p>
+	<p>
+	Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+	</p>
+    </div>
+</div>
+
+
+<div class="nav_zone">
+	<div class="arrow" onclick="slide2.mouseopen();">
+		ouvrir
+	</div>
+	<div class="arrow" onclick="slide2.mouseclose();">
+	    fermer
+	</div>
+</div>
+					
+<div class="slider_content" id="slider2">
+	<div class="content_hide">
+	<p>
+	Iamque non umbratis fallaciis res agebatur, sed qua palatium est extra muros, armatis omne circumdedit. ingressusque obscuro iam die, ablatis regiis indumentis Caesarem tunica texit et paludamento communi, eum post haec nihil passurum velut mandato principis iurandi crebritate confirmans et statim inquit exsurge et inopinum carpento privato inpositum ad Histriam duxit prope oppidum Polam, ubi quondam peremptum Constantini filium accepimus Crispum.
+	</p>
+	<p>
+	Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat, non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat, nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur, montuosis etiam et silvestribus, in quibus diutius commorati sumus.
+	</p>
+	<p>
+	Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+	</p>
+    </div>
+</div>
+
+                
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Dynamic Galery</title>
+<link href="style.css" type="text/css" rel="stylesheet" />
+<style>
+div#page{  position:relative; height:auto; margin:20px auto; border-top:1px solid #ddd; border-right:1px solid #eee; border-bottom:1px solid #999; border-left:1px solid #aaa; }
+div#Autrepage2{ width:440px; position:relative; height:auto; margin:20px auto; border-top:1px solid #ddd; border-right:1px solid #eee; border-bottom:1px solid #999; border-left:1px solid #aaa; }
+img{float:left; width:60px; padding:9px; border:1px solid #fff; background-color:#fff;}
+img.hover{border:1px solid #ddd; background-color:#fbfbfb;}
+img.normal{border:1px solid #fff; background-color:#fff;}
+div.clear{ clear:both; }
+</style>
+<script language="javascript" type="text/javascript" src="script.js"></script>
+<script type="text/javascript">
+	/*
+	 * @param enlargeInt		[int] Ellargissement en px
+	 * @param speedInt 			[int] vitesse en milliseconde
+	 * @param contentId			[string] id du contenant 
+	 * @param imgActivePercent	[int] Pourcent de l'opacite de l'element actif
+ 	 * @param curveInt			[int] Accentuation de la courbe (1=Aucun - 5=Extreme)
+	 */
+	var page = new dynamicGallery( 5, 1, 'page', 20, 5 );
+	
+	var Autrepage2 = new dynamicGallery( 2, 1, 'Autrepage2', 10, 0.5 );
+	
+	window.onload = function(){
+		
+		page.initProcess();
+	
+		contentElement = document.getElementById('page');
+		nbImages = contentElement.getElementsByTagName('img').length;
+		for( r = 0; r < nbImages; r++ ) {
+			imgElement = document.getElementById( 'page' + r );
+			
+			imgElement.onmouseover = function() { page.imgOver( this.id ) }
+			imgElement.onmouseout = function() { page.imgOut( this.id ) }
+			imgElement.onclick = function() { page.imgExpose( this.id ) }
+		}
+		
+		Autrepage2.initProcess();
+	
+		contentElement = document.getElementById('Autrepage2');
+		nbImages = contentElement.getElementsByTagName('img').length;
+		for( r = 0; r < nbImages; r++ ) {
+			imgElement = document.getElementById( 'Autrepage2' + r );
+			
+			imgElement.onmouseover = function() { Autrepage2.imgOver( this.id ) }
+			imgElement.onmouseout = function() { Autrepage2.imgOut( this.id ) }
+			imgElement.onclick = function() { Autrepage2.imgExpose( this.id ) }
+		}
+		
+	}
+	
+</script>
+</head>
+<body>
+
+<div id="page">
+	<img src="images/Firefox.png" />
+	<img src="images/IE.png" />
+	<img src="images/Maxthon.png" />
+	<img src="images/Netscape.png" />
+	<img src="images/Nikon.png" />
+	<img src="images/Safari.png" />
+	<img src="images/TheWorld.png" />
+	<img src="images/iphone.png" />
+	<div class="clear"></div>	
+</div>
+
+<div id="Autrepage2">
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<img src="images/Chrome.png" />
+	<div class="clear"></div>	
+</div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Site (Navigateur - Print - Portable)</title>
+	<link rel="stylesheet" type="text/css" href="css/site.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="css/portable.css" media="handheld" />
+</head>
+<body>
+	
+<div id="page">
+        <div id="entete">
+        	<img id="logo_ecran" src="titre-fond-noir.jpg" />
+			<img id="logo_print" src="titre-fond-blanc.jpg" />
+        </div>
+		<div id="intro">
+			<img class="photo_intro" src="smart_phone.png" />
+			<p class="text_intro">
+			Un document HTML peut être conçu et s'adapter à plusieurs périphérique. Pour cela il suffit de créer une feuille de style pour chaque support et ainsi redéfinir l'apparence du contenu selon l'espace et les dimensions de ceux-ci.
+			</p>
+			<p class="text_intro">
+			La liaison d'un fichier CSS s'établit par la balise link qui permet de définir le support pour chaque type de support grâce à l'attribut media. Ainsi, il peut y avoir une feuille de style pour l'affichage dans un navigateur (screen), pour l'impression (print) ou pour les support mobiles, tels que les téléphones mobiles (handheld)
+			</p>
+		</div>	
+
+		<div id="contenu">
+			<p class="explications">
+			<img class="support" src="navigateur.png" />
+			Pour un <strong>navigateur</strong>, la feuille de style est définie par &lt;link rel="stylesheet" type="text/css" href="css/site.css" media="screen" /&gt;.
+			Les dimensions peuvent être fixes (px) ou relatives (%). La dimension des images peuvent être également redéfinie en fixe (px) ou relative (%).
+			</p>
+			
+			<p class="explications">
+			<img class="support" src="print.png" />
+			Pour <strong>l'impression</strong>, la feuille de style est définie par &lt;link rel="stylesheet" type="text/css" href="css/print.css" media="print" /&gt;.
+			Les dimensions peuvent être fixes (pt, cm ou mm) ou relatives (%). La dimension des images peuvent être également redéfinie en fixe (cm ou mm) ou relative (%).
+			</p>
+			<p class="explications">
+			<img class="support" src="natel.png" align="absbottom" />
+			Pour <strong>les supports portables</strong>, la feuille de style est définie par &lt;link rel="stylesheet" type="text/css" href="css/portable.css" media="handheld" /&gt;.
+			Les dimensions peuvent être fixes (px) ou relatives (%). La dimension des images peuvent être également redéfinie en fixe (px) ou relative (%).
+			</p>																			
+		</div>
+             
+		<div id="pied">&copy 2009</div>
+
+
+<div id="code">
+	<h2>code HTML</h2>
+	<pre>
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"&gt;
+	&lt;title&gt;Site (Navigateur - Print - Portable)&lt;/title&gt;
+	&lt;link rel="stylesheet" type="text/css" href="css/site.css" media="screen" /&gt;
+	&lt;link rel="stylesheet" type="text/css" href="css/print.css" media="print" /&gt;
+	&lt;link rel="stylesheet" type="text/css" href="css/portable.css" media="handheld" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;div id="page"&gt;
+    &lt;div id="entete"&gt;
+    	&lt;img id="logo_ecran" src="titre-fond-noir.jpg" /&gt;
+		&lt;img id="logo_print" src="titre-fond-blanc.jpg" /&gt;
+    &lt;/div&gt;
+	&lt;div id="intro"&gt;
+		&lt;img class="photo_intro" src="smart_phone.png" /&gt;
+		&lt;p class="text_intro"&gt;
+		Un document HTML peut être conçu et s'adapter à plusieurs périphérique. 
+		Pour cela il suffit de créer une feuille de style pour chaque support et ainsi 
+		redéfinir l'apparence du contenu selon l'espace et les dimensions de ceux-ci.
+		&lt;/p&gt;
+		&lt;p class="text_intro"&gt;
+		La liaison d'un fichier CSS s'établit par la balise link qui permet de définir 
+		le support pour chaque type de support grâce à l'attribut media. 
+		Ainsi, il peut y avoir une feuille de style pour l'affichage dans un navigateur 
+		(screen), pour l'impression (print) ou pour les support mobiles, tels que les 
+		téléphones mobiles (handheld)
+		&lt;/p&gt;
+	&lt;/div&gt;	
+
+	&lt;div id="contenu"&gt;
+		&lt;p class="explications"&gt;
+		&lt;img class="support" src="navigateur.png" /&gt;
+		Pour un &lt;strong&gt;navigateur&lt;/strong&gt;, la feuille de style est 
+		définie par &lt;link rel="stylesheet" type="text/css" href="css/site.css" 
+		media="screen" /&gt;.
+		Les dimensions peuvent être fixes (px) ou relatives (%). La dimension des 
+		images peuvent être également redéfinie en fixe (px) ou relative (%).
+		&lt;/p&gt;
+		
+		&lt;p class="explications"&gt;
+		&lt;img class="support" src="print.png" /&gt;
+		Pour &lt;strong&gt;l'impression&lt;/strong&gt;, la feuille de style est 
+		définie par &lt;link rel="stylesheet" type="text/css" href="css/print.css" 
+		media="print" /&gt;.
+		Les dimensions peuvent être fixes (pt, cm ou mm) ou relatives (%). La dimension 
+		des images peuvent être également redéfinie en fixe (cm ou mm) ou relative (%).
+		&lt;/p&gt;
+		&lt;p class="explications"&gt;
+		&lt;img class="support" src="natel.png" align="absbottom" /&gt;
+		Pour &lt;strong&gt;les supports portables&lt;/strong&gt;, la feuille de style 
+		est définie par &lt;link rel="stylesheet" type="text/css" href="css/portable.css" 
+		media="handheld" /&gt;.
+		Les dimensions peuvent être fixes (px) ou relatives (%). La dimension des images 
+		peuvent être également redéfinie en fixe (px) ou relative (%).
+		&lt;/p&gt;																			
+	&lt;/div&gt;
+         
+	&lt;div id="pied"&gt;&copy 2009&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;	
+	</pre>
+
+<h2>site.css</h2>
+<pre>
+body { 
+	background-color: #000; 
+	font-family:Arial, Helvetica, sans-serif; color:#FFFFFF; 
+	margin: 0px; 
+	padding: 0px;
+	}
+
+div#page{
+	width:700px;
+	margin:0px auto;
+	}
+div#entete{
+	width:100%;
+	height:90px;
+	}
+div#intro{
+	padding:0px;
+	margin:0px 0px 100px;
+	}
+div#contenu{
+	border-top: 1px solid #666;
+	padding:0px;
+	}
+div#pied{
+	text-align:right;
+	font-size:11px;
+	}
+
+img#logo_ecran{ 
+	float:right; 
+	}
+
+img#logo_print{ 
+	display:none; 
+	}
+
+img.photo_intro{
+	float:left;
+	margin:0px 30px 0px 0px;
+	width:150px;
+	}
+
+img.support{
+	height:140px;
+	max-width:100%;
+	margin:10px 50px 10px 0px;
+	}
+
+p.explications{
+	float:left;
+	width:30%;
+	margin:10px 3% 0px 0px;
+	}
+
+p.text_intro{
+	font-size:18px;
+	}
+
+p{
+	margin:5px 0px; 
+	font-size:11px;
+	}
+</pre>
+	
+<h2>print.css</h2>
+<pre>
+body { 
+	background-color: #000; 
+	font-family:Arial, Helvetica, sans-serif; color:#FFFFFF; 
+	margin: 0px; 
+	padding: 0px;
+	}
+
+div#page{
+	width:90%;
+	margin:0px auto;
+	}
+	
+div#entete{
+	width:100%;
+	height:2cm;
+	}
+	
+div#intro{
+	padding:0;
+	margin:0 4% 1cm 0;
+	width:61%;
+	float:left;
+	}
+	
+div#contenu{
+	border-left: 1px solid #bbb;
+	padding:0 0 0 2%;
+	width:27%;
+	float:right;
+	}
+	
+div#pied{
+	clear:both;
+	border-top:1px solid #bbb;
+	padding:1mm 0 0 0;
+	font-size:10pt;
+	}
+
+img#logo_ecran{ 
+	display:none;
+	}
+
+img#logo_print{  
+	}
+
+img.photo_intro{
+	float:left;
+	margin:0 1cm 0 0;
+	width:3cm;
+	}
+
+img.support{
+	height:2.5cm;
+	margin:0 0.5cm 0.5cm 0;
+	float:left;
+	}
+
+p.explications{
+	margin:0 0 19pt 0;
+	}
+
+p.text_intro{
+	font-size:18pt;
+	line-height:25pt;
+	}
+
+p{
+	margin:7pt 0pt; 
+	font-size:8.5pt;
+	}
+p.text_intro:first-letter{
+	font-size:49pt;
+	font-weight:bold;
+	}	
+</pre>
+
+<h2>portable.css</h2>
+<pre>
+	body { 
+	background-color: #000; 
+	font-family:Arial, Helvetica, sans-serif; color:#FFFFFF; 
+	margin: 0px; 
+	padding: 0px;
+	}
+
+div#page{
+	width:100%;
+	}
+div#entete{
+	width:100%;
+	margin:5px 5px 15px;
+	}
+div#intro{
+	padding:0px;
+	margin:5px 5px 15px;
+	}
+div#contenu{
+	border-top: 1px solid #666;
+	margin:0px 5px 0px 5px;
+	padding:10px 0px 0px 0px;
+	}
+div#pied{
+	text-align:right;
+	font-size:9px;
+	}
+
+img#logo_ecran{ 
+	width:150px; 
+	}
+
+img#logo_print{
+	display:none; 
+	}
+
+img.photo_intro{
+	float:left;
+	margin:0px 12px 0px 0px;
+	width:75px;
+	}
+
+img.support{
+	width:100%;
+	margin:0 5px 5px 0;
+	float:left;
+	}
+
+p.explications{
+	margin:0 0 15px 0;
+	}
+
+p.text_intro{
+	font-size:12px;
+	}
+
+p{
+	margin:5px 0px; 
+	font-size:10px;
+	}
+</pre>
+	
+<a href="html_css_media.zip">Télécharger l'exemple complet</a>
+</div>
+
+</div>
+
+</body>
+</html>

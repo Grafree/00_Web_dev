@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Using POST method in XMLHTTPRequest(Ajax)</title>
+<style>
+
+body {
+	margin:0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:1em;
+	background-color:#fff;
+	color:#000;
+}
+
+td {
+	font-size:12px;
+}
+img {
+	border:0;
+}
+a {
+	text-decoration:none;
+}
+a:hover {
+	color:red;
+}
+hr.line {
+	width:70%;
+	color:#74bff6;
+	background-color:#74bff6;
+	border:1px solid #74bff6;
+}
+p {
+	text-align:justify;
+}
+h2 {
+	color:#aa4929;
+}
+h3 {
+	color:#3f4782;
+}
+h4 {
+	color:#6c2d68;
+}
+dt {
+	font-weight:bold;
+}
+dd {
+	margin-left:10px;
+	margin-bottom:10px;
+}
+code {
+
+}
+br {
+	clear:both;
+}
+/*Forms*/
+.form-area label {
+	width:100px;
+	font-weight:bold;
+	float:left;
+}
+.form-area input {
+	float:left;
+}
+
+
+#header {
+	height:133px;
+	background:#f00 url(images/layout_images/header_gradient.png) repeat-x;
+}
+#main {
+	padding:0 5px 0 5px;
+	min-height:500px;
+}
+#content {
+	width:80%;
+	float:left;
+	padding-right:10px;
+	border-right:1px dashed #666;
+}
+#sidebar {
+	float:right;
+	width:17%;
+	padding:5px 0 0 10px;
+}
+#footer {
+	height:20px;
+	background:#f00 url(images/layout_images/footer_gradient.png) repeat-x;
+}
+#breadcrumbs {
+	white-space:nowrap;
+	font-weight:bold;
+	border-bottom:1px solid #eee;
+}
+#breadcrumbs a {
+	color:#00f;
+	font-weight:normal;
+}
+#logo,#tagline {
+	float:left;
+}
+#tagline {
+	font-weight:bold;
+	margin-left:-180px;
+	margin-top:60px;
+}
+/*Tab Control*/
+#tabs {
+	float:right;
+	margin-top:88px;
+}
+#tabs li {
+	display:inline;
+	text-align:center;
+	float:left;
+}
+#tabs li a {
+	display:block;
+	background:url(images/layout_images/tab.png) no-repeat;
+	height:30px;
+	width:85px;
+	padding-top:7px;
+	color:#fff;
+	font-size:12px;
+	font-weight:bold;
+}
+
+pre {
+	
+	padding:0 0 15px 5px;
+	width:90%;
+	border-left:#666 1px solid; 
+
+	color:#666;
+
+}
+pre .special {
+	color:#f00;
+}
+pre .highlight {
+	color:#080;
+}
+
+.test_evaluation_area textarea {
+	width:100%;
+}
+/*Navigator in tutorial pages */
+.multi-page-navigator-top {
+	margin-top:10px;
+	border-bottom:1px solid #333;
+	height:40px;
+}
+.multi-page-navigator-bottom {
+	border-top:1px solid #333;
+	height:30px;
+}
+.mpn-previous {
+	width:33%;
+	float:left;
+	height:30px;
+}
+.mpn-title {
+	width:33%;
+	float:left;
+	text-align:center;
+}
+.mpn-next {
+	width:33%;
+	float:right;
+	text-align:right;
+	height:30px;
+}
+/* Sidebar Stuff */
+#sidebar ul {
+	margin:0;
+	padding:0;
+	list-style:circle;
+}
+#sidebar h3 {
+	margin:10px 0 0 -10px;
+	padding:0;
+	border-bottom:1px solid #000;
+}
+#sidebar .page-info {
+	margin-left:-5px;
+}
+#sidebar form {
+	margin-left:-18px;
+}
+
+
+/*Formating*/
+strong.highlight {
+	font-weight:normal;
+	background-color:#ddd;
+}
+/*Decrypt Email */
+.email-encrypt {
+	unicode-bidi:bidi-override;
+	direction: rtl;
+}
+.email-encrypt .email-decrypt-message {
+	display:none;
+}
+
+#ad {
+	float:right;
+	margin-left:10px;
+}
+.message-success {
+	color:#006400;
+	font-weight:bold;
+}
+.message-error {
+	color:red;
+	font-weight:bold;
+}
+.message-info {
+	font-weight:bold;
+}
+
+/*Comments*/
+#comment_text {
+	width:99%;
+}
+#comments-area .field-row {
+	display:inline;
+}
+.comment {
+	background-color:#ddf0fc;
+	border:1px solid #85a3fc;
+	margin:5px;
+}
+.my-comment {
+	background-color:#b6bdff;
+	border:1px solid #85a3fc;
+}
+.comment-poster {
+	font-weight:bold;
+}
+#comments-area #replyto-message {
+	display:none;
+}
+#comment-pot {
+	display:none;
+}
+/*Nulifying the BR's inserted by the code inside <pre> element*/
+#comments-area pre br {
+	display:none;
+}
+
+
+.validation-error {
+	border:1px solid red;
+}
+.validation-success {
+	border:1px solid green;
+}
+
+
+
+</style>
+
+<meta name="description" content="Shows how to use POST method when creating an Ajax Script.">
+<meta name="keywords" content="javascript,client,scripting,web development,post,ajax">
+
+</head><body>
+
+
+<h2>Using POST method in XMLHTTPRequest(Ajax)</h2>
+
+<h3>XMLHTTPRequest Object</h3>
+
+<p>For the sake of simplicity, we are going to create the
+XMLHTTPRequest object using the Firefox supported ' XMLHttpRequest()'
+function. I believe that you know the proper way of <a href="http://www.openjs.com/scripts/jx/jx.php" title="jx Ajax Library - Line by Line Explaination">creating a cross-browser XMLHttpRequest object</a>. If not, learn that first.</p>
+
+<pre><code class="javascript">var http = new XMLHttpRequest();</code></pre>
+
+<h3>Using GET method</h3>
+
+<p>Now we open a connection using the GET method.</p>
+
+<pre><code class="javascript">
+var url = "get_data.php";
+var params = "lorem=ipsum&amp;name=binny";
+http.open("<span class="special">GET</span>", url<span class="special">+"?"+params</span>, true);
+http.onreadystatechange = function() {//Call a function when the state changes.
+	if(http.readyState == 4 &amp;&amp; http.status == 200) {
+		alert(http.responseText);
+	}
+}
+http.send(<span class="special">null</span>);
+</code></pre>
+
+<p>I really hope that this much is clear for you - I am assuming that you know a bit of Ajax coding. If you don't, please read a <a href="http://www.openjs.com/ajax/tutorial/" title="A Gentle Introduction to Ajax">ajax tutorial</a> that explains these parts before continuing.</p>
+
+<h3>POST method</h3>
+
+<p>We are going to make some modifications so POST method will be used when sending the request...</p>
+
+<pre><code class="javascript">
+var url = "get_data.php";
+var params = "lorem=ipsum&amp;name=binny";
+http.open("<span class="highlight">POST</span>", url, true);
+
+<span class="highlight">//Send the proper header information along with the request
+http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+http.setRequestHeader("Content-length", params.length);
+http.setRequestHeader("Connection", "close");</span>
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+	if(http.readyState == 4 &amp;&amp; http.status == 200) {
+		alert(http.responseText);
+	}
+}
+http.send(<span class="highlight">params</span>);
+</code></pre>
+
+<p>The first change(and the most obvious one) is that I changed the first argument of the <code>open</code>
+function from GET to POST. Also notice the difference in the second
+argument - in the GET method, we send the parameters along with the url
+separated by a '?' character...</p>
+
+<pre><code class="javascript">http.open("GET",<span class="special">url+"?"+params</span>, true);</code></pre>
+
+<p>But in the POST method we will use just the url as the second argument. We will send the parameters later.</p>
+
+<pre><code class="javascript">http.open("POST", <span class="special">url</span>, true);</code></pre>
+
+<p>Some <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" title="HTTP/1.1: Header Field Definitions">http headers</a> must be set along with any POST request. So we set them in these lines...</p>
+
+<pre><code class="javascript">http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+http.setRequestHeader("Content-length", params.length);
+http.setRequestHeader("Connection", "close");</code></pre>
+
+<p>With the above lines we are basically saying that the data send is
+in the format of a form submission. We also give the length of the
+parameters we are sending.</p>
+
+<pre><code class="javascript">http.onreadystatechange = function() {//Call a function when the state changes.
+	if(http.readyState == 4 &amp;&amp; http.status == 200) {
+		alert(http.responseText);
+	}
+}</code></pre>
+
+<p>We set a handler for the 'ready state' change event. This is the same handler we used for the GET method. You can use the <code>http.responseText</code> here - insert into a div using innerHTML(<a href="http://binnyva.blogspot.com/2005/11/ahahasynchronous-html-over-http-ajax.html" class="mypoges blog" title="AHAH(Asynchronous HTML over HTTP) - AJAX 2.0">AHAH</a>), eval it(<a href="http://binnyva.blogspot.com/2006/03/ajax-response-data-formats.html" class="blog mypages" title="Ajax Response Data Formats">JSON</a>) or anything else.</p>
+
+<pre><code class="javascript">http.send(<span class="highlight">params</span>);</code></pre>
+
+<p>Finally, we send the parameters with the request. The given url is
+loaded only after this line is called. In the GET method, the parameter
+will be a null value. But in the POST method, the data to be send will
+be send as the argument of the <code>send</code> function. The <code>params</code>
+variable was declared in the second line as
+"lorem=ipsum&amp;name=binny" - so we send two parameters - 'lorem' and
+'name' with the values 'ipsum' and 'binny' respectively.</p>
+
+
+</body></html>

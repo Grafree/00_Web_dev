@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<title>Event</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+			var x, y;
+			img1 = null;		
+			var zone1 = [];	
+			var zone2 = [];
+			var parentElement;
+			var currentElement;
+			var elementTemp;
+			
+			var setImagesPositionBox1 = function(){
+				
+				var images_zone1 = document.getElementById( 'images_zone1' );
+				var imagesBox1 = images_zone1.getElementsByTagName( 'img' );
+			
+				for( i = 0; i < imagesBox1.length; i++ ){
+					imagesBox1[ i ].onmousedown = moveObjectBehaviour;
+				}
+				zone1['top'] = document.getElementById('images_zone1').offsetTop;
+				zone1['right'] = document.getElementById('images_zone1').offsetLeft + document.getElementById('images_zone1').offsetWidth;
+				zone1['bottom'] = document.getElementById('images_zone1').offsetTop + document.getElementById('images_zone1').offsetHeight;
+				zone1['left'] = document.getElementById('images_zone1').offsetLeft;
+				zone1['borderColor'] = document.getElementById('images_zone1').style.borderColor;
+				zone2['top'] = document.getElementById('images_zone2').offsetTop;
+				zone2['right'] = document.getElementById('images_zone2').offsetLeft + document.getElementById('images_zone2').offsetWidth;
+				zone2['bottom'] = document.getElementById('images_zone2').offsetTop + document.getElementById('images_zone2').offsetHeight;
+				zone2['left'] = document.getElementById('images_zone2').offsetLeft;
+				zone2['borderColor'] = document.getElementById('images_zone2').style.borderColor;
+				
+			}
+			
+			function replaceElement(){
+				var imagesElement = parentElement.getElementsByTagName( 'img' );
+				for( i = 0; i < imagesElement.length; i++ ){
+					if( imagesElement[ i ] === currentElement ){
+						elementTemp = document.createElement( 'div' );
+						elementTemp.setAttribute( 'style', 'width:98px; height:98px; border:1px dashed #999; float:left; margin:2px;' );
+						parentElement.appendChild( elementTemp );
+					}
+				}
+			}
+			
+			function moveObjectBehaviour( event ){
+				img1 = this;
+				parentElement = this.parentNode;
+				currentElement = img1;
+				
+				replaceElement();
+				
+				x = img1.offsetLeft;
+				y = img1.offsetTop;
+						
+				img1.style.position = 'absolute';
+				img1.style.zIndex = 10;
+				img1.style.left = x + 'px';
+				img1.style.top = y + 'px';
+				
+				x = x - event.clientX;
+				y = y - event.clientY;
+				
+				
+				document.onmousemove = function( event2 ){
+					img1.style.left = ( event2.clientX + x ) + 'px';
+					img1.style.top = ( event2.clientY + y ) + 'px';
+					
+					if( event2.clientX < zone1['right'] && event2.clientX > zone1['left'] && event2.clientY < zone1['bottom'] && event2.clientY > zone1['top'] ){
+						document.getElementById('images_zone1').style.borderColor = 'red';
+					}else{
+						document.getElementById('images_zone1').style.borderColor = zone1['borderColor'];
+					}
+					if( event2.clientX < zone2['right'] && event2.clientX > zone2['left'] && event2.clientY < zone2['bottom'] && event2.clientY > zone2['top'] ){
+						document.getElementById('images_zone2').style.borderColor = 'red';
+					}else{
+						document.getElementById('images_zone2').style.borderColor = zone2['borderColor'];
+					}
+						
+				}
+					
+				document.onmouseup = function( event3 ){
+					document.onmousemove = null;
+					document.onmouseup = null;
+					
+					x = event3.clientX + x;
+					y = event3.clientY + y;
+					
+					parentElement.removeChild( elementTemp );
+					
+					if( event3.clientX < zone1['right'] && event3.clientX > zone1['left'] && event3.clientY < zone1['bottom'] && event3.clientY > zone1['top'] ){
+						document.getElementById('images_zone1').appendChild( currentElement );
+					}else if( event3.clientX < zone2['right'] && event3.clientX > zone2['left'] && event3.clientY < zone2['bottom'] && event3.clientY > zone2['top'] ){
+						document.getElementById('images_zone2').appendChild( currentElement );
+					}else{
+						parentElement.appendChild( currentElement );
+					}
+					currentElement.style.position = 'static';
+					currentElement.style.float = 'left';
+					
+					img1 = null;
+				}
+				
+				return false;
+			}
+			
+		
+    	window.onload = function(){
+			setImagesPositionBox1();
+		}
+	</script>
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<h1>Javascript:event</h1>
+		</div>	
+		<div id="col_left">
+			
+			<div id="images_zone1">
+				<img id="img1" width="100" src="images/blue.jpg" />
+				<img id="img2" width="100" src="images/green.jpg" />
+			</div>
+			
+			<div id="images_zone2"></div>
+
+		</div>
+		
+		<div id="col_right">
+				
+			<div class="figure">
+			<p>Explications....</p>
+			<p><a href="http://www.alsacreations.com/article/lire/578-La-gestion-des-evenements-en-JavaScript.html">Alsacréation explique les événements</a></p>
+
+            </div>
+			
+		</div>
+	
+		<div id="bas_page">	
+		</div>
+	</div>
+<div id="footer">
+	&copy; 2012 - Ajax
+</div>
+</body>
+</html>

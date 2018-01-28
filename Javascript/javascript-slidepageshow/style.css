@@ -1,0 +1,75 @@
+body{
+	font-size:10px; 
+	font-family:Tahoma, Arial, Verdana, sans-serif;
+}
+
+/* Le diaporama (obligatoire) */
+
+div.espace_page{  				/* Espace visible du diaporama */
+	height:302px;
+	width:302px;
+	overflow:hidden;
+	position:relative;
+}
+
+div.support{  					/* Contient toutes les pages */
+	width:auto;
+	white-space:nowrap;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+
+div.support dl {				/* Chaque page */
+	height:300px;
+	width:300px;
+	border:1px solid #666;
+	display:inline;
+	float:left;
+	padding: 0px 0px 0px 0px;	/* Ne pas mettre de padding left ou right */
+	margin: 0px 0px 0px 0px;	/* Ne pas mettre de margin left ou right */
+	overflow:auto;				/* Soit auto ou hidden */
+	white-space:normal;
+}
+
+/* Elements internes au diaporama (accessoire) */
+
+div.support dl p{
+	padding: 5px;
+	margin: 0px 0px 0px 0px;
+}
+
+/* Navigation (acessoire) */
+
+div.arrow{
+	width:25px;
+	height:20px;
+	float:left;
+	margin:15px 0px 0px 0px;
+	padding:0px 7px 0px 8px;
+	cursor:pointer;
+	}
+
+ul.menu{
+	list-style-type:none;
+	margin:0px;
+	padding:0px;	
+}
+
+ul.menu li{
+	margin:0px;
+	padding:0px;
+	display:inline;	
+}
+ul.menu li span{
+	display:block;
+	float:left;
+	padding:5px 8px;
+	margin:0px 5px 0px 0px;
+	border:1px solid #ccc;
+	cursor:pointer;	
+}
+
+
+
+

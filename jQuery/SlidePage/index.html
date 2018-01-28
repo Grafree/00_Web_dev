@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery - Slide Page</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+<style>
+html{font-size:100%;}
+body{background:#fff; font-size:14px; margin:0; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+div#page{width:100%;}
+article{display:block; margin:0 auto 40px auto; width:600px; min-height:400px;}
+header{width:100%; background:#fff; box-shadow:0px 0px 4px #ddd; top:0px;}
+nav{width:600px; height:50px; margin:0 auto;}
+footer{width:100%; padding:10px; font-size:10px; background:#fafafa; box-shadow:0px 0px 4px #ddd; display:block;}
+h1{font-size:28px;}
+
+/*************************** HEAD **/
+div#head1{width:100%; height:450px; background:url(images/bkg1.jpg) top center no-repeat fixed;}
+div#head2{width:100%; height:450px; background:url(images/bkg2.jpg) top center no-repeat fixed;}
+div#head3{width:100%; height:450px; background:url(images/bkg3.jpg) top center no-repeat fixed;}
+
+/*************************** MENU **/
+ul.nav{list-style:none; padding:7px 0 0 0; height:40px; margin:0;}
+ul.nav li{margin:0px; padding:0; display:inline-block; position:relative;}
+ul.nav li a{display:inline-block; margin:5px 0 0 0; line-height:36px; text-align:center; padding:0 10px; margin:1px; text-decoration:none; box-shadow:1px 1px 0px #ddd; color:#fff; font-weight:bold; font-size:12px; text-shadow:1px 1px 0px #BA5D00, -1px -1px 0px #ED8200; border:1px solid #000; border-radius:6px; background: #ff7f04;}
+ul.nav li a:hover{color:#222; background:#fefefe; box-shadow:0px 0px 4px #ccc; text-shadow:none;}
+ul.nav li.actif a{box-shadow:0px 0px 3px #666; border-color:#fff;}
+ul.nav li em{display:none; position:absolute; bottom:-8px; background:url(images/marqueur.png) bottom center no-repeat; height:10px; width:100%;}
+ul.nav li.actif em{display:block;}
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+        var scrollT = $(document).scrollTop();
+
+        var tMenuH = $( 'nav' ).height(); // Hauteur du menu
+        var tHeadH = $( 'div#head1' ).height(); // Hauteur de l'entete
+
+        $('nav ul a').bind('click',function(event){
+                event.preventDefault(); // Supprime le rechargement de page de la balise <a>
+                var anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: (  $(anchor.attr('href')).offset().top - tMenuH )
+                }, 1500);
+                //$('nav ul li').removeClass( 'actif' ); // Active la rubrique du menu.
+                //anchor.parent().addClass( 'actif' );
+        });
+
+        $('a#top').bind('click',function(event){
+            event.preventDefault(); // Supprime le rechargement de page de la balise <a>
+            $('html, body').stop().animate({
+                scrollTop: ( 0 )
+            }, 1500);
+        });
+
+    $(window).scroll(function() {
+
+        scrollT = $(document).scrollTop();
+
+        if( scrollT > tHeadH ){
+            var divOffset = $("nav").offset().top - scrollT;
+            if( divOffset <= 0 ){
+                $("header").css({'top':'0px', 'position':'fixed'});
+                $("footer").css({'bottom':'0px', 'position':'fixed'});
+                $('body').css({'margin-top':tMenuH+'px'});
+           }else{
+                $("header").css({'position':'static'});
+                $("footer").css({'position':'static'});
+                $('body').css({'margin-top':0});
+            }
+        }else{
+            $("header").css({'position':'static'});
+            $("footer").css({'position':'static'});
+            $('body').css({'margin-top':0});
+        }
+
+        $('nav ul li').each( function(){
+                var anchor = $(this).find('a');
+                if( ( $(anchor.attr('href')).offset().top  - scrollT - tHeadH ) < 0 ){
+                    $('nav ul li').removeClass( 'actif' );
+                    anchor.parent().addClass( 'actif' );
+                }
+        });
+                
+
+    });	
+
+});
+
+</script>
+</head>
+<body>
+<div id="page"> 
+	<div id="head1"></div>
+  <header>
+      <nav>			
+          <ul class="nav">
+              <li class="actif"><a href="#support">Supports</a><em></em></li>
+              <li class=""><a href="#responsive">Responsive Design</a><em></em></li>
+              <li class=""><a href="#mobiles">Mobiles</a><em></em></li>
+          </ul>
+      </nav>
+  </header>
+    <article id="support">
+    <h1>Supports</h1>
+    <p>On peut considérer qu'il n'existe plus de références ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+    </article>
+
+    <div id="head2"></div>
+    <article id="responsive">
+        <h1>Responsive Design</h1>
+        <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+        <p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+        <p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+        <p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+    </article>
+
+    <div id="head3"></div>
+
+    <article id="mobiles">
+        <h1>Mobiles</h1>
+        <p>On peut considérer qu'<strong>il n'existe plus de références</strong> ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+        <p>Dès la conception d'un site Web une estimation des supports pour lesquels il sera conçu doit être définie.</p>
+        <p>Il sera utile de <strong>définir le contenu et la forme</strong> des pages du site, <strong>pour chaque support</strong>.</p> 
+        <p>Dans la pratique, ceci consistera à définir le contenu, la forme et l'aspect graphique en considérant <strong>en premier lieu les supports mobiles</strong>. Ils sont plus contraignants (taille du support et des éléments graphiques)</p>
+    </article>
+
+
+<footer>
+    [<a id="top" href="">Haut de page</a>]
+</footer>
+
+</div>	
+	
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Galery</title>
+	<script language="JavaScript" src="galeryview.js"></script>
+	<script language="JavaScript">
+
+		var Galery = new GaleryView( 1, 5 );
+		
+	</script>
+	
+	<link href="galerieview.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>	
+	
+	<div id="galery" style="width:100%;">
+	<h4>Galerie 1 </h4>
+	<!-- 
+	<img class="image_galery" group="nom_galerie" alt="Titre de l'image" id="chemin_de_la_grande_image" src="image_vignette" width="si necessaire" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );  
+	-->
+	<img class="image_galery" group="test" alt="Image caption for image 1" id="images/galery/01.jpg" src="images/galery/v_01.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	<img class="image_galery" group="test" alt="Image caption for image 2" id="images/galery/02.jpg" src="images/galery/v_02.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	<img class="image_galery" group="test" alt="Image caption for image 3" id="images/galery/03.jpg" src="images/galery/v_03.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	<img class="image_galery" group="test" alt="Image caption for image 4" id="images/galery/04.jpg" src="images/galery/v_04.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	<br /><br /><br />
+	<h4>Galerie 2 </h4>
+	<img class="image_galery" group="test2" alt="Image caption for image 5" id="images/galery/05.jpg" src="images/galery/v_05.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	<img class="image_galery" group="test2" alt="Image caption for image 6" id="images/galery/06.jpg" src="images/galery/v_06.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	<img class="image_galery" group="test2" alt="Image caption for image 7" id="images/galery/07.jpg" src="images/galery/v_07.jpg" width="60" onmouseover="javascript:Galery.img_hover( this.id );" onmouseout="javascript:Galery.img_link( this.id );" onclick="javascript:Galery.openGalery( this.id );" />
+	</div>
+
+	<div id="superpose"></div>	<!-- A la fin du fichier -->
+	<div id="superposeImg"></div>
+</body>
+</html>

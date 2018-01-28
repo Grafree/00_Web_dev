@@ -1,0 +1,45 @@
+/***********************************************
+*
+*		MISE EN PAGE
+*
+**********************************************/
+
+body {background:url(../images/bkg_motif.gif) repeat #eee; font-size:10px; margin:0px; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+
+div#page {width:1000px; border:1px solid #000; margin:10px auto; text-align:left; box-shadow: 1px 1px 6px #aaa; background-color:#fff;}
+
+div#header{margin:15px 0px; width:1000px; height:80px;}
+div#col_left{float:left; width:340px; min-height:300px; margin:0 0 0 15px; border-right:solid 1px #ccc;}
+div#col_right{float:right; width:614px; min-height:300px; margin:0 15px;}
+
+div#bas_page{width:1000px; height:30px; clear:both;}
+
+div#footer {width:1000px; margin: 0px auto; height:35px; padding: 0px 10px 0px 10px;}
+
+.clear{clear:both;}
+
+/********************************************************************************* 
+*
+*      MISE EN FORME
+*
+*********************************************************************************/
+td, ul, ol, li, h1, h2, h3, h4, h5, h6, p {margin:0; padding:0}
+
+code, pre{margin:0 0 10px 0; padding:10px; border:1px solid #6A84FC; background:#EAEEFF; display:block; font-size:12px; color:#666; font-family:"Courier New", Courier, monospace;}
+ul {margin:0 0 10px 25px;}
+ol {margin:0 0 10px 25px;}
+p{margin:8px 0;}
+
+li {}
+ol li ol li{list-style-type:lower-alpha;}
+
+a{color:#666; text-decoration:underline; font-weight:bold;}
+a:link, a:visited {}
+a img{border:0;}
+h1 {font-size:20px; font-weight:normal; text-transform:uppercase; white-space:nowrap; min-width:150px; float:right; padding:15px; margin:0px 0 0px 0; border:1px solid #999; color:#fff; background-color:#ddd; box-shadow: -1px 2px 3px #ccc;}
+h2 {font-size:16px; font-weight:normal; text-transform:uppercase; white-space:nowrap; min-width:150px; padding:8px; margin:0px 0 0px 0; border:1px solid #bbb; color:#000; background-color:#eee; box-shadow: -1px 2px 3px #ccc;}
+h3 {font-size:10px; font-weight:normal; margin:10px 0 0 0; color:#6A84FC; font-style:italic;}
+
+
+div#equilizer1{width:334px; height:16px; margin:2px; background:url(../images/ligne.png) center no-repeat;}
+div#equilizer2{width:16px; height:100px; margin:2px; background:url(../images/ligne-portrait.png) center no-repeat;}

@@ -1,0 +1,100 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.1
+-- http://www.phpmyadmin.net
+--
+-- Serveur: localhost
+-- Généré le : Mer 22 Juillet 2009 à 17:08
+-- Version du serveur: 5.1.30
+-- Version de PHP: 5.2.8
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de données: `ajaxdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tb_faq`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_faq` (
+  `faq_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `theme` int(11) NOT NULL,
+  `faq_quest` text NOT NULL,
+  `faq_rep` text NOT NULL,
+  PRIMARY KEY (`faq_ID`),
+  UNIQUE KEY `faq_ID` (`faq_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Contenu de la table `tb_faq`
+--
+
+INSERT INTO `tb_faq` (`faq_ID`, `theme`, `faq_quest`, `faq_rep`) VALUES
+(2, 1, 'Question sécurité 2', 'Réponse sécurité 2'),
+(3, 1, 'Question sécurité 3', 'Réponse sécurité 3'),
+(4, 1, 'Question Sécurité 4', 'Réponse Sécurité 4'),
+(6, 1, 'Qustion Sécurité 6', 'Réponse Sécurité 6'),
+(7, 1, 'Qustion sécurité 6', 'Réponse sécurité 6'),
+(8, 1, 'Question sécurité 88', 'Réponse sécurité 88'),
+(9, 1, 'Question sécurité 10', 'Réponse sécurité 10'),
+(10, 1, 'Question Sécurité 11', 'Réponse Sécurité 11');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tb_img`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_img` (
+  `img_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `img_name` varchar(50) NOT NULL,
+  `img_url` varchar(80) NOT NULL,
+  PRIMARY KEY (`img_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+--
+-- Contenu de la table `tb_img`
+--
+
+INSERT INTO `tb_img` (`img_ID`, `img_name`, `img_url`) VALUES
+(1, 'mayer_try.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(2, 'shepherd_ledbetter.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(4, 'vaughan_flood.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(5, 'waters_live.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(6, 'clapton_cream.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(7, 'cream_live.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(8, 'hendrix_experience.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(9, 'house_delta.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(10, 'johnson_complete.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(11, 'johnson_wizard.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(12, 'jorma_blues.jpg', 'http://localhost/AjaxDOM/imgs/'),
+(13, 'lang_lie.jpg', 'http://localhost/AjaxDOM/imgs/');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tb_theme`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_theme` (
+  `theme_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `theme_name` varchar(60) NOT NULL,
+  PRIMARY KEY (`theme_ID`),
+  UNIQUE KEY `theme_ID` (`theme_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Contenu de la table `tb_theme`
+--
+
+INSERT INTO `tb_theme` (`theme_ID`, `theme_name`) VALUES
+(1, 'Sécurité1'),
+(2, 'Environnement'),
+(4, 'Carrière'),
+(5, 'Maladie'),
+(6, 'Assurances'),
+(7, 'Site Web'),
+(8, 'Agenda 11');

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Sommaire en PHP !</title>
+  <style type="text/css">
+  #sommaire
+  {
+  position:absolute;
+  background-color:cyan;
+  left:10px;
+  width:100px;
+  }
+ 
+  #page
+  {
+  position:absolute;
+  background-color:#AAAAAA;
+  left : 200px;
+  width:500px;
+  height:500px;
+  }
+  </style>
+ 
+<script type='text/JavaScript'>
+var xhr = null; 
+function getXhr()
+{
+     if(window.XMLHttpRequest)xhr = new XMLHttpRequest(); 
+else if(window.ActiveXObject)
+  { 
+  try{
+     xhr = new ActiveXObject("Msxml2.XMLHTTP");
+     } catch (e) 
+     {
+     xhr = new ActiveXObject("Microsoft.XMLHTTP");
+     }
+  }
+else 
+  {
+  alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest..."); 
+  xhr = false; 
+  } 
+}
+ 
+function ShowPage(page)
+{
+getXhr();
+xhr.onreadystatechange = function()
+    {
+     if(xhr.readyState == 4 && xhr.status == 200)
+     {
+     document.getElementById('page').innerHTML=xhr.responseText;
+     }
+    }
+xhr.open("GET","ajax.php?page="+page,true);
+xhr.send(null);
+}
+ 
+</script>
+ 
+</head>
+ 
+<body onLoad="ShowPage(1)">
+ 
+    <div id="sommaire">
+        <h3>Sommaire</h3>
+        <a href="#" onClick="ShowPage(1)">Page 1</a><br/>
+        <a href="#" onClick="ShowPage(2)">Page 2</a><br/>
+        <a href="#" onClick="ShowPage(3)">Page 3</a><br/>
+        <a href="#" onClick="ShowPage(4)">Page 4</a><br/>
+    </div>
+ 
+    <div id="page">
+    </div>
+ 
+  </body>
+</html>

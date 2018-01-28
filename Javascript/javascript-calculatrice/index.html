@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Untitled Document</title>
+		<style>
+		body{
+			font-family:Arial, Helvetica, sans-serif;
+			font-size:9px;
+		}
+		div.calculatrice{
+			margin:50px auto;
+			width:105px;
+			padding:10px;
+			border:1px solid #999;
+			background-color:#eee;
+		}
+		div.ecran{
+			width:92%;
+			height:10px;
+			border:1px solid #ccc;
+			margin-bottom:10px;
+			padding:3px 3px;
+			text-align:right;
+			background-color:#fff;
+		}
+		div.bouton{
+			border:1px solid #ccc;
+			width:10px;
+			height:10px;
+			padding:4px;
+			margin:3px;
+			text-align:center;
+			float:left;
+			cursor: pointer;
+			background-color:#fff;
+		}
+		div.boutontotal{
+			border:1px solid #ccc;
+			width:36px;
+			height:10px;
+			padding:4px;
+			margin:3px;
+			text-align:center;
+			float:left;
+			cursor: pointer;
+			background-color:#fff;
+		}
+		div.clear{
+			clear:both;
+		}
+		
+		</style>
+		<script>
+			function set_num(numero){
+				var tempoperateur;
+				var valuenumero;
+				var valuenumero2;
+				
+				if ( document.getElementById('statutnumero1').value != 'wait' ) {
+					
+					if ( document.getElementById('tempoperateur').value == 'done' || document.getElementById('tempoperateur').value == '' ) {
+						valuenumero = document.getElementById('numero1').value;
+						document.getElementById('numero1').value = valuenumero + numero;
+						valuenumero2 = '';
+					} 
+					
+				}else{
+					
+					document.getElementById('statutnumero1').value = 'wait';
+					if ( document.getElementById('tempoperateur').value == 'done' ) {
+						valuenumero2 = document.getElementById('numero2').value;
+						document.getElementById('numero2').value =  valuenumero2 + numero;
+						valuenumero = '';
+					} else {
+						document.getElementById('numero2').value = numero;
+						valuenumero2 = '';
+						valuenumero = '';
+					}
+				}
+				
+				document.getElementById('ecran').innerHTML = valuenumero2 + valuenumero + numero;
+	
+				tempoperateur = document.getElementById('operateur').value;
+				document.getElementById('tempoperateur').value = 'done';
+
+			}
+			
+			function operateur(operateur){
+				document.getElementById('operateur').value = operateur;
+				document.getElementById('tempoperateur').value = 'inaction';
+				document.getElementById('statutnumero1').value = 'wait';
+
+			}
+			
+			function result(){
+				var total
+				var element1;
+				var element2;
+				var lasttotal;
+				
+				lasttotal = parseFloat(document.getElementById('total').value);
+				
+				element1 = parseFloat(document.getElementById('numero1').value);
+				
+				element2 = parseFloat(document.getElementById('numero2').value);
+				
+				if( isNaN( element1 ) && lasttotal != '' ) element1 = lasttotal;
+
+				if (document.getElementById('operateur').value == '+') {
+					total = element1 + element2;
+				} else if (document.getElementById('operateur').value == '*') {	
+					total = element1 * element2;
+				} else if (document.getElementById('operateur').value == '-') {	
+					total = element1 - element2;
+				} else if (document.getElementById('operateur').value == '/') {	
+					total = element1 / element2;
+				}
+				
+				
+				if( isNaN( total ) ) total = 'Refaites le calcul';
+				
+				document.getElementById('ecran').innerHTML = total;
+				document.getElementById('total').value = total;
+				document.getElementById('numero1').value = '';
+			}
+
+			function reset(){
+				document.getElementById('statutnumero1').value = '';
+				document.getElementById('numero1').value = '';
+				document.getElementById('numero2').value = '';
+				document.getElementById('total').value = '';
+				document.getElementById('operateur').value = '';
+				document.getElementById('ecran').innerHTML = 0;		
+				valuenumero = 0;	
+				valuenumero2 = 0;	
+			}
+			
+		</script>
+	</head>
+
+	<body onload="reset();">
+		
+		<form>
+			<div class="calculatrice">
+				<div class="ecran" id="ecran">0</div>
+				
+				<div class="boutontotal">&nbsp</div>
+				<div class="boutontotal" onclick="reset();">Reset</div>
+				<div class="bouton" onclick="set_num('1');">1</div>
+				<div class="bouton" onclick="set_num('2');">2</div>
+				<div class="bouton" onclick="set_num('3');">3</div>
+				<div class="bouton" onclick="operateur('+');">+</div>
+				<div class="bouton" onclick="set_num('4');">4</div>
+				<div class="bouton" onclick="set_num('5');">5</div>
+				<div class="bouton" onclick="set_num('6');">6</div>
+				<div class="bouton" onclick="operateur('-');">-</div>
+				<div class="bouton" onclick="set_num('7');">7</div>
+				<div class="bouton" onclick="set_num('8');">8</div>
+				<div class="bouton" onclick="set_num('9');">9</div>
+				<div class="bouton" onclick="operateur('*');">x</div>
+				<div class="bouton" onclick="set_num('0');">0</div>
+				<div class="bouton" onclick="set_num('.');">.</div>
+				<div class="bouton" onclick="result();">=</div>
+				<div class="bouton" onclick="operateur('/');">/</div>
+				
+				<div class="clear"></div>
+			
+			</div>		
+			
+			<input type="hidden" value="" id="numero1" name="numero1" />
+			<input type="hidden" value="" id="statutnumero1" name="statutnumero1" />
+			<input type="hidden" value="" id="numero2" name="numero2" />
+			<input type="hidden" value="" id="operateur" name="operateur" />
+			<input type="hidden" value="" id="tempoperateur" name="tempoperateur" />
+			<input type="hidden" value="" id="total" name="total" />
+			
+		</form>
+		
+	</body>
+</html>

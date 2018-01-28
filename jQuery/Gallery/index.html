@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery - Gallery</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/modernizr.custom.90118.js"></script>
+
+<style>
+html{font-size:100%;}
+body{background:#fff; font-size:14px; margin:0; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+
+div#page{}
+
+/*************************** GALLERY **/
+ul#gallery{list-style:none; margin:0; padding:0; width:100%;}
+ul#gallery li{height:300px; text-align:center; position:relative; line-height:300px; width:300px; margin:10px; box-shadow:0px 0px 5px 0px #bbb; padding:0; display:inline-block; text-align:center; cursor:pointer; background:rgba(255, 255, 255, 0.3);}
+ul#gallery li:hover{box-shadow:0px 0px 5px 0px #999;}
+ul#gallery li:active{box-shadow:0px 0px 5px 0px #f00;}
+ul#gallery li.actif{box-shadow:0px 0px 5px 1px #000; background:rgba(255, 255, 255, 0.8);}
+ul#gallery li img{vertical-align:middle;}
+ul#gallery div.extend{min-height:200px; background:#ddd; display:none; width:100%; color:#555; position:relative;}
+ul#gallery div.extend img{margin:5%; width:30%;}
+ul#gallery div.extend h1{float:right; width:50%; margin:25px 10% 10px 0; font-size:35px; font-weight:normal;}
+ul#gallery div.extend p{float:right; width:50%; margin:15px 10% 15px 0;}
+ul#gallery div.close{background:#bbb; padding:5px; border-radius:10px 0px 0px 10px; margin:0;}
+ul#gallery div.close img{width:auto;}
+.clear{clear:both;}
+</style>
+
+<script type="text/javascript">
+// ref : http://tympanus.net/Tutorials/ThumbnailGridExpandingPreview/
+var imgMargin = 0;
+var wHeight = 0;
+var wWidth = 0;
+var k = 0; 
+var course = [];
+var c = null;
+var xTopLimit = 0;
+var xBottomLimit = 0;
+    
+var openExt = function(){
+    $('ul#gallery > li.selected').removeClass('selected');
+    var d = c.find('div.extend').clone();
+    c.addClass('selected');
+    $('li.selected').append('<img id="pointer" src="images/pointer.png" style="position:absolute; display:inline; bottom:-'+imgMargin+'; left:'+((c.width()/2)-35)+'px" />');
+    
+    var extend = -1;
+    var e = false;
+    k = 0;
+    $('ul#gallery > li').each( function(){
+        if( extend >= 0 && !e && extend !== $(this).offset().top){
+            e = true;
+            extend = k - 1;
+        }
+        if( k === c.index() ){
+            extend = c.offset().top;
+        }
+        k++;
+    });
+
+    if( !e ) extend = ( course.length - 1 );
+    course[extend].after(d.addClass('ext').slideDown('fast'));
+    $('div.ext div.close').bind({
+        click:function(e){closeExt();},
+        mouseenter:function(e){$(this).css({'opacity':1});},
+        mouseleave:function(e){$(this).css({'opacity':0.5});}
+    });
+    xTopLimit = $('div.ext div.close').offset().top;
+    
+    $('html, body').stop().animate({scrollTop: (  $('div.ext').offset().top )}, 500, function(){xBottomLimit = xTopLimit + $('div.ext').height();});
+};
+
+var closeExt = function(){
+    $('div.ext').slideUp( 'fast', function(){
+        $('div.ext').remove();
+        $('img#pointer').remove();
+        $('ul#gallery li.selected').removeClass('selected');
+        c = null;
+    });
+};
+
+var gallery = function(){
+    
+    wHeight = $(window).height();
+    wWidth = $(window).width();
+    
+    $('ul#gallery > li').click(function(){
+        if( !$(this).hasClass('selected') ){
+            c = $(this);       
+            if( $('div.ext').length > 0 ){
+                $('div.ext').slideUp('fast', function(){
+                    $.when($('div.ext').remove()).then( function(){ $('img#pointer').remove(); openExt(); });
+                });
+            }else{
+                openExt(c);
+            }
+        }
+    });
+    
+    $('ul#gallery > li').each( function(){
+        var li = $(this);
+        imgMargin = li.css('margin-bottom');
+        var div = li.find('div.extend');
+        div.append('<div class="close"><img src="images/close-icon.png" /></div>');
+        $('div.close').css({'position':'absolute', 'right':'0px', 'top':'0px', 'cursor':'pointer', 'opacity':0.5});
+        course[k]=li;            
+        k++;        
+    });
+    
+    
+    $(window).scroll(function() {
+        if( $('div.ext div.close').length > 0 ){
+            var scrollT = $(document).scrollTop();
+            
+            var xOffset = $('div.ext div.close').offset().top - scrollT;
+            var xTopLimitOffset = xTopLimit - $('div.ext div.close').offset().top;
+            var xBottomLimitOffset = xBottomLimit - $('div.ext div.close').height() -27 - $('div.ext div.close').offset().top;
+            
+            if( xTopLimitOffset <= 0 && xOffset <= 0 ){
+                console.log(xBottomLimitOffset);
+                if( xBottomLimitOffset < 0 && xOffset <= 0){
+                    $('div.ext div.close').css({'position':'absolute', 'bottom':0, 'top':'auto'});
+                }else{
+                    $('div.ext div.close').css({'position':'fixed', 'z-index':1000, 'bottom':'auto', 'top':0});
+                }
+            }else{
+                $('div.ext div.close').css({'position':'absolute', 'top':0, 'bottom':'auto'});
+            }
+        }
+    });
+
+};
+
+$(document).ready(function() {
+    gallery();
+});
+$(window).resize(function() {
+    window.location = 'index.html';
+});
+
+</script>
+</head>
+<body>
+<div id="page">
+    <ul id="gallery">
+        <li><img src="images/gallery/world.png" />
+            <div class="extend">
+                <h1>Les navigateurs Web</h1>
+                <p>Il existe de nombreux navigateurs web, pour toutes sortes de matériels (ordinateur personnel, tablette tactile, téléphones mobiles, etc.) et pour différents systèmes d'exploitation (GNU–Linux, Windows, Mac OS, iOS et Android). Les plus utilisés à l'heure actuelle sont, Google Chrome, Mozilla Firefox, Internet Explorer, Safari et Opera.</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Navigateur_web">Wikipedia</a></p>
+                <img src="images/gallery/world.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/firefox.png" />
+            <div class="extend">
+                <h1>Mozilla Firefox</h1>
+                <p>Mozilla Firefox est un navigateur Web libre et gratuit, développé et distribué par la Mozilla Foundation avec l'aide de milliers de bénévoles grâce aux méthodes de développement du logiciel libre/open source et à la liberté du code source.</p>
+                <p>Firefox est à l'origine un programme dérivé du logiciel Mozilla (actuellement connu sous le nom de SeaMonkey), mais reprenant uniquement les fonctions de navigation de celui-ci. Ce logiciel multiplate-forme est compatible avec diverses versions de Windows, Mac OS X et GNU/Linux (incluant Android). Il a été porté sur d'autres systèmes d'exploitation, ce qui est rendu possible par la mise à disposition de son code source sous trois licences libres différentes en même temps (MPL, GPL et LGPL).</p>
+                <p>Source : <a target="_blank" href="fr.wikipedia.org/wiki/Mozilla_Firefox">Wikipedia</a></p>
+                <img src="images/gallery/firefox.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/chrome.png" />
+            <div class="extend">
+                <h1>Google Chrome</h1>
+                <p>Chrome est un navigateur web développé par Google basé sur le projet libre Chromium fonctionnant sous Windows, Mac, Linux, Android et iOS. Google Chrome est identique à Chromium hormis un logo différent et quelques fonctionnalités en moins ou en développement.</p>
+                <p>Il est annoncé le 1er septembre 2008 dans une bande dessinée de Scott McCloud, la veille de la sortie de la première version beta. La première version stable est quant à elle dévoilée le 11 décembre 2008. Selon l'institut StatCounter, Google Chrome devient en juin 2012 le navigateur le plus utilisé dans le monde, avec environ un tiers des utilisateurs.</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Google_Chrome">Wikipedia</a></p>
+                <img src="images/gallery/chrome.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/safari.png" />
+            <div class="extend">
+                <h1>Safari</h1>
+                <p>Safari est un navigateur web pour Mac, Windows et iOS développé par Apple, dont le moteur de rendu HTML WebKit est fondé sur KHTML.</p>
+                <p>Il est téléchargeable gratuitement depuis le 7 janvier 2003, soit depuis Mac OS X v10.2. Le 8 juin 2009 la version 4.0 est sortie pour les plateformes Mac OS X v10.4 (ou ultérieur), Windows XP et Vista (ou ultérieur). Ce navigateur est celui installé par défaut sur tous les ordinateurs Mac depuis Mac OS X v10.3. Pour le fonctionnement de Safari 4.0, il faut que Quartz Extrême soit pris en charge par la carte graphique. La version pour Windows a été abandonnée : la dernière, Safari 5.1.7, est sortie en mai 2012.</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Safari_(logiciel)">Wikipedia</a></p>
+                <img src="images/gallery/safari.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/opera.png" />
+            <div class="extend">
+                <h1>Opera</h1>
+                <p>Opera est un navigateur Web gratuit et multiplate-forme développé par la société norvégienne Opera Software, qui propose plusieurs logiciels relatifs à Internet.</p>
+                <p>Opera est un navigateur relativement peu utilisé par rapport aux autres navigateurs web, totalisant 1,16 % de parts de marché en août 2013. Il peut cependant se féliciter d'être le troisième navigateur mobile mondial avec 16,10 % de parts de marché en août 2013, selon StatCounter. Depuis sa version 15, Opera utilise le moteur de rendu HTML WebKit (contre Presto précédemment).</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Opera">Wikipedia</a></p>
+                <img src="images/gallery/opera.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/ie.png" />
+            <div class="extend">
+                <h1>Microsoft Internet Explorer</h1>
+                <p>'Internet Explorer (officiellement Windows Internet Explorer depuis la version 7, anciennement Microsoft Internet Explorer), parfois abrégé IE,'MIE ou MSIE, est le navigateur Web développé par Microsoft, installé par défaut avec Windows. Depuis qu'il a détrôné Netscape Navigator à la fin des années 1990 et jusque vers 2012, c'est le navigateur Web qui a le plus été utilisé au monde. Ses principaux concurrents sont Mozilla Firefox (depuis 2004) et Google Chrome (depuis 2008).</p>
+                <p>Les versions antérieures à la version 7 sont nommées « Microsoft Internet Explorer », tandis qu'à partir de la version 7, le logiciel est intitulé « Windows Internet Explorer ».</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Internet_Explorer">Wikipedia</a></p>
+                <img src="images/gallery/ie.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/netscape.png" />
+            <div class="extend">
+                <h1>Netscape Navigator</h1>
+                <p>Netscape Navigator était un navigateur Web qui a dominé le marché au milieu des années 1990. Celui-ci a régressé face à la concurrence d'Internet Explorer, bien que ce dernier ne fonctionne durant cette période qu'avec le système d'exploitation Windows. Il était édité par la société Netscape Communications, faisant maintenant partie du groupe Time Warner (anciennement connu sous le nom d'AOL Time Warner).</p>
+                <p>Le logiciel était disponible sur les plateformes Windows, GNU/Linux et Mac OS. Son support a cessé le 1er mars 2008.</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Netscape_Navigator">Wikipedia</a></p>
+                <img src="images/gallery/netscape.png" />
+            </div>
+        </li>
+        <li><img src="images/gallery/maxthon.png" />
+            <div class="extend">
+                <h1>Maxthon</h1>
+                <p>Maxthon (anciennement connu sous le nom MyIE ou MyIE2) (à prononcer « maxton ») est un navigateur web gratuit fonctionnant sous Windows et OS X et développé par le chinois Maxthon International Limited. Il utilise par défaut Trident, pour effectuer le rendu des pages web, mais peut également utiliser le moteur Gecko employé par Mozilla Firefox, entre autres. La troisième version lui permet d'utiliser WebKit. Il est classé premier des navigateurs qui supportent le HTML 5.</p>
+                <p>Maxthon vise à proposer un maximum de fonctionnalités tout en permettant de gérer la compatibilité avec des sites optimisés uniquement pour Internet Explorer. Il conserve donc toutes les fonctionnalités de Trident (dont les ActiveX), avec tous ses avantages mais aussi certains de ses inconvénients.</p>
+                <p>Source : <a target="_blank" href="http://fr.wikipedia.org/wiki/Maxthon">Wikipedia</a></p>
+                <img src="images/gallery/maxthon.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+        <li><img src="images/gallery/traveler.png" />
+            <div class="extend">
+                <h1>Traveler</h1>
+                <p>Aucune info.</p>
+                <img src="images/gallery/traveler.png" />
+                <div class="clear"></div>
+            </div>
+        </li>
+    </ul>
+</div>
+    
+</body>
+</html>

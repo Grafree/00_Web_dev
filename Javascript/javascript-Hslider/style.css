@@ -1,0 +1,38 @@
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+}
+
+
+div.slider_content{  /* Espace du diaporama */
+	height:400px;
+	width:1px;
+	overflow:auto;
+	border:1px solid #aaa;
+}
+div.content_hide{
+	display:none;
+}
+div.content_show{
+	display:block;
+	margin:10px;
+}
+
+
+
+
+div.nav_zone{
+	height:20px;
+	width:280px;
+	margin:15px 0px 0px 0px;
+}
+div.arrow{
+	width:25px;
+	height:20px;
+	float:left;
+	margin:0px 0px 0px 0px;
+	padding:0px 7px 0px 8px;
+	cursor:pointer;
+}
+
+

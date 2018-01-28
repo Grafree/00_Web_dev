@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>jQuery - Drop page</title>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	
+	<style>
+html{font-size:100%;}
+body{background:#fff; font-size:12px; margin:0px; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+div.container{width:600px; margin:0 auto; height:5480px;}
+article{display:block;  margin:0 0 40px 0;}
+.clear{clear:both;}
+
+p{font-size:12px; color:#666; margin:0 0 10px 0;}
+h1{font-size:36px; margin:0 0 15px 0; font-weight:bold; color:#6A615E; text-shadow:1px 1px 0px #fff, 3px 3px 0px #ccc; text-transform:uppercase;}
+
+.infobox{position:fixed; top:100px; left:100px; border:1px solid #999; background:#fff; padding:10px;}
+#support{position:fixed; top:100px;}
+	</style>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+            
+            var startElementPosition = parseInt( $('#support').css('top') );
+            
+            $(window).scroll(function () { 
+                $('.infobox').text( "You've scrolled " + $(window).scrollTop() + " pixels");
+                
+                var scrollTopDist = $(window).scrollTop();
+                if( scrollTopDist > 1000 ){
+                    var scrollToDo =  ( ( scrollTopDist ) * ( 1 - scrollTopDist / 1500 ) ) - startElementPosition ;
+                }else{
+                    var scrollToDo = startElementPosition;
+                }
+                
+                $('#support').css('top', scrollToDo);
+            });
+                
+        });
+	
+	</script>
+</head>
+<body>
+
+
+<div class="container">	
+        
+	<article id="support">
+	<h1>Supports</h1>
+	<p>On peut considérer qu'il n'existe plus de références ou de standards qui permettent de définir les limites de la taille d'un site Web.</p>
+	<img src="images/ScreenSize.jpg"/>
+	</article>
+
+	
+</div>
+
+    <div class="infobox"></div>
+  
+</body>
+</html>

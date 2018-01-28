@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Javascript : Basics - Funtion</title>
+		
+		<style>
+			div.bouton{border:1px solid #333; padding:5px; width:50px; font-family:Arial, Helvetica, sans-serif; font-size:9px; cursor:pointer;}
+		</style>
+		<script type="text/javascript">
+			
+			function condition( x ){
+				
+				if( x == 'Vert' ){
+					
+					alert( 'La couleur choisie est verte.' );
+					
+				}else if( x == 'Jaune'){
+					
+					alert( 'La couleur choisie est jaune.' );
+					
+				}else{
+					
+					alert( 'La couleur choisie est autre que jaune ou verte.' );
+					
+				}
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		Condition avec une chaîne de caractère<br />
+		<div class="bouton" onclick="condition( 'Vert' );">Vert</div>
+		
+		<div class="bouton" onclick="condition( 'Jaune' );">Jaune</div>
+		
+		<div class="bouton" onclick="condition( 'Rouge' );">Rouge</div>
+	</body>
+</html>

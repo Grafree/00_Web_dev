@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery - Gallery-Filter</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/modernizr.custom.90118.js"></script>
+
+<style>
+html{font-size:100%;}
+body{background:#fff; font-size:14px; margin:0; padding:0; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+*{outline:0;}
+
+div#page{width:970px; margin:0 auto;}
+.clear{clear:both;}
+
+/*************************** NAV ******/
+nav{height:100px; box-shadow:inset 0px 0px 10px 0px #ccc; background:#f5f5f5}
+nav ul{text-align:center; margin:0; padding:0; list-style:none;}
+nav ul li{height:100px; margin:0; padding:0 30px; border-right:2px dotted #ddd; line-height:80px; color:#f9f9f9; text-shadow:-1px -1px 1px #fff, 1px 1px 1px #ddd; text-transform:uppercase; display:inline-block; transition:color 1s, text-shadow 2s; font-size:30px; font-weight:bold; cursor:pointer;}
+nav ul li:first-child{border-left:2px dotted #ddd;}
+nav ul li sup{color:#f9f9f9; text-shadow:-1px -1px 1px #fff, 1px 1px 1px #ddd; transition:color 1.7s, text-shadow 2s;}
+nav ul li:hover{color:#aaa; text-shadow:-1px -1px 1px #fff, 1px 1px 1px #888; background: rgba(255,255,255,0.5)}
+nav ul li:hover sup{color:#ccc; text-shadow:-1px -1px 1px #fff, 1px 1px 1px #888;}
+nav ul li.selected{color:#aaa; text-shadow:-1px -1px 1px #fff, 1px 1px 1px #888; background: rgba(255,255,255,0.3)}
+
+/*************************** GALLERY **/
+ul#gallery{list-style:none; margin:0; padding:0; width:100%;}
+ul#gallery li{height:300px; text-align:center; position:relative; line-height:300px; width:300px; margin:10px; box-shadow:0px 0px 5px 0px #bbb; padding:0; display:inline-block; text-align:center; cursor:pointer; background:rgba(255, 255, 255, 0.3);}
+ul#gallery li:hover{box-shadow:0px 0px 5px 0px #999;}
+ul#gallery li:active{box-shadow:0px 0px 5px 0px #f00;}
+ul#gallery li.actif{box-shadow:0px 0px 5px 1px #000; background:rgba(255, 255, 255, 0.8);}
+ul#gallery li img{vertical-align:middle;}
+
+</style>
+
+<script type="text/javascript">
+// @author : Olivier Dommange
+var contentRef = window;    // Sets the content used as reference (window = all the page, string = id of a content ex.: var contentRef = 'page';)
+var allFilter = 'all';      // Sets the class name to reset all images
+var speedFilter = 500;      // Sets the speed in millisecond
+var curFilter = null;
+var conT = 0;
+var conL = 0;
+var nCol = 0;
+var posT = [];
+var posL = [];
+var i = 0; 
+
+var init = function(){
+    if( contentRef !== window ){
+        conT = $('#'+contentRef).offset().top; 
+        conL = $('#'+contentRef).offset().left;
+        $('#'+contentRef).css({'position':'relative'});
+    }
+    curFilter = allFilter;
+    $('nav ul > li').click(function(){
+        if( !$(this).hasClass('selected') ){
+            curFilter = $(this).attr('id');
+            $('nav ul > li').removeClass('selected')
+            filterGallery();
+        }
+    });
+    
+    // Set position references and num of img per column.    
+    $('ul#gallery > li').each( function(){
+        posT[i]=$(this).offset().top-conT;   
+        posL[i]=$(this).offset().left-conL;   
+        if(i>0 && nCol===0 && posT[i]!=posT[(i-1)])nCol=i;
+        i++;        
+    });
+    
+    i=0;
+    $('ul#gallery > li').each( function(){
+        $(this).css({'position':'absolute', 'top':posT[i], 'left':posL[i]});   
+        i++;
+    });
+    
+    filterGallery();
+}
+
+var filterGallery = function(){
+    $('nav ul li#'+curFilter).addClass('selected');
+    
+    if(curFilter===allFilter){
+        
+        i=0;
+        $('ul#gallery > li').each( function(){
+            $(this).animate({'position':'absolute', 'top':posT[i], 'left':posL[i]}, speedFilter);   
+            i++;
+        });
+        
+        setTimeout(function(){
+            $('ul#gallery > li').fadeIn();
+	}, speedFilter);
+        
+    }else{
+        $('ul#gallery > li').not('.'+curFilter).fadeOut();
+        
+        i=0;
+        $('ul#gallery > li').each( function(){
+            if( $(this).hasClass(curFilter)){
+                $(this).animate({'position':'absolute', 'top':posT[i], 'left':posL[i]}, speedFilter);   
+                i++;
+            }
+        });
+        setTimeout(function(){
+            $('ul#gallery > li.'+curFilter).fadeIn();
+	}, speedFilter);
+    }
+    
+};
+
+$(document).ready(function() {
+    init();
+});
+$(window).resize(function() {
+    window.location = 'index.html';
+});
+
+
+</script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li id="all"><sup>&#10077;</sup>&#9776;<sup>&#10078;</sup></li><li id="o"><sup>&#10077;</sup>Orange<sup>&#10078;</sup></li><li id="b"><sup>&#10077;</sup>Bleu<sup>&#10078;</sup></li><li id="r"><sup>&#10077;</sup>Rouge<sup>&#10078;</sup></li>
+    </ul>
+</nav>
+<div id="page">
+    <ul id="gallery">
+        <li class="b"><img src="images/gallery/world.png" /></li>
+        <li class="b o"><img src="images/gallery/firefox.png" /></li>
+        <li class="b r o"><img src="images/gallery/chrome.png" /></li>
+        <li class="b"><img src="images/gallery/safari.png" /></li>
+        <li class="r"><img src="images/gallery/opera.png" /></li>
+        <li class="b o"><img src="images/gallery/ie.png" /></li>
+        <li class="b"><img src="images/gallery/netscape.png" /></li>
+        <li class="b"><img src="images/gallery/maxthon.png" /></li>
+        <li class="b o"><img src="images/gallery/traveler.png" /></li>
+    </ul>
+</div>
+    
+</body>
+</html>

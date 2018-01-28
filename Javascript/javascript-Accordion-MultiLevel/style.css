@@ -1,0 +1,21 @@
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+}
+
+
+/* FENETRES COULISSANTES - Grandes fenetres */
+dl{padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;}
+dt{width:246px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; height:25px; cursor:pointer;}
+
+dd.slider_content{width:246px; height:1px; overflow:hidden; margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;}
+dd{margin:0px 0px 50px 0px}
+
+/* FENETRES COULISSANTES - Sous elements */
+div.content_hide{display:none;}
+div.content_show{width: 226px; background-color:#ccc; display:block; margin:0px; padding:10px;}
+div.content_show_sub{width: 226px; margin:0px; padding:0px;}
+
+a.title_sub{padding:0px 0px 0px 0px; margin:10px 0px 5px 0px;}
+div.content_sub{width:229px; height:1px; overflow:hidden; border:0px solid #aaa; margin:0px 0px 10px 0px; padding:0px 0px 0px 0px;}
+

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Javascript : Basics - Funtion</title>
+		
+		<style>
+			div.bouton{border:1px solid #333; padding:5px; width:50px; font-family:Arial, Helvetica, sans-serif; font-size:9px; cursor:pointer;}
+		</style>
+		<script type="text/javascript">
+			function boucleFor( x ){
+				
+				for( i = 1; i <= x; i++ ){
+					alert( i );
+				}
+				
+			}
+			
+			function boucleWhile( x ){
+				var i = 1;
+				while( i <= x ){
+					alert( i );
+					i++;
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		Boucle for<br />
+		<div class="bouton" onclick="boucleFor( 10 );">Boucle 10 X</div>
+		
+		<div class="bouton" onclick="boucleFor( 5 );">Boucle 5 X</div>
+		
+		
+		Boucle while<br />
+		<div class="bouton" onclick="boucleWhile( 10 );">Boucle 10 X</div>
+		
+		<div class="bouton" onclick="boucleWhile( 5 );">Boucle 5 X</div>
+	</body>
+</html>

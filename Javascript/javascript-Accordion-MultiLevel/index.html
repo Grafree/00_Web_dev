@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+<head>
+	<title>Slider</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript" src="windowslide.js"></script>
+
+<script language="JavaScript">
+	/*
+	accrodionWindow(	[int | distance en px], 
+				[int | vitesse en milliseconde], 
+				[string | id des fenetres coulissantes], 
+				[int | % de deceration], 
+				[bolean | fermeture automatique des fenetres coulissantes a l'ouverture d'une autre = true], 
+				[int | Id de la slide ouverte au chargement. 0 indique aucune],
+				[bolean | Indique si l'ouverture de la fenetre coulissante au chargement dervait se faire avec un coulissement], 
+				[int | Nb de px des fenetres fermees. Correspond a la propriete CSS height de la classe slider_content],
+				[int | Correspond au padding indique dans le CSS pour content_show]		);
+	*/
+	var menuAcc = new accordionWindow( 50, 25, 'slider', 75, true, 1, false, 1, 0 );
+</script>
+                            
+</head>
+ 
+<body>
+
+<span id="current" style="display:none;">1</span>
+<dl id="allslides">
+<dt class="entete_normal" id="1" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+	Paragraphe
+</dt>
+<dd class="slider_content" id="slider_1">
+	<div class="content_show">
+	<p>
+	Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+	</p>
+	
+		<a href="javascript:menuAcc.subaction( 1 );" class="title_sub">Horaires des jours fériés de l'année</a>
+		
+		<div class="content_sub" id="slider_1_sub">
+			<div class="content_show_sub">
+				
+				<br />						
+				<table width="100%" cellpadding="1">
+					<tr>
+						<th></th>
+						<th align="left" nowrap="nowrap">Jours fériés</th>
+						<th align="left">Horaires</th>
+					</tr>
+					<tr>
+						<td valign="top" nowrap="nowrap">01 janvier</td>
+						<td>Nouvel an</td>
+						<td valign="top" nowrap="nowrap">Fermé</td>
+					</tr>
+					<tr>
+						<td valign="top" nowrap="nowrap">10 avril</td>
+						<td>Vendredi Saint</td>
+						<td valign="top" nowrap="nowrap">9h à 19h</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	
+    </div>
+</dd>
+
+
+<dt class="entete_normal" id="2" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+	Image et texte		
+</dt>
+<dd class="slider_content" id="slider_2">
+	<div class="content_show">
+	<img width="200" src="http://extranet.etsl.ch/images/realisations/62.jpg" />
+	<p>
+	Non ergo erunt homines deliciis diffluentes audiendi, si quando de amicitia, quam nec usu nec ratione habent cognitam, disputabunt. Nam quis est, pro deorum fidem atque hominum! qui velit, ut neque diligat quemquam nec ipse ab ullo diligatur, circumfluere omnibus copiis atque in omnium rerum abundantia vivere? Haec enim est tyrannorum vita nimirum, in qua nulla fides, nulla caritas, nulla stabilis benevolentiae potest esse fiducia, omnia semper suspecta atque sollicita, nullus locus amicitiae.
+	</p>
+    </div>
+</dd>
+
+<dt class="entete_normal" id="3" onclick="menuAcc.action(this.id);" onmouseover="menuAcc.entete_roll(this.id);" onmouseout="menuAcc.entete_normal(this.id);">
+	Google maps		
+</dt>
+<dd class="slider_content" id="slider_3">
+	<div class="content_show">
+	<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;q=Chemin+de+l'Orio+6,+1032+Romanel-sur-Lausanne,+Lausanne,+Vaud,+Suisse&amp;sll=47.338823,2.988281&amp;sspn=13.108017,42.626953&amp;ie=UTF8&amp;cd=1&amp;geocode=FXWCxgIdQMdkAA&amp;split=0&amp;ll=46.571371,6.608706&amp;spn=0.006491,0.020814&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+    </div>
+</dd>
+
+</dl>
+                
+</body>
+</html>

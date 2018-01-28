@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Untitled Document</title>
+<script language="JavaScript">
+	
+function MyClass( valeurbase ) {
+		
+	var attribut = parseInt( valeurbase ); 				// Attribut private
+	var base = parseInt( "10" );						// Attribut private
+	this.basetxt = "10";								// Attribut public (Utilisable que dans les méthodes publics)
+	
+	var calcul = function(){ 							// Méthode private
+		var totalpro = attribut + base;
+		return totalpro;
+	}
+	
+	this.total = function(){							// Méthode publique (Accessible depuis l'extérieur de la classe)
+		var totalpro = calcul();
+		//var totalpro = attribut + base;
+		alert( 'Le totale est de : ' + totalpro + '. Lorsque on y ajoute ' + this.basetxt );		
+	}
+	
+}
+
+var obj = new MyClass( '2' );	
+var obj2 = new MyClass( '4' );	
+	
+	
+</script>
+	
+</head>
+	<body>
+		
+	<div onclick="obj.total();" style="cursor:pointer">Test avec 2</div>	
+	<br /><br />
+	<div onclick="obj2.total();" style="cursor:pointer">Test avec 4</div>	
+		
+<br />
+<hr />
+Javascript :
+<textarea  style="width:100%; height:350px;">
+function MyClass( valeurbase ) {
+		
+	var attribut = parseInt( valeurbase );     // Attribut private
+	var base = parseInt( "10" );               // Attribut private
+	this.basetxt = "10";                       // Attribut public (Utilisable que dans les méthodes publics)
+	
+	var calcul = function(){                   // Méthode private
+		var totalpro = attribut + base;
+		return totalpro;
+	}
+	
+	this.total = function(){                   // Méthode publique (Accessible depuis l'extérieur de la classe)
+		var totalpro = calcul();
+		//var totalpro = attribut + base;
+		alert( 'Le totale est de : ' + totalpro + '. Lorsque on y ajoute ' + this.basetxt );		
+	}
+	
+}
+
+var obj = new MyClass( '2' );	
+var obj2 = new MyClass( '4' );	
+</textarea>		
+
+<br />
+HTML : 
+<textarea style="width:100%; height:50px;">
+<div onclick="obj.total();" style="cursor:pointer">Test avec 2</div>	
+<br /><br />
+<div onclick="obj2.total();" style="cursor:pointer">Test avec 4</div>	
+</textarea>
+	</body>
+</html>

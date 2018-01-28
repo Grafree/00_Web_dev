@@ -1,0 +1,135 @@
+body{margin:0; padding:0; font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;}
+
+ul, ol, p, h1, h2, h3, h4, h5{margin:0; padding:0;}
+
+main, nav, section, aside, footer{display:block;}
+
+.clear{clear:both;}
+
+/*  Couleurs de fond */
+body.bleu{background-color:#C3F1F5;}
+body.rouge{background-color:#FFDDDD;}
+body.vert{background-color:#DCFFE2;}
+
+/* Navigation */
+nav{
+    width:200px;
+    background-color:rgba(0, 0, 0, 0.8);	
+    position:fixed;
+    top:0px;
+    left:0px;
+    padding:20px;
+}
+
+nav>ul{
+    list-style:none;	
+    border-left:1px dotted #444;
+    border-right:1px dotted #444;
+}
+
+nav ul li{
+	
+}
+
+nav ul li span{
+    display:block;
+    line-height:30px;
+    padding:0 10px;
+    margin:0 0 3px 0;
+    text-decoration:none;
+    -o-transition:all 0.5s;
+    -ms-transition:all 0.5s;
+    -moz-transition:all 0.5s;
+    -webkit-transition:all 0.5s;
+    transition:all 0.5s;
+    font-size:13px;
+    cursor:pointer;
+}
+
+nav ul li ul{
+    list-style:none;
+    margin:0 0 0 30px;
+    display:none;
+}
+
+nav ul li ul li a{
+    display:block;
+    line-height:30px;
+    padding:0 10px;
+    margin:0 0 3px 0;
+    text-decoration:none;
+    -o-transition:all 0.5s;
+    -ms-transition:all 0.5s;
+    -moz-transition:all 0.5s;
+    -webkit-transition:all 0.5s;
+    transition:all 0.5s;
+    font-size:13px;
+}
+
+/* Couleurs spécifiques de la navigation définies en fonction du fond de la page (ex. : <body class="bleu">) */
+body.bleu nav ul li a{color:#C3F1F5;}
+body.bleu nav ul li span{color:#C3F1F5;}
+body.bleu nav ul li a:hover{color:#35CFDD;}
+body.bleu nav ul li span:hover{color:#35CFDD;}
+body.rouge nav ul li a{color:#FFDDDD;}
+body.rouge nav ul li span{color:#FFDDDD;}
+body.rouge nav ul li a:hover{color:#F50000;}
+body.rouge nav ul li span:hover{color:#F50000;}
+body.vert nav ul li a{color:#DCFFE2;}
+body.vert nav ul li span{color:#DCFFE2;}
+body.vert nav ul li a:hover{color:#00F52A;}
+body.vert nav ul li span:hover{color:#00F52A;}
+
+
+
+/* Galerie */
+main{
+    width:80%;
+    margin:50px auto;
+    max-width:800px;
+}
+
+main section{
+    width:60%;
+    float:right;	
+}
+
+main section img{
+    width:100%;	
+}
+
+
+/* Vignettes */
+main aside{
+    width:20%;
+    float:left;	
+}
+
+main aside img{
+    width:44%;
+    margin:1%;
+    vertical-align: middle;
+    cursor:pointer;
+}
+
+
+
+/* Pied de page - copyright */
+nav footer{
+    position:absolute;
+    bottom:50px;
+    left:20px;	
+}
+
+
+@media screen and (max-width:1200px){
+    nav{left:-220px;}
+    nav ul li a{font-size:15px;}		
+}
+
+
+@media screen and (max-width:500px){
+    main{margin:10px auto;}
+    main section, main aside{width:100%;}
+    main aside img{width:50px;}
+}
