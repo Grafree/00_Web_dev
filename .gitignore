@@ -6,3 +6,4 @@ nbproject/*.*
 wysiwyg/**/*.*
 wysiwyg/*
 wysiwyg/*.*
+/nbproject/private/
