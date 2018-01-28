@@ -1,0 +1,19 @@
+{
+    "type":"survey",
+    "title":"L'utilisateur et les formulaires",
+    "questions": [
+        {"q":"Question 1", "statement":"Veuillez réponde à cette question...", "img":"lib/images/questions/test/01.jpg", "a":[
+            {"statement":"Réponse A", "img":""},
+            {"statement":"Réponse B", "img":""}
+        ]},
+        {"q":"Question 2", "statement":"Veuillez réponde à cette question...", "img":"", "a":[
+            {"statement":"Réponse A"},
+            {"statement":"Réponse B"},
+            {"statement":"Réponse C"}
+        ]},
+        {"q":"Question 3", "statement":"Veuillez réponde à cette question...", "a":[
+            {"statement":"Réponse A", "img":""},
+            {"statement":"Réponse B", "img":""}
+        ]}
+    ]
+}

@@ -1,0 +1,13 @@
+/* icon's name : https://www.google.com/design/icons/ */
+
+@font-face {
+  font-family: 'materialicons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(materialicons.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('materialicons'),
+       url(materialicons.woff2) format('woff2'),
+       url(materialicons.woff) format('woff'),
+       url(materialicons.ttf) format('truetype');
+}
