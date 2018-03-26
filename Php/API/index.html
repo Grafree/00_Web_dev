@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API exploitation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>                       
+            
+            $(window).on('load', function(){
+                
+                $.getJSON( "http://localhost/test-Mario/api.php", function( data ){
+                    var htmlContent = '<h5>http://localhost/test-Mario/api.php</h5>';
+                    
+                    console.log( data );
+                    
+                    htmlContent += data.prenom + ' ' + data.nom;
+                    
+                    $('div#users').html( htmlContent );
+                });
+                
+                
+            });
+        </script>
+    </head>
+    <body>
+        <div id="users"></div>
+    </body>
+</html>
