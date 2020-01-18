@@ -1,0 +1,76 @@
+*{box-sizing:border-box;}
+body{margin:0; font-family:Arial;}
+div.container{}
+body > header{background:#fff; height:75px; width:100%; display:flex; justify-content: space-between; border-bottom:1px solid rgba(0, 0, 0, 0.2);}
+div.container > main{background:rgba(26, 84, 103, 0.07); padding:20px 10px; min-height:calc(100vh - 75px);}
+div.container > main > footer{border-top:1px solid #bbb; padding:10px 10px 0 10px;}
+
+aside{width:100%; min-height:calc(100vh - 75px); background-color:#923015; position:absolute; top:75px; left:0px; display:none;}
+
+body.fixed{padding-top:80px;}
+body.fixed > header{position:fixed; width:100%; top:0; left:0;}
+
+
+/* Logo */
+header > a{display:block; padding:15px; margin:0 10px; text-decoration:none; color:#000; font-size:22px; font-weight:bold; text-transform:uppercase; font-weight:bold; letter-spacing:0px; }
+header > a figure{margin:0;}
+header > a figure span{display:inline-block; background-color:#d84c25; padding:5px; vertical-align: middle; margin:0 5px 0 0; border-radius:8px; box-shadow:1px 1px 3px rgba(0, 0, 0, 0.4);}
+header > a figure span img{font-size:40px; display:block; margin:0 auto; height:35px;}
+header > a figure figcaption{display:inline-block; vertical-align: middle;}
+
+h1{margin:0;}
+
+/* Articles */
+article{background:rgba(255, 255, 255, 1); margin:20px 0;}
+article header{padding:20px 20px; border-bottom:1px solid #e5e5e5; display:flex; justify-content: space-between;}
+article header img{}
+article main{padding:10px 20px;}
+article h2{font-size:16px; line-height:18px; margin:0;}
+article h2 img{float:left; margin:0 10px 0 0; width:17px; cursor:pointer;}
+article h4{font-size:14px; margin:0;}
+article h4 span{}
+article h4 em{}
+p{font-size:14px;}
+
+/* Code */
+pre {border: 1px solid #ddd; margin:0px 20px 10px 20px; padding:5px; background:rgba(26, 84, 103, 0.07); counter-reset:line; line-height:9px; overflow:hidden; font-size:10px;}
+pre span {display: block; }
+pre span::before {counter-increment:line; content: counter(line); display:inline-block; border-right:1px solid #ddd; padding:0 .5em; margin-right:.5em;}
+pre span em {background:rgba(255, 255, 0, 0.35);}
+pre span b {color:rgba(255, 0, 0, 1);}
+pre span i {color:rgba(0, 147, 255, 1);}
+pre span del {text-decoration:none; color: #888;}
+
+/* Menu Mobile Icon */
+header button{width:50px; height:40px; float:right; margin:15px; cursor:pointer; border-radius:8px; background:#fff; border:none; outline:none;}
+header button span{display: block; height:3px; margin:5px 5px; background:#923015; transition: transform 0.5s; border-radius:3px;}
+
+body.openmenu header button span{opacity:0;}
+body.openmenu header button span:first-child{opacity:1; transform:rotate(45deg); position:relative; top:8px;}
+body.openmenu header button span:last-child{opacity:1; transform:rotate(-45deg); position:relative; top:-8px;}
+body.openmenu aside{display:block;}
+body.openmenu main{display:none;}
+
+/* Menu */
+aside ul{list-style:none;margin:0; padding:0;}
+aside > ul > li{}
+aside ul li a{color:#fff; font-size:12px; text-decoration:none; display:block; line-height:50px; padding:0px 20px; transition:background 0.5s}
+aside ul li a:hover{background:rgba(255, 255, 255, 0.1);}
+aside > ul > li > a{border-top: 1px solid #732009; border-bottom: 1px solid #882d14;}
+aside > ul > li > a::after{display:block; float:right; background-image:url(../images/chevron-down.svg); background-repeat:no-repeat; background-position:center; content:''; height:24px; width:20px; margin:13px; transition:transform 0.3s;}
+aside > ul > li.active > a::after{transform:rotate(180deg);}
+aside > ul > li > ul{overflow: hidden; height:0; transition:height 0.5s;}
+aside > ul > li.active > ul{display:block;}
+aside ul li ul li a{padding:0px 40px; border-right:10px solid #af4427;}
+
+
+@media (min-width:700px){
+    div.container{display:flex; justify-content:space-between;}
+
+    div.container > main{width:calc(100% - 250px);}
+    aside{width:250px; position:static; display:block;}
+
+    div.container > header{position:static;}
+    header button{display:none;}
+
+}

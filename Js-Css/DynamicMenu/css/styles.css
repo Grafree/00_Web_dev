@@ -1,0 +1,66 @@
+*{box-sizing:border-box;}
+body{margin:0; font-family:Arial;}
+header, main, article, footer{display:block;}
+div.container{}
+header{background:#fff; height:150px; width:100%; border-bottom:1px solid rgba(0, 0, 0, 0.2);}
+main{padding:100px; min-height:calc(100vh - 150px); }
+footer{position:fixed; bottom:0px; right:0px; background:rgba(239, 243, 244, 1); width:150px; height:150px; border-radius:100% 0 0 0;}
+
+/* header */
+header > a{display:block; margin:0; padding:75px 0 0 150px; text-decoration:none; color:#000; font-size:32px; font-weight:bold; font-weight:bold; letter-spacing:0px; }
+
+/* Article */
+article{background:rgba(26, 84, 103, 0.07); margin:20px 0; padding: 10px 20px;}
+article h4{font-size:14px; margin:0;}
+p{font-size:14px;}
+
+/* Menu Mobile Icon */
+footer button{width:90px; height:80px; margin:45px; padding:20px; cursor:pointer; border-radius:8px; border:none; outline:none; background:transparent;}
+footer button span{display: block; height:4px; margin:6px 5px; background:#cccccc; transition: all 0.5s; border-radius:3px;}
+footer button:hover span{background:#333333;}
+
+/* Menu */
+footer ul{list-style:none; margin:0; padding:0; position:absolute; bottom:-130px; right:40px; opacity:0; z-index:-1; transition:opacity 1.3s, bottom 1.5s; transition-timing-function: cubic-bezier(0.5,0,0.1,1);}
+footer ul li{}
+footer ul li a{font-size:30px; color:#000; text-decoration:none; transition:font-size 1.5s, padding 1.5s, margin 1.5s; display:block; float:left; white-space:nowrap; line-height:20px; padding:0; margin:0; transition-timing-function: cubic-bezier(0.5,0,0.1,1); position:relative;}
+footer ul li a:after{display:block; content:''; height:3px; width:0; position:absolute; bottom:0px; background:rgba(26, 84, 103, 0.07); transition:all 0.5s;}
+footer ul li a:hover:after{width:100%; background:rgba(0, 0, 0, 0.5);}
+
+
+
+/* The title coming from the menu */
+span#newtitle, header span{position:absolute; transition:all 1s; font-size:30px; padding:10px 0px; margin:8px 0; top:59px; left:calc(100% - 169px);}
+header span{transition:none;}
+
+/* open menu */
+body.openmenu footer button span{opacity:0;}
+body.openmenu footer button span:first-child{opacity:1; transform:rotate(45deg); position:relative; top:9px;}
+body.openmenu footer button span:last-child{opacity:1; transform:rotate(-45deg); position:relative; top:-11px;}
+
+body.openmenu footer ul{opacity:1; bottom:150px;}
+body.openmenu footer ul li a{font-size:30px; padding:10px 0px; margin:8px 0;}
+
+/* menu disapear */
+body.hidemenu footer ul{opacity:0;}
+
+
+.makeappear{opacity:0; transition:opacity 3s;}
+
+body.intro{overflow:hidden;}
+body{overflow:visible;}
+body.intro header, body.intro main, body.intro footer{opacity:0;}
+body main, body footer{opacity:1; transition:opacity 2s;}
+
+/* logo */
+img.logo{position:absolute; opacity:1; transition:none; top:75px; left:100px; width:35px;}
+body.intro img.logo{animation-name:logo; animation-duration:2s; animation-timing-function:cubic-bezier(0.1,0,0.3,1);}
+
+
+@media(min-width:900px){
+    main{width:calc(100% - 300px);}
+}
+
+@keyframes logo {
+  0%   {top:50%; left:50%; width:6600px; transform:translate(-50%, -50%); opacity:0.7;}
+  100% {top:75px; left:100px; width:35px; transform:translate(0, 0); opacity:1;}
+}
