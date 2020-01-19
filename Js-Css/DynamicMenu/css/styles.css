@@ -49,10 +49,10 @@ body.hidemenu footer ul{opacity:0;}
 body.intro{overflow:hidden;}
 body{overflow:visible;}
 body.intro header, body.intro main, body.intro footer{opacity:0;}
-body main, body footer{opacity:1; transition:opacity 2s;}
+body header, body main, body footer{opacity:1; transition:opacity 2s;}
 
 /* logo */
-img.logo{position:absolute; opacity:1; transition:none; top:75px; left:100px; width:35px;}
+img.logo{position:absolute; z-index:100; opacity:1; transition:none; top:75px; left:100px; width:35px;}
 body.intro img.logo{animation-name:logo; animation-duration:2s; animation-timing-function:cubic-bezier(0.1,0,0.3,1);}
 
 
